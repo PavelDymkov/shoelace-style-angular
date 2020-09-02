@@ -1,0 +1,36 @@
+{
+    "name": "shoelace-style-angular",
+    "version": "0.0.0",
+    "author": {
+        "name": "Pavel Dymkov",
+        "email": "dymkov86@gmail.com"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/PavelDymkov/shoelace-style-angular.git"
+    },
+    "scripts": {
+        "build": "ng build --prod",
+        "deploy": "npm run build && npm run test && cd lib/shoelace-style-angular && npm publish",
+        "dev": "ng serve",
+        "start": "npm run dev",
+        "test": ""
+    },
+    "private": true,
+    "dependencies": {},
+    "devDependencies": {
+        "@angular-devkit/build-angular": "~0.1000.8",
+        "@angular-devkit/build-ng-packagr": "~0.1000.8",
+        "@angular/cli": "~10.0.8",
+        "@angular/compiler": "^10.0.14",
+        "@angular/compiler-cli": "~10.0.14",
+        "@angular/core": "^10.0.14",
+        "@angular/forms": "^10.0.14",
+        "@types/node": "^12.11.1",
+        "ng-packagr": "^10.0.0",
+        "prettier": "^2.1.1",
+        "ts-node": "~8.3.0",
+        "tslint": "~6.1.0",
+        "typescript": "~3.9.5"
+    }
+}

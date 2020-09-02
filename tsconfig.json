@@ -1,0 +1,8 @@
+{
+    "files": [],
+    "references": [
+        {
+            "path": "./projects/shoelace-style-angular/tsconfig.lib.json"
+        }
+    ]
+}

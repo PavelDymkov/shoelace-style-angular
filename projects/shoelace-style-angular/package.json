@@ -1,0 +1,26 @@
+{
+    "name": "shoelace-style-angular",
+    "version": "0.7.5",
+    "description": "Provide @shoelace-style in Angular",
+    "keywords": [
+        "@shoelace-style",
+        "shoelace",
+        "angular"
+    ],
+    "author": {
+        "name": "Pavel Dymkov",
+        "email": "dymkov86@gmail.com"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/PavelDymkov/shoelace-style-angular.git"
+    },
+    "license": "MIT",
+    "peerDependencies": {
+        "@angular/core": "^10.0.14",
+        "@angular/forms": "^10.0.14"
+    },
+    "dependencies": {
+        "tslib": "^2.0.0"
+    }
+}
