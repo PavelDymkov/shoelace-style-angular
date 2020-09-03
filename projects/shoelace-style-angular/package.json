@@ -18,9 +18,11 @@
     "license": "MIT",
     "peerDependencies": {
         "@angular/core": "^10.0.14",
-        "@angular/forms": "^10.0.14"
+        "@angular/forms": "^10.0.14",
+        "rxjs": "^6.6.2"
     },
     "dependencies": {
+        "logical-not": "^1.0.7",
         "tslib": "^2.0.0"
     }
 }

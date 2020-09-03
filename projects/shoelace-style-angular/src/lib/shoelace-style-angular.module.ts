@@ -2,19 +2,19 @@ import { NgModule } from "@angular/core";
 
 import {
     ShoelaceStyleControlsDirective,
-    ShoelaceStyleFormDirective,
+    ShoelaceStyleFormGroupDirective,
     ShoelaceStyleShowHideDirective,
 } from "./directives";
 
 @NgModule({
     declarations: [
         ShoelaceStyleControlsDirective,
-        ShoelaceStyleFormDirective,
+        ShoelaceStyleFormGroupDirective,
         ShoelaceStyleShowHideDirective,
     ],
     exports: [
         ShoelaceStyleControlsDirective,
-        ShoelaceStyleFormDirective,
+        ShoelaceStyleFormGroupDirective,
         ShoelaceStyleShowHideDirective,
     ],
 })

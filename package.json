@@ -11,10 +11,11 @@
     },
     "scripts": {
         "build": "ng build --prod",
+        "build-test-app": "ng build test",
         "deploy": "npm run build && npm run test && cd lib/shoelace-style-angular && npm publish",
         "dev": "ng serve",
         "start": "npm run dev",
-        "test": ""
+        "test": "npm run build-test-app"
     },
     "private": true,
     "dependencies": {},
@@ -22,15 +23,24 @@
         "@angular-devkit/build-angular": "~0.1000.8",
         "@angular-devkit/build-ng-packagr": "~0.1000.8",
         "@angular/cli": "~10.0.8",
+        "@angular/common": "^10.0.14",
         "@angular/compiler": "^10.0.14",
         "@angular/compiler-cli": "~10.0.14",
         "@angular/core": "^10.0.14",
         "@angular/forms": "^10.0.14",
+        "@angular/platform-browser": "^10.0.14",
+        "@angular/platform-browser-dynamic": "^10.0.14",
+        "@angular/router": "^10.0.14",
+        "@shoelace-style/shoelace": "^2.0.0-beta.17",
         "@types/node": "^12.11.1",
+        "logical-not": "^1.0.7",
         "ng-packagr": "^10.0.0",
         "prettier": "^2.1.1",
+        "rxjs": "^6.6.2",
         "ts-node": "~8.3.0",
+        "tslib": "^2.0.1",
         "tslint": "~6.1.0",
-        "typescript": "~3.9.5"
+        "typescript": "~3.9.5",
+        "zone.js": "^0.11.1"
     }
 }

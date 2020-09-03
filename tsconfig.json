@@ -3,6 +3,9 @@
     "references": [
         {
             "path": "./projects/shoelace-style-angular/tsconfig.lib.json"
+        },
+        {
+            "path": "./projects/test/tsconfig.app.json"
         }
     ]
 }

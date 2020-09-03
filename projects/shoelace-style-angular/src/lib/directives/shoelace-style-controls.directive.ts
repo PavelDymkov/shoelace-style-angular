@@ -1,6 +1,9 @@
 import { Directive, forwardRef, ElementRef, OnDestroy } from "@angular/core";
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from "@angular/forms";
 
+import { ISlControlElement } from "../interfaces/shoelace-style-elements";
+import { ShoelaceStyleControlBase } from "../tools/shoelace-style-control";
+
 @Directive({
     selector: `
         sl-checkbox,
@@ -23,14 +26,19 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from "@angular/forms";
     ],
 })
 export class ShoelaceStyleControlsDirective
+    extends ShoelaceStyleControlBase
     implements ControlValueAccessor, OnDestroy {
-    private readonly element = this.elementRef.nativeElement;
-    private readonly changeEventName = this.getChangeEventName();
+    readonly element = this.elementRef.nativeElement;
+
+    private readonly getValue = this.createValueGetter();
+    private readonly setValue = this.createValueSetter();
 
     private onChange: () => void;
     private onTouch: () => void;
 
-    constructor(private elementRef: ElementRef<HTMLElement & { value: any }>) {}
+    constructor(private elementRef: ElementRef<ISlControlElement>) {
+        super();
+    }
 
     ngOnDestroy(): void {
         this.element.removeEventListener(this.changeEventName, this.onChange);
@@ -38,12 +46,12 @@ export class ShoelaceStyleControlsDirective
     }
 
     writeValue(value: any): void {
-        this.element.value = value;
+        this.setValue(value);
     }
 
     registerOnChange(changeTo: any): void {
         this.onChange = () => {
-            changeTo(this.element.value);
+            changeTo(this.getValue());
         };
 
         this.elementRef.nativeElement.addEventListener(
@@ -63,15 +71,5 @@ export class ShoelaceStyleControlsDirective
             this.onTouch,
             false,
         );
-    }
-
-    private getChangeEventName(): string {
-        switch (this.element.tagName) {
-            case "sl-input":
-            case "sl-textarea":
-                return "slInput";
-            default:
-                return "slChange";
-        }
     }
 }
