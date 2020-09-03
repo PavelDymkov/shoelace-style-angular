@@ -1,11 +1,14 @@
 import {
     Directive,
-    ElementRef,
     OnInit,
-    OnDestroy,
     Output,
     EventEmitter,
+    ElementRef,
 } from "@angular/core";
+
+import { fromEvent } from "rxjs";
+
+import { SubscribableDirective } from "../tools/subscribable-directive";
 
 @Directive({
     selector: `
@@ -17,7 +20,9 @@ import {
         sl-tooltip,
     `,
 })
-export class ShoelaceStyleShowHideDirective implements OnInit, OnDestroy {
+export class ShoelaceStyleShowHideDirective
+    extends SubscribableDirective
+    implements OnInit {
     @Output()
     onShow = new EventEmitter<void>();
 
@@ -30,39 +35,27 @@ export class ShoelaceStyleShowHideDirective implements OnInit, OnDestroy {
     @Output()
     onAfterHide = new EventEmitter<void>();
 
-    private readonly element = this.elementRef.nativeElement;
-
-    private readonly onSlShow = () => {
-        this.onShow.emit();
-    };
-
-    private readonly onSlAfterShow = () => {
-        this.onAfterShow.emit();
-    };
-
-    private readonly onSlHide = () => {
-        this.onHide.emit();
-    };
-
-    private readonly onSlAfterHide = () => {
-        this.onAfterHide.emit();
-    };
-
-    constructor(private elementRef: ElementRef<HTMLElement & { value: any }>) {}
-
-    ngOnInit(): void {
-        this.element.addEventListener("slShow", this.onSlShow, false);
-        this.element.addEventListener("slHide", this.onSlHide, false);
-
-        this.element.addEventListener("slAfterShow", this.onSlAfterShow, false);
-        this.element.addEventListener("slAfterHide", this.onSlAfterHide, false);
+    constructor(private elementRef: ElementRef<HTMLElement>) {
+        super();
     }
 
-    ngOnDestroy(): void {
-        this.element.removeEventListener("slShow", this.onSlShow);
-        this.element.removeEventListener("slHide", this.onSlHide);
+    ngOnInit(): void {
+        const element = this.elementRef.nativeElement;
 
-        this.element.removeEventListener("slAfterShow", this.onSlAfterShow);
-        this.element.removeEventListener("slAfterHide", this.onSlAfterHide);
+        this.subscriptions.push(
+            fromEvent(element, "slShow").subscribe(() => {
+                this.onShow.emit();
+            }),
+            fromEvent(element, "slHide").subscribe(() => {
+                this.onHide.emit();
+            }),
+
+            fromEvent(element, "slAfterShow").subscribe(() => {
+                this.onAfterShow.emit();
+            }),
+            fromEvent(element, "slAfterHide").subscribe(() => {
+                this.onAfterHide.emit();
+            }),
+        );
     }
 }

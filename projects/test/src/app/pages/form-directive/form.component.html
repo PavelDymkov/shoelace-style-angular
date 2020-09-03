@@ -1,7 +1,11 @@
-<sl-form [form]="form" (onSubmit)="onSubmit()">
+<sl-form [form]="form" (submit)="onSubmit()">
     <sl-input name="name" value="text" label="Name"></sl-input>
     <br />
-    <sl-select name="favorite" label="Select your favorite">
+    <sl-select
+        name="favorite"
+        [value]="favoriteValue"
+        label="Select your favorite"
+    >
         <sl-menu-item value="birds">Birds</sl-menu-item>
         <sl-menu-item value="cats">Cats</sl-menu-item>
         <sl-menu-item value="dogs">Dogs</sl-menu-item>

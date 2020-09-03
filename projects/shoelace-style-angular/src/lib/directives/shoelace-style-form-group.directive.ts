@@ -2,35 +2,38 @@ import {
     Directive,
     Input,
     OnInit,
-    OnDestroy,
     ElementRef,
     EventEmitter,
 } from "@angular/core";
 import { FormGroup } from "@angular/forms";
 
+import { fromEvent } from "rxjs";
+
+import { SubscribableDirective } from "../tools/subscribable-directive";
+
 @Directive({
     selector: "sl-form[formGroup]",
-    outputs: ["onSubmit"],
+    outputs: ["submit"],
 })
-export class ShoelaceStyleFormGroupDirective implements OnInit, OnDestroy {
+export class ShoelaceStyleFormGroupDirective
+    extends SubscribableDirective
+    implements OnInit {
     @Input()
     formGroup: FormGroup;
 
-    onSubmit = new EventEmitter<void>();
+    submit = new EventEmitter<void>();
 
-    private readonly element = this.elementRef.nativeElement;
-
-    private readonly onSlSubmit = () => {
-        this.onSubmit.emit();
-    };
-
-    constructor(private elementRef: ElementRef<HTMLElement>) {}
-
-    ngOnInit(): void {
-        this.element.addEventListener("slSubmit", this.onSlSubmit, false);
+    constructor(private elementRef: ElementRef<HTMLElement>) {
+        super();
     }
 
-    ngOnDestroy(): void {
-        this.element.removeEventListener("slSubmit", this.onSlSubmit);
+    ngOnInit(): void {
+        this.subscriptions.push(
+            fromEvent(this.elementRef.nativeElement, "slSubmit").subscribe(
+                () => {
+                    this.submit.emit();
+                },
+            ),
+        );
     }
 }

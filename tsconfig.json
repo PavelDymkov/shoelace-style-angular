@@ -1,4 +1,7 @@
 {
+    "compilerOptions": {
+        "baseUrl": "./projects/shoelace-style-angular/src/lib"
+    },
     "files": [],
     "references": [
         {

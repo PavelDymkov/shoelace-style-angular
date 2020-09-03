@@ -1,6 +1,8 @@
 import { Directive, forwardRef, ElementRef, OnDestroy } from "@angular/core";
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from "@angular/forms";
 
+import { fromEvent } from "rxjs";
+
 import { ISlControlElement } from "../interfaces/shoelace-style-elements";
 import { ShoelaceStyleControlBase } from "../tools/shoelace-style-control";
 
@@ -33,16 +35,8 @@ export class ShoelaceStyleControlsDirective
     private readonly getValue = this.createValueGetter();
     private readonly setValue = this.createValueSetter();
 
-    private onChange: () => void;
-    private onTouch: () => void;
-
     constructor(private elementRef: ElementRef<ISlControlElement>) {
         super();
-    }
-
-    ngOnDestroy(): void {
-        this.element.removeEventListener(this.changeEventName, this.onChange);
-        this.element.removeEventListener(this.changeEventName, this.onTouch);
     }
 
     writeValue(value: any): void {
@@ -50,26 +44,18 @@ export class ShoelaceStyleControlsDirective
     }
 
     registerOnChange(changeTo: any): void {
-        this.onChange = () => {
-            changeTo(this.getValue());
-        };
-
-        this.elementRef.nativeElement.addEventListener(
-            this.changeEventName,
-            this.onChange,
-            false,
+        this.subscriptions.push(
+            fromEvent(this.element, this.changeEventName).subscribe(() => {
+                changeTo(this.getValue());
+            }),
         );
     }
 
     registerOnTouched(touch: any): void {
-        this.onTouch = () => {
-            touch();
-        };
-
-        this.elementRef.nativeElement.addEventListener(
-            this.changeEventName,
-            this.onTouch,
-            false,
+        this.subscriptions.push(
+            fromEvent(this.element, this.changeEventName).subscribe(() => {
+                touch();
+            }),
         );
     }
 }

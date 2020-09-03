@@ -2,13 +2,12 @@ import {
     Directive,
     Input,
     OnInit,
-    OnDestroy,
     ElementRef,
     EventEmitter,
 } from "@angular/core";
 import { FormGroup } from "@angular/forms";
 
-import { fromEvent, Subscription } from "rxjs";
+import { fromEvent } from "rxjs";
 import { not } from "logical-not";
 
 import {
@@ -16,88 +15,82 @@ import {
     ISlControlElement,
 } from "../interfaces/shoelace-style-elements";
 import { ShoelaceStyleControl } from "../tools/shoelace-style-control";
+import { SubscribableDirective } from "../tools/subscribable-directive";
 
 @Directive({
     selector: "sl-form[form]",
-    outputs: ["onSubmit"],
+    outputs: ["submit"],
 })
-export class ShoelaceStyleFormDirective implements OnInit, OnDestroy {
+export class ShoelaceStyleFormDirective
+    extends SubscribableDirective
+    implements OnInit {
     @Input()
     form: FormGroup;
 
-    onSubmit = new EventEmitter<void>();
+    submit = new EventEmitter<void>();
 
-    private readonly element = this.elementRef.nativeElement;
-
-    private unsubscriptions: (() => void)[];
-
-    private readonly onSlSubmit = () => {
-        this.onSubmit.emit();
-    };
-
-    private subscriptions: Subscription[] = [];
-
-    constructor(private elementRef: ElementRef<ISlFormElement>) {}
+    constructor(private elementRef: ElementRef<ISlFormElement>) {
+        super();
+    }
 
     ngOnInit(): void {
-        this.element.addEventListener("slSubmit", this.onSlSubmit, false);
+        const element = this.elementRef.nativeElement;
 
-        this.element
+        this.subscriptions.push(
+            fromEvent(element, "slSubmit").subscribe(() => {
+                this.submit.emit();
+            }),
+        );
+
+        element
             .getFormData()
             .then(formData => {
-                console.log("getFormData");
-                const form = {};
-
-                formData.forEach((value, name) => (form[name] = value));
-
-                this.form.patchValue(form);
+                this.setInitialFormValue(formData);
             })
             .then(() => {
-                this.element
-                    .getFormControls()
-                    .then((controls: ISlControlElement[]) => {
-                        console.log("getFormControls");
-                        if (not(this.subscriptions)) return;
-
-                        controls.forEach(element => {
-                            const { name } = element;
-
-                            if (not(name)) return;
-
-                            const control = new ShoelaceStyleControl(element);
-                            const eventName = control.changeEventName;
-
-                            const getValue = control.createValueGetter();
-                            const setValue = control.createValueSetter();
-
-                            const formControl = this.form.get(name);
-
-                            this.subscriptions.push(
-                                formControl.valueChanges.subscribe(value => {
-                                    if (getValue() !== value) {
-                                        setValue(value);
-                                    }
-                                }),
-                                fromEvent(element, eventName).subscribe(() => {
-                                    this.form.patchValue({
-                                        [name]: getValue(),
-                                    });
-                                }),
-                            );
-                        });
-                    });
+                this.subscribeControls(element);
             });
     }
 
-    ngOnDestroy(): void {
-        this.element.removeEventListener("slSubmit", this.onSlSubmit);
+    private setInitialFormValue(formData: FormData): void {
+        const form = {};
 
-        this.subscriptions.forEach(subscription => subscription.unsubscribe());
-        this.subscriptions = null;
+        formData.forEach((value, name) => (form[name] = value));
 
-        if (this.unsubscriptions) {
-            this.unsubscriptions.forEach(unsubscription => unsubscription());
-            this.unsubscriptions = null;
-        }
+        this.form.patchValue(form);
+    }
+
+    private subscribeControls(element: ISlFormElement): void {
+        element.getFormControls().then((controls: ISlControlElement[]) => {
+            if (not(this.subscriptions)) return;
+
+            controls.forEach(element => {
+                const { name } = element;
+
+                if (not(name)) return;
+
+                const control = new ShoelaceStyleControl(element);
+
+                const getValue = control.createValueGetter();
+                const setValue = control.createValueSetter();
+
+                const formControl = this.form.get(name);
+
+                this.subscriptions.push(
+                    formControl.valueChanges.subscribe(value => {
+                        if (getValue() !== value) {
+                            setValue(value);
+                        }
+                    }),
+                    fromEvent(element, control.changeEventName).subscribe(
+                        () => {
+                            this.form.patchValue({
+                                [name]: getValue(),
+                            });
+                        },
+                    ),
+                );
+            });
+        });
     }
 }

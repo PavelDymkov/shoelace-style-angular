@@ -18,6 +18,8 @@ export class FormComponent {
 
     elements: Record<FormControlName, HTMLElement>;
 
+    favoriteValue = "cats";
+
     constructor(
         private formBuilder: FormBuilder,
         private elementRef: ElementRef<HTMLElement>,

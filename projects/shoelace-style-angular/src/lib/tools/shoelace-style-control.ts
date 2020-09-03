@@ -1,8 +1,10 @@
 import { ISlControlElement } from "../interfaces/shoelace-style-elements";
 
+import { SubscribableDirective } from "./subscribable-directive";
+
 export type SlControlElementValue = string | boolean;
 
-export abstract class ShoelaceStyleControlBase {
+export abstract class ShoelaceStyleControlBase extends SubscribableDirective {
     abstract readonly element: ISlControlElement;
 
     get tagName(): string {

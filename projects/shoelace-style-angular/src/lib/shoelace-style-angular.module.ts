@@ -3,6 +3,7 @@ import { NgModule } from "@angular/core";
 import {
     ShoelaceStyleControlsDirective,
     ShoelaceStyleFormGroupDirective,
+    ShoelaceStyleFormDirective,
     ShoelaceStyleShowHideDirective,
 } from "./directives";
 
@@ -10,11 +11,13 @@ import {
     declarations: [
         ShoelaceStyleControlsDirective,
         ShoelaceStyleFormGroupDirective,
+        ShoelaceStyleFormDirective,
         ShoelaceStyleShowHideDirective,
     ],
     exports: [
         ShoelaceStyleControlsDirective,
         ShoelaceStyleFormGroupDirective,
+        ShoelaceStyleFormDirective,
         ShoelaceStyleShowHideDirective,
     ],
 })
