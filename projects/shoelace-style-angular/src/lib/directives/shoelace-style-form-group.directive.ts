@@ -8,8 +8,7 @@ import {
 import { FormGroup } from "@angular/forms";
 
 import { fromEvent } from "rxjs";
-
-import { SubscribableDirective } from "../tools/subscribable-directive";
+import { SubscribableDirective } from "ngx-subscribable";
 
 @Directive({
     selector: "sl-form[formGroup]",
@@ -21,19 +20,19 @@ export class ShoelaceStyleFormGroupDirective
     @Input()
     formGroup: FormGroup;
 
-    submit = new EventEmitter<void>();
+    submit = new EventEmitter<HTMLElement>();
 
     constructor(private elementRef: ElementRef<HTMLElement>) {
         super();
     }
 
     ngOnInit(): void {
+        const form = this.elementRef.nativeElement;
+
         this.subscriptions.push(
-            fromEvent(this.elementRef.nativeElement, "slSubmit").subscribe(
-                () => {
-                    this.submit.emit();
-                },
-            ),
+            fromEvent(form, "slSubmit").subscribe(() => {
+                this.submit.emit(form);
+            }),
         );
     }
 }

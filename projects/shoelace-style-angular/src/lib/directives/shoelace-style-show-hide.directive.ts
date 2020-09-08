@@ -7,13 +7,13 @@ import {
 } from "@angular/core";
 
 import { fromEvent } from "rxjs";
-
-import { SubscribableDirective } from "../tools/subscribable-directive";
+import { SubscribableDirective } from "ngx-subscribable";
 
 @Directive({
     selector: `
         sl-alert,
         sl-color-picker,
+        sl-details,
         sl-dialog,
         sl-drawer,
         sl-dropdown,
@@ -24,16 +24,16 @@ export class ShoelaceStyleShowHideDirective
     extends SubscribableDirective
     implements OnInit {
     @Output()
-    onShow = new EventEmitter<void>();
+    show = new EventEmitter<HTMLElement>();
 
     @Output()
-    onAfterShow = new EventEmitter<void>();
+    afterShow = new EventEmitter<HTMLElement>();
 
     @Output()
-    onHide = new EventEmitter<void>();
+    hide = new EventEmitter<HTMLElement>();
 
     @Output()
-    onAfterHide = new EventEmitter<void>();
+    afterHide = new EventEmitter<HTMLElement>();
 
     constructor(private elementRef: ElementRef<HTMLElement>) {
         super();
@@ -44,17 +44,17 @@ export class ShoelaceStyleShowHideDirective
 
         this.subscriptions.push(
             fromEvent(element, "slShow").subscribe(() => {
-                this.onShow.emit();
+                this.show.emit(element);
             }),
             fromEvent(element, "slHide").subscribe(() => {
-                this.onHide.emit();
+                this.hide.emit(element);
             }),
 
             fromEvent(element, "slAfterShow").subscribe(() => {
-                this.onAfterShow.emit();
+                this.afterShow.emit(element);
             }),
-            fromEvent(element, "slAfterHide").subscribe(() => {
-                this.onAfterHide.emit();
+            fromEvent(element, "slAfterHide").subscribe(t => {
+                this.afterHide.emit(element);
             }),
         );
     }

@@ -8,6 +8,7 @@ import {
 import { FormGroup } from "@angular/forms";
 
 import { fromEvent } from "rxjs";
+import { SubscribableDirective } from "ngx-subscribable";
 import { not } from "logical-not";
 
 import {
@@ -15,7 +16,6 @@ import {
     ISlControlElement,
 } from "../interfaces/shoelace-style-elements";
 import { ShoelaceStyleControl } from "../tools/shoelace-style-control";
-import { SubscribableDirective } from "../tools/subscribable-directive";
 
 @Directive({
     selector: "sl-form[form]",
@@ -27,7 +27,7 @@ export class ShoelaceStyleFormDirective
     @Input()
     form: FormGroup;
 
-    submit = new EventEmitter<void>();
+    submit = new EventEmitter<CustomEvent>();
 
     constructor(private elementRef: ElementRef<ISlFormElement>) {
         super();
@@ -37,8 +37,8 @@ export class ShoelaceStyleFormDirective
         const element = this.elementRef.nativeElement;
 
         this.subscriptions.push(
-            fromEvent(element, "slSubmit").subscribe(() => {
-                this.submit.emit();
+            fromEvent(element, "slSubmit").subscribe((event: CustomEvent) => {
+                this.submit.emit(event);
             }),
         );
 

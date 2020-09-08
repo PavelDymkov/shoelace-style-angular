@@ -5,5 +5,9 @@
         "types": []
     },
     "files": ["src/main.ts", "src/polyfills.ts"],
-    "include": ["src/**/*.d.ts"]
+    "include": ["src/**/*.d.ts"],
+    "paths": {
+        "logical-not": ["../../node_modules/logical-not"],
+        "ngx-subscribable": ["../../node_modules/ngx-subscribable"]
+    }
 }

@@ -1,6 +1,6 @@
-import { ISlControlElement } from "../interfaces/shoelace-style-elements";
+import { SubscribableDirective } from "ngx-subscribable";
 
-import { SubscribableDirective } from "./subscribable-directive";
+import { ISlControlElement } from "../interfaces/shoelace-style-elements";
 
 export type SlControlElementValue = string | boolean;
 

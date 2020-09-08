@@ -23,6 +23,7 @@
     },
     "dependencies": {
         "logical-not": "^1.0.7",
+        "ngx-subscribable": "^1.0.0",
         "tslib": "^2.0.0"
     }
 }

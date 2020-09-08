@@ -18,7 +18,6 @@
         "test": "npm run build-test-app"
     },
     "private": true,
-    "dependencies": {},
     "devDependencies": {
         "@angular-devkit/build-angular": "~0.1000.8",
         "@angular-devkit/build-ng-packagr": "~0.1000.8",
@@ -35,6 +34,7 @@
         "@types/node": "^12.11.1",
         "logical-not": "^1.0.7",
         "ng-packagr": "^10.0.0",
+        "ngx-subscribable": "^1.0.0",
         "prettier": "^2.1.1",
         "rxjs": "^6.6.2",
         "ts-node": "~8.3.0",

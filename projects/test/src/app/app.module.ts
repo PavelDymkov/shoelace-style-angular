@@ -13,6 +13,7 @@ import { AppComponent } from "./app.component";
 
 import { ControlsDirectiveComponent } from "./pages/controls-directive/controls-directive.component";
 import { FormComponent } from "./pages/form-directive/form.component";
+import { ShowHideComponent } from "./pages/show-hide/show-hide.component";
 
 @NgModule({
     imports: [
@@ -26,6 +27,7 @@ import { FormComponent } from "./pages/form-directive/form.component";
         AppComponent,
         ControlsDirectiveComponent,
         FormComponent,
+        ShowHideComponent,
 
         ShoelaceStyleControlsDirective,
         ShoelaceStyleFormGroupDirective,
