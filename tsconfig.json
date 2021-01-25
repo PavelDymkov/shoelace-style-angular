@@ -1,14 +1,22 @@
 {
+    "compileOnSave": false,
     "compilerOptions": {
-        "baseUrl": "./projects/shoelace-style-angular/src/lib"
-    },
-    "files": [],
-    "references": [
-        {
-            "path": "./projects/shoelace-style-angular/tsconfig.lib.json"
-        },
-        {
-            "path": "./projects/test/tsconfig.app.json"
+        "baseUrl": "./",
+        "outDir": "./lib",
+        "sourceMap": true,
+        "declaration": false,
+        "downlevelIteration": true,
+        "experimentalDecorators": true,
+        "moduleResolution": "node",
+        "importHelpers": true,
+        "target": "es2015",
+        "module": "es2020",
+        "lib": ["es2018", "dom"],
+        "paths": {
+            "shoelace-style-angular": [
+                "lib/shoelace-style-angular/shoelace-style-angular",
+                "lib/shoelace-style-angular"
+            ]
         }
-    ]
+    }
 }
