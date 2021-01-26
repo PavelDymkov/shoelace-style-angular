@@ -1,11 +1,23 @@
 import { SubscribableDirective } from "ngx-subscribable";
+import { Components } from "@shoelace-style/shoelace";
 
-import { ISlControlElement } from "../interfaces/shoelace-style-elements";
-
-export type SlControlElementValue = string | boolean;
+export type ShoelaceStyleControlElement = HTMLElement &
+    (
+        | Components.SlCheckbox
+        | Components.SlColorPicker
+        | Components.SlForm
+        | Components.SlInput
+        | Components.SlRadio
+        | Components.SlRange
+        | Components.SlRating
+        | Components.SlSelect
+        | Components.SlSwitch
+        | Components.SlTextarea
+    );
+export type ShoelaceStyleControlElementValue = string | boolean;
 
 export abstract class ShoelaceStyleControlBase extends SubscribableDirective {
-    abstract readonly element: ISlControlElement;
+    abstract readonly element: ShoelaceStyleControlElement;
 
     get tagName(): string {
         return this.element.tagName.toLowerCase();
@@ -15,19 +27,19 @@ export abstract class ShoelaceStyleControlBase extends SubscribableDirective {
         switch (this.tagName) {
             case "sl-input":
             case "sl-textarea":
-                return "slInput";
+                return "sl-input";
             default:
-                return "slChange";
+                return "sl-change";
         }
     }
 
-    createValueGetter(): () => SlControlElementValue {
+    createValueGetter(): () => ShoelaceStyleControlElementValue {
         switch (this.tagName) {
             case "sl-checkbox":
             case "sl-radio":
             case "sl-switch":
                 return () => {
-                    const { checked } = this.element;
+                    const { checked } = this.element as Components.SlCheckbox;
 
                     const value = this.element.getAttribute("value");
 
@@ -38,28 +50,30 @@ export abstract class ShoelaceStyleControlBase extends SubscribableDirective {
                     return checked;
                 };
             default:
-                return () => this.element.value;
+                return () => (this.element as Components.SlInput).value;
         }
     }
 
-    createValueSetter(): (value: SlControlElementValue) => void {
+    createValueSetter(): (value: ShoelaceStyleControlElementValue) => void {
         switch (this.tagName) {
             case "sl-checkbox":
             case "sl-radio":
             case "sl-switch":
-                return (value: SlControlElementValue) => {
-                    this.element.checked = value ? true : false;
+                return (value: ShoelaceStyleControlElementValue) => {
+                    (this.element as Components.SlCheckbox).checked = value
+                        ? true
+                        : false;
                 };
             default:
                 return (value: string) => {
-                    this.element.value = value;
+                    (this.element as Components.SlInput).value = value;
                 };
         }
     }
 }
 
 export class ShoelaceStyleControl extends ShoelaceStyleControlBase {
-    constructor(readonly element: ISlControlElement) {
+    constructor(readonly element: ShoelaceStyleControlElement) {
         super();
     }
 }

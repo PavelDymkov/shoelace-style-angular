@@ -1,0 +1,19 @@
+<sl-form [data]="form" (submit)="logFormData()">
+    <sl-input
+        name="inputByFormData"
+        value="invalid"
+        label="inputByFormData"
+    ></sl-input>
+    <br />
+    <sl-input
+        name="inputBySlValue"
+        value="Sl value text"
+        label="inputBySlValue"
+    >
+    </sl-input>
+    <br />
+    <sl-button submit>Submit</sl-button>
+</sl-form>
+
+<button id="patch" (click)="patchForm()">Patch value</button>
+<button id="submit" (click)="emitSubmit()">Emit submit</button>

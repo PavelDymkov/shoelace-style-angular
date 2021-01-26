@@ -1,0 +1,37 @@
+const { spawn } = require("child_process");
+
+const { port } = require("./config");
+const { url } = require("./tools");
+
+let serveProcess;
+
+module.exports = {
+    async mochaGlobalSetup() {
+        const sh = `npx ng serve test --port ${port}`;
+        const [command, ...args] = sh.split(/\s+/);
+
+        console.log(`starting test server on ${url("/")}`);
+
+        serveProcess = spawn(command, args);
+
+        serveProcess.once("close", code => {
+            if (code) throw new Error();
+        });
+
+        return new Promise(resolve => {
+            serveProcess.stdout.on("data", data => {
+                const message = String(data);
+
+                if (message.includes("Compiled successfully")) {
+                    console.log("test server started");
+
+                    resolve();
+                }
+            });
+        });
+    },
+
+    async mochaGlobalTeardown() {
+        serveProcess.kill();
+    },
+};

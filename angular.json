@@ -68,7 +68,12 @@
                         "aot": true,
                         "assets": [
                             "projects/test/src/favicon.ico",
-                            "projects/test/src/assets"
+                            "projects/test/src/assets",
+                            {
+                                "glob": "**/*.*",
+                                "input": "node_modules/@shoelace-style/shoelace/dist/shoelace",
+                                "output": "/assets/shoelace"
+                            }
                         ],
                         "styles": ["projects/test/src/styles.css"],
                         "scripts": []

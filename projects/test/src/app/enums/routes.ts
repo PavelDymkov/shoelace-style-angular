@@ -1,5 +1,5 @@
 export enum ERoutes {
-    ControlsDirective = "controls-directive",
+    Focusable = "focusable",
     Form = "form",
     ShowHide = "show-hide",
 }

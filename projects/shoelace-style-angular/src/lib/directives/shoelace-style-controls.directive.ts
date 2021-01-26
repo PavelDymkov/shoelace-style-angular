@@ -3,8 +3,10 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from "@angular/forms";
 
 import { fromEvent } from "rxjs";
 
-import { ISlControlElement } from "../interfaces/shoelace-style-elements";
-import { ShoelaceStyleControlBase } from "../tools/shoelace-style-control";
+import {
+    ShoelaceStyleControlBase,
+    ShoelaceStyleControlElement,
+} from "../tools/shoelace-style-control";
 
 @Directive({
     selector: `
@@ -35,7 +37,7 @@ export class ShoelaceStyleControlsDirective
     private readonly getValue = this.createValueGetter();
     private readonly setValue = this.createValueSetter();
 
-    constructor(private elementRef: ElementRef<ISlControlElement>) {
+    constructor(private elementRef: ElementRef<ShoelaceStyleControlElement>) {
         super();
     }
 

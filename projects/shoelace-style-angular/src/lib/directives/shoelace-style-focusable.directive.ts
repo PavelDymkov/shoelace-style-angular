@@ -1,10 +1,4 @@
-import {
-    Directive,
-    OnInit,
-    Output,
-    EventEmitter,
-    ElementRef,
-} from "@angular/core";
+import { Directive, OnInit, EventEmitter, ElementRef } from "@angular/core";
 
 import { fromEvent } from "rxjs";
 import { SubscribableDirective } from "ngx-subscribable";
@@ -21,14 +15,12 @@ import { SubscribableDirective } from "ngx-subscribable";
         sl-switch,
         sl-textarea,
     `,
+    outputs: ["focus", "blur"],
 })
 export class ShoelaceStyleFocusableDirective
     extends SubscribableDirective
     implements OnInit {
-    @Output()
     focus = new EventEmitter<HTMLElement>();
-
-    @Output()
     blur = new EventEmitter<HTMLElement>();
 
     constructor(private elementRef: ElementRef<HTMLElement>) {
@@ -38,13 +30,13 @@ export class ShoelaceStyleFocusableDirective
     ngOnInit(): void {
         const element = this.elementRef.nativeElement;
 
-        this.subscriptions.push(
-            fromEvent(element, "slFocus").subscribe(() => {
+        this.subscriptions = [
+            fromEvent(element, "sl-focus").subscribe(() => {
                 this.focus.emit(element);
             }),
-            fromEvent(element, "slBlur").subscribe(() => {
+            fromEvent(element, "sl-blur").subscribe(() => {
                 this.blur.emit(element);
             }),
-        );
+        ];
     }
 }

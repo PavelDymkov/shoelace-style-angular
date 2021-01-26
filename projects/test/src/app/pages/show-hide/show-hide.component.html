@@ -1,9 +1,11 @@
 <sl-alert
-    [open]="isShowAlert"
-    (show)="onShow($event)"
-    (hide)="onHide($event)"
-    (afterShow)="onAfterShow($event)"
-    (afterHide)="onAfterHide($event)"
+    [attr.open]="isShowAlert"
+    (show)="logMessage('show', $event)"
+    (hide)="logMessage('hide', $event)"
+    (afterShow)="logMessage('after show', $event)"
+    (afterHide)="logMessage('atfer hide', $event)"
 >
     Shoelace Style Alert
 </sl-alert>
+
+<button id="toggle" (click)="isShowAlert = !isShowAlert">Toggle</button>

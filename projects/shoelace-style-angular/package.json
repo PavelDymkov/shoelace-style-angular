@@ -17,9 +17,9 @@
     },
     "license": "MIT",
     "peerDependencies": {
-        "@angular/core": "^10.0.14",
-        "@angular/forms": "^10.0.14",
-        "rxjs": "^6.6.2"
+        "@angular/core": "^11.1.0",
+        "@angular/forms": "^11.1.0",
+        "rxjs": "^6.6.3"
     },
     "dependencies": {
         "logical-not": "^1.0.7",

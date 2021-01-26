@@ -1,26 +1,19 @@
 import { NgModule } from "@angular/core";
 
 import {
-    ShoelaceStyleControlsDirective,
     ShoelaceStyleFocusableDirective,
-    ShoelaceStyleFormGroupDirective,
-    ShoelaceStyleFormDirective,
     ShoelaceStyleShowHideDirective,
 } from "./directives";
+import { ShoelaceStyleFormModule } from "./shoelace-style-form.module";
 
 @NgModule({
     declarations: [
-        ShoelaceStyleControlsDirective,
         ShoelaceStyleFocusableDirective,
-        ShoelaceStyleFormGroupDirective,
-        ShoelaceStyleFormDirective,
         ShoelaceStyleShowHideDirective,
     ],
     exports: [
-        ShoelaceStyleControlsDirective,
+        ShoelaceStyleFormModule,
         ShoelaceStyleFocusableDirective,
-        ShoelaceStyleFormGroupDirective,
-        ShoelaceStyleFormDirective,
         ShoelaceStyleShowHideDirective,
     ],
 })

@@ -7,29 +7,32 @@ import {
 } from "@angular/core";
 import { FormGroup } from "@angular/forms";
 
+import { Components } from "@shoelace-style/shoelace";
+
 import { fromEvent } from "rxjs";
 import { SubscribableDirective } from "ngx-subscribable";
 import { not } from "logical-not";
 
 import {
-    ISlFormElement,
-    ISlControlElement,
-} from "../interfaces/shoelace-style-elements";
-import { ShoelaceStyleControl } from "../tools/shoelace-style-control";
+    ShoelaceStyleControl,
+    ShoelaceStyleControlElement,
+} from "../tools/shoelace-style-control";
 
 @Directive({
-    selector: "sl-form[form]",
+    selector: "sl-form[data]",
     outputs: ["submit"],
 })
 export class ShoelaceStyleFormDirective
     extends SubscribableDirective
     implements OnInit {
-    @Input()
+    @Input("data")
     form: FormGroup;
 
     submit = new EventEmitter<CustomEvent>();
 
-    constructor(private elementRef: ElementRef<ISlFormElement>) {
+    constructor(
+        private elementRef: ElementRef<Components.SlForm & HTMLElement>,
+    ) {
         super();
     }
 
@@ -37,7 +40,7 @@ export class ShoelaceStyleFormDirective
         const element = this.elementRef.nativeElement;
 
         this.subscriptions.push(
-            fromEvent(element, "slSubmit").subscribe((event: CustomEvent) => {
+            fromEvent(element, "sl-submit").subscribe((event: CustomEvent) => {
                 this.submit.emit(event);
             }),
         );
@@ -45,37 +48,35 @@ export class ShoelaceStyleFormDirective
         element
             .getFormData()
             .then(formData => {
-                this.setInitialFormValue(formData);
+                const formValue = {};
+
+                formData.forEach((value, name) => (formValue[name] = value));
+
+                this.form.patchValue(formValue);
             })
             .then(() => {
-                this.subscribeControls(element);
+                element
+                    .getFormControls()
+                    .then((controls: ShoelaceStyleControlElement[]) =>
+                        this.subscribeControls(controls),
+                    );
             });
     }
 
-    private setInitialFormValue(formData: FormData): void {
-        const form = {};
+    private subscribeControls(controls: ShoelaceStyleControlElement[]): void {
+        controls.forEach(element => {
+            const { name } = element as { name: string };
 
-        formData.forEach((value, name) => (form[name] = value));
+            if (not(name)) return;
 
-        this.form.patchValue(form);
-    }
+            const control = new ShoelaceStyleControl(element);
 
-    private subscribeControls(element: ISlFormElement): void {
-        element.getFormControls().then((controls: ISlControlElement[]) => {
-            if (not(this.subscriptions)) return;
+            const getValue = control.createValueGetter();
+            const setValue = control.createValueSetter();
 
-            controls.forEach(element => {
-                const { name } = element;
+            const formControl = this.form.get(name);
 
-                if (not(name)) return;
-
-                const control = new ShoelaceStyleControl(element);
-
-                const getValue = control.createValueGetter();
-                const setValue = control.createValueSetter();
-
-                const formControl = this.form.get(name);
-
+            if (formControl) {
                 this.subscriptions.push(
                     formControl.valueChanges.subscribe(value => {
                         if (getValue() !== value) {
@@ -90,7 +91,7 @@ export class ShoelaceStyleFormDirective
                         },
                     ),
                 );
-            });
+            }
         });
     }
 }
