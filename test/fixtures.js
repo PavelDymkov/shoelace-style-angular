@@ -7,12 +7,20 @@ let serveProcess;
 
 module.exports = {
     async mochaGlobalSetup() {
-        const sh = `npx ng serve test --port ${port}`;
+        const sh = `npx ng serve test --prod --port ${port}`;
         const [command, ...args] = sh.split(/\s+/);
 
         console.log(`starting test server on ${url("/")}`);
 
         serveProcess = spawn(command, args);
+
+        serveProcess.stdout.on("data", data => {
+            process.stdout.write(data);
+        });
+
+        serveProcess.stderr.on("data", data => {
+            process.stderr.write(data);
+        });
 
         serveProcess.once("close", code => {
             if (code) throw new Error();

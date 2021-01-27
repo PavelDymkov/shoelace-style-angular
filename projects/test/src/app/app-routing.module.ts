@@ -5,6 +5,7 @@ import { ERoutes } from "./enums/routes";
 
 import { FocusableComponent } from "./pages/focusable/focusable.component";
 import { FormComponent } from "./pages/form/form.component";
+import { OverlayComponent } from "./pages/overlay/overlay.component";
 import { ShowHideComponent } from "./pages/show-hide/show-hide.component";
 
 const routes: Routes = [
@@ -20,6 +21,10 @@ const routes: Routes = [
     {
         path: ERoutes.Form,
         component: FormComponent,
+    },
+    {
+        path: ERoutes.Overlay,
+        component: OverlayComponent,
     },
     {
         path: ERoutes.ShowHide,

@@ -11,12 +11,6 @@
         "importHelpers": true,
         "target": "es2015",
         "module": "es2020",
-        "lib": ["es2018", "dom"],
-        "paths": {
-            "shoelace-style-angular": [
-                "lib/shoelace-style-angular/shoelace-style-angular",
-                "lib/shoelace-style-angular"
-            ]
-        }
+        "lib": ["es2018", "dom"]
     }
 }

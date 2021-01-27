@@ -2,14 +2,15 @@
     "extends": "../../tsconfig.json",
     "compilerOptions": {
         "outDir": "../../out-tsc/lib",
-        "declarationMap": true,
+        "declarationMap": false,
         "target": "es2015",
         "declaration": true,
         "inlineSources": true
     },
     "angularCompilerOptions": {
+        "enableIvy": false,
+        "enableResourceInlining": true,
         "skipTemplateCodegen": true,
-        "strictMetadataEmit": true,
-        "enableResourceInlining": true
+        "strictMetadataEmit": true
     }
 }

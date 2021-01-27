@@ -2,12 +2,13 @@
     "extends": "../../tsconfig.json",
     "compilerOptions": {
         "outDir": "../../test/app",
-        "types": ["resize-observer-browser"]
+        "types": ["resize-observer-browser"],
+        "paths": {
+            "shoelace-style-angular": [
+                "projects/shoelace-style-angular/src/lib/shoelace-style-angular.module"
+            ]
+        }
     },
     "files": ["src/main.ts", "src/polyfills.ts"],
-    "include": ["src/**/*.d.ts"],
-    "paths": {
-        "logical-not": ["../../node_modules/logical-not"],
-        "ngx-subscribable": ["../../node_modules/ngx-subscribable"]
-    }
+    "include": ["src/**/*.d.ts"]
 }

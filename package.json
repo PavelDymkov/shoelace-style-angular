@@ -10,9 +10,8 @@
         "url": "https://github.com/PavelDymkov/shoelace-style-angular.git"
     },
     "scripts": {
-        "build": "ng build --prod",
-        "start": "ng serve",
-        "test": "npm run build && mocha test/**/*.test.js --require test/fixtures.js"
+        "start": "npx ng serve test",
+        "test": "ng build && mocha test/**/*.test.js --require test/fixtures.js"
     },
     "private": true,
     "devDependencies": {

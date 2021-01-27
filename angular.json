@@ -14,11 +14,6 @@
                     "options": {
                         "tsConfig": "projects/shoelace-style-angular/tsconfig.lib.json",
                         "project": "projects/shoelace-style-angular/ng-package.json"
-                    },
-                    "configurations": {
-                        "production": {
-                            "tsConfig": "projects/shoelace-style-angular/tsconfig.lib.prod.json"
-                        }
                     }
                 }
             }
@@ -80,31 +75,7 @@
                     },
                     "configurations": {
                         "production": {
-                            "fileReplacements": [
-                                {
-                                    "replace": "projects/test/src/environments/environment.ts",
-                                    "with": "projects/test/src/environments/environment.prod.ts"
-                                }
-                            ],
-                            "optimization": true,
-                            "outputHashing": "all",
-                            "sourceMap": false,
-                            "namedChunks": false,
-                            "extractLicenses": true,
-                            "vendorChunk": false,
-                            "buildOptimizer": true,
-                            "budgets": [
-                                {
-                                    "type": "initial",
-                                    "maximumWarning": "2mb",
-                                    "maximumError": "5mb"
-                                },
-                                {
-                                    "type": "anyComponentStyle",
-                                    "maximumWarning": "6kb",
-                                    "maximumError": "10kb"
-                                }
-                            ]
+                            "tsConfig": "projects/test/tsconfig.app.test.json"
                         }
                     }
                 },
@@ -117,12 +88,6 @@
                         "production": {
                             "browserTarget": "test:build:production"
                         }
-                    }
-                },
-                "extract-i18n": {
-                    "builder": "@angular-devkit/build-angular:extract-i18n",
-                    "options": {
-                        "browserTarget": "test:build"
                     }
                 }
             }

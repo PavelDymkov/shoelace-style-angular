@@ -7,15 +7,14 @@ import { SubscribableDirective } from "ngx-subscribable";
     selector: `
         sl-dialog,
         sl-drawer,
-        sl-tooltip,
     `,
     outputs: ["initialFocus", "overlayDismiss"],
 })
-export class ShoelaceStyleShowHideDirective
+export class ShoelaceStyleOverlayDirective
     extends SubscribableDirective
     implements OnInit {
-    initialFocus = new EventEmitter<HTMLElement>();
-    overlayDismiss = new EventEmitter<HTMLElement>();
+    initialFocus = new EventEmitter<CustomEvent>();
+    overlayDismiss = new EventEmitter<CustomEvent>();
 
     constructor(private elementRef: ElementRef<HTMLElement>) {
         super();
@@ -25,12 +24,16 @@ export class ShoelaceStyleShowHideDirective
         const element = this.elementRef.nativeElement;
 
         this.subscriptions = [
-            fromEvent(element, "sl-initial-focus").subscribe(() => {
-                this.initialFocus.emit(element);
-            }),
-            fromEvent(element, "sl-overlay-dismiss").subscribe(() => {
-                this.overlayDismiss.emit(element);
-            }),
+            fromEvent(element, "sl-initial-focus").subscribe(
+                (event: CustomEvent) => {
+                    this.initialFocus.emit(event);
+                },
+            ),
+            fromEvent(element, "sl-overlay-dismiss").subscribe(
+                (event: CustomEvent) => {
+                    this.overlayDismiss.emit(event);
+                },
+            ),
         ];
     }
 }
