@@ -1,12 +1,26 @@
-import { Directive, forwardRef, ElementRef, OnDestroy } from "@angular/core";
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from "@angular/forms";
+import { Directive, OnInit, ElementRef, EventEmitter } from "@angular/core";
+import { AbstractControl } from "@angular/forms";
 
+import { Components } from "@shoelace-style/shoelace";
+
+import { SubscribableDirective } from "ngx-subscribable";
 import { fromEvent } from "rxjs";
 
-import {
-    ShoelaceStyleControlBase,
-    ShoelaceStyleControlElement,
-} from "../tools/shoelace-style-control";
+type ShoelaceStyleControlElement = HTMLElement & {
+    name: string;
+    value: any;
+} & (
+        | Components.SlCheckbox
+        | Components.SlColorPicker
+        | Components.SlForm
+        | Components.SlInput
+        | Components.SlRadio
+        | Components.SlRange
+        | Components.SlRating
+        | Components.SlSelect
+        | Components.SlSwitch
+        | Components.SlTextarea
+    );
 
 @Directive({
     selector: `
@@ -21,42 +35,62 @@ import {
         sl-switch,
         sl-textarea,
     `,
-    providers: [
-        {
-            provide: NG_VALUE_ACCESSOR,
-            useExisting: forwardRef(() => ShoelaceStyleControlsDirective),
-            multi: true,
-        },
-    ],
+    outputs: ["change"],
 })
 export class ShoelaceStyleControlsDirective
-    extends ShoelaceStyleControlBase
-    implements ControlValueAccessor, OnDestroy {
+    extends SubscribableDirective
+    implements OnInit {
+    readonly change = new EventEmitter<CustomEvent>();
     readonly element = this.elementRef.nativeElement;
 
-    private readonly getValue = this.createValueGetter();
-    private readonly setValue = this.createValueSetter();
+    private connected = false;
+
+    get tagName(): string {
+        return this.element.tagName.toLowerCase();
+    }
+
+    get changeEventName(): string {
+        switch (this.tagName) {
+            case "sl-input":
+            case "sl-textarea":
+                return "sl-input";
+            default:
+                return "sl-change";
+        }
+    }
 
     constructor(private elementRef: ElementRef<ShoelaceStyleControlElement>) {
         super();
     }
 
-    writeValue(value: any): void {
-        this.setValue(value);
-    }
+    ngOnInit(): void {
+        const element = this.elementRef.nativeElement;
 
-    registerOnChange(changeTo: any): void {
-        this.subscriptions.push(
-            fromEvent(this.element, this.changeEventName).subscribe(() => {
-                changeTo(this.getValue());
+        this.subscriptions = [
+            fromEvent(element, "sl-change").subscribe((event: CustomEvent) => {
+                this.change.emit(event);
             }),
-        );
+        ];
     }
 
-    registerOnTouched(touch: any): void {
+    connectTo(formControl: AbstractControl): void {
+        if (this.connected) return;
+        else this.connected = true;
+
+        if (this.element.value) {
+            formControl.patchValue(this.element.value, { emitEvent: false });
+        }
+
+        this.element.value = formControl.value;
+
         this.subscriptions.push(
+            formControl.valueChanges.subscribe(value => {
+                if (this.element.value !== value) {
+                    this.element.value = value;
+                }
+            }),
             fromEvent(this.element, this.changeEventName).subscribe(() => {
-                touch();
+                formControl.patchValue(this.element.value);
             }),
         );
     }

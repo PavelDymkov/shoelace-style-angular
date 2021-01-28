@@ -5,7 +5,7 @@ const { url } = require("./tools");
 
 let browser;
 
-describe("Focusable Directive", () => {
+describe("Load Directive", () => {
     before(async () => {
         browser = await puppeteer.launch();
     });
@@ -14,19 +14,15 @@ describe("Focusable Directive", () => {
         await browser.close();
     });
 
-    it("should check angular native focus and blur outputs", async () => {
+    it("should check load output", async () => {
         const page = await browser.newPage();
+
+        await page.goto(url("/load"));
 
         await io({
             page,
-            async input() {
-                await page.goto(url("/focusable"));
-            },
             async output({ message }) {
-                await message("focus: sl-input");
-                await message("blur: sl-input");
-                await message("focus: sl-button");
-                await message("blur: sl-button");
+                await message("sl-icon loaded");
             },
         });
 

@@ -9,7 +9,7 @@ import { delay, tap } from "rxjs/operators";
 })
 export class FocusableComponent implements AfterViewInit {
     ngAfterViewInit(): void {
-        from(Array.from(document.querySelector("#container").children))
+        from(Array.from(document.querySelector("app-focusable-page").children))
             .pipe(delay(100))
             .pipe(tap(item => (item as any).setFocus()))
             .pipe(delay(100))

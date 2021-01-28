@@ -25,8 +25,8 @@ describe("ShowHide Directive", () => {
                 await page.click("#toggle");
             },
             async output({ message }) {
-                await message("show sl-alert");
-                await message("after show sl-alert");
+                await message("sl-alert show");
+                await message("sl-alert after show");
             },
         });
 
@@ -36,8 +36,8 @@ describe("ShowHide Directive", () => {
                 await page.click("#toggle");
             },
             async output({ message }) {
-                await message("hide sl-alert");
-                await message("atfer hide sl-alert");
+                await message("sl-alert hide");
+                await message("sl-alert atfer hide");
             },
         });
 

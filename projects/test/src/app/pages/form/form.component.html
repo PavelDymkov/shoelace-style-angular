@@ -1,16 +1,13 @@
 <sl-form [data]="form" (submit)="logFormData()">
-    <sl-input
-        name="inputByFormData"
-        value="invalid"
-        label="inputByFormData"
-    ></sl-input>
+    <sl-input name="inputByFormData"></sl-input>
     <br />
-    <sl-input
-        name="inputBySlValue"
-        value="Sl value text"
-        label="inputBySlValue"
-    >
-    </sl-input>
+    <sl-input name="inputBySlValue" value="Sl text"> </sl-input>
+    <br />
+    <sl-select name="select">
+        <sl-menu-item value="option-1">Option 1</sl-menu-item>
+        <sl-menu-item value="option-2">Option 2</sl-menu-item>
+        <sl-menu-item value="option-3">Option 3</sl-menu-item>
+    </sl-select>
     <br />
     <sl-button submit>Submit</sl-button>
 </sl-form>

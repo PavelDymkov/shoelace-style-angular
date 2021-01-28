@@ -8,7 +8,7 @@ export class ShowHideComponent {
     isShowAlert = false;
 
     logMessage(prefix: string, target: HTMLElement): void {
-        console.log(`${prefix} ${this.getTagName(target)}`);
+        console.log(`${this.getTagName(target)} ${prefix}`);
     }
 
     private getTagName(element: HTMLElement): string {

@@ -2,8 +2,11 @@ import {
     Directive,
     Input,
     OnInit,
+    AfterContentChecked,
     ElementRef,
     EventEmitter,
+    ContentChildren,
+    QueryList,
 } from "@angular/core";
 import { FormGroup } from "@angular/forms";
 
@@ -11,12 +14,8 @@ import { Components } from "@shoelace-style/shoelace";
 
 import { fromEvent } from "rxjs";
 import { SubscribableDirective } from "ngx-subscribable";
-import { not } from "logical-not";
 
-import {
-    ShoelaceStyleControl,
-    ShoelaceStyleControlElement,
-} from "../tools/shoelace-style-control";
+import { ShoelaceStyleControlsDirective } from "./shoelace-style-controls.directive";
 
 @Directive({
     selector: "sl-form[data]",
@@ -24,9 +23,12 @@ import {
 })
 export class ShoelaceStyleFormDirective
     extends SubscribableDirective
-    implements OnInit {
+    implements OnInit, AfterContentChecked {
     @Input("data")
     form: FormGroup;
+
+    @ContentChildren(ShoelaceStyleControlsDirective)
+    controlsQueryList: QueryList<ShoelaceStyleControlsDirective>;
 
     submit = new EventEmitter<CustomEvent>();
 
@@ -44,53 +46,14 @@ export class ShoelaceStyleFormDirective
                 this.submit.emit(event);
             }),
         );
-
-        element
-            .getFormData()
-            .then(formData => {
-                const formValue = {};
-
-                formData.forEach((value, name) => (formValue[name] = value));
-
-                this.form.patchValue(formValue);
-            })
-            .then(() => {
-                element
-                    .getFormControls()
-                    .then((controls: ShoelaceStyleControlElement[]) =>
-                        this.subscribeControls(controls),
-                    );
-            });
     }
 
-    private subscribeControls(controls: ShoelaceStyleControlElement[]): void {
-        controls.forEach(element => {
-            const { name } = element as { name: string };
-
-            if (not(name)) return;
-
-            const control = new ShoelaceStyleControl(element);
-
-            const getValue = control.createValueGetter();
-            const setValue = control.createValueSetter();
-
-            const formControl = this.form.get(name);
+    ngAfterContentChecked(): void {
+        this.controlsQueryList.forEach(control => {
+            const formControl = this.form.get(control.element.name);
 
             if (formControl) {
-                this.subscriptions.push(
-                    formControl.valueChanges.subscribe(value => {
-                        if (getValue() !== value) {
-                            setValue(value);
-                        }
-                    }),
-                    fromEvent(element, control.changeEventName).subscribe(
-                        () => {
-                            this.form.patchValue({
-                                [name]: getValue(),
-                            });
-                        },
-                    ),
-                );
+                control.connectTo(formControl);
             }
         });
     }

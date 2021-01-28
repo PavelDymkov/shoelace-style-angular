@@ -7,8 +7,11 @@ import { ShoelaceStyleAngularModule } from "shoelace-style-angular";
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
 
+import { ClearableComponent } from "./pages/clearable/clearable.component";
+import { ClosableComponent } from "./pages/closable/closable.component";
 import { FocusableComponent } from "./pages/focusable/focusable.component";
 import { FormComponent } from "./pages/form/form.component";
+import { LoadComponent } from "./pages/load/load.component";
 import { OverlayComponent } from "./pages/overlay/overlay.component";
 import { ShowHideComponent } from "./pages/show-hide/show-hide.component";
 
@@ -22,8 +25,11 @@ import { ShowHideComponent } from "./pages/show-hide/show-hide.component";
     ],
     declarations: [
         AppComponent,
+        ClearableComponent,
+        ClosableComponent,
         FocusableComponent,
         FormComponent,
+        LoadComponent,
         OverlayComponent,
         ShowHideComponent,
     ],

@@ -3,7 +3,7 @@ import { FormBuilder } from "@angular/forms";
 
 import { not } from "logical-not";
 
-type FormControlName = "inputByFormData" | "inputBySlValue";
+type FormControlName = "inputByFormData" | "inputBySlValue" | "select";
 
 @Component({
     selector: "app-form-page",
@@ -11,8 +11,9 @@ type FormControlName = "inputByFormData" | "inputBySlValue";
 })
 export class FormComponent {
     form = this.formBuilder.group({
-        inputByFormData: ["form data text"],
+        inputByFormData: ["formControl text"],
         inputBySlValue: [null],
+        select: [],
     } as Record<FormControlName, any[]>);
 
     elements: Record<FormControlName, HTMLElement>;
@@ -28,17 +29,20 @@ export class FormComponent {
         this.elements = $<FormControlName>(this.elementRef.nativeElement, {
             inputByFormData: `sl-input[name=inputByFormData]`,
             inputBySlValue: `sl-input[name=inputBySlValue]`,
+            select: `sl-select[name="select"]`,
         });
     }
 
     patchForm(): void {
         this.form.patchValue({
-            inputByFormData: "valid",
-        });
+            inputByFormData: "patched value",
+            inputBySlValue: "patched value",
+            select: "option-2",
+        } as Record<FormControlName, any>);
     }
 
     logFormData(): void {
-        console.log("formData", this.form.value);
+        console.log("sl-form data", this.form.value);
     }
 
     emitSubmit(): void {

@@ -27,10 +27,11 @@ describe("Form Directive", () => {
                 await page.click("#submit");
             },
             async output({ dataFromMessage }) {
-                const formData = await dataFromMessage("formData");
+                const formData = await dataFromMessage("sl-form data");
 
-                ok(formData.inputByFormData === "invalid");
-                ok(formData.inputBySlValue === "Sl value text");
+                ok(formData.inputByFormData === "formControl text");
+                ok(formData.inputBySlValue === "Sl text");
+                ok(formData.select === null);
             },
         });
 
@@ -41,9 +42,11 @@ describe("Form Directive", () => {
                 await page.click("#submit");
             },
             async output({ dataFromMessage }) {
-                const formData = await dataFromMessage("formData");
+                const formData = await dataFromMessage("sl-form data");
 
-                ok(formData.inputByFormData === "valid");
+                ok(formData.inputByFormData === "patched value");
+                ok(formData.inputBySlValue === "patched value");
+                ok(formData.select === "option-2");
             },
         });
 
