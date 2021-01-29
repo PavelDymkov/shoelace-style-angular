@@ -6,10 +6,8 @@ import { Components } from "@shoelace-style/shoelace";
 import { SubscribableDirective } from "ngx-subscribable";
 import { fromEvent } from "rxjs";
 
-type ShoelaceStyleControlElement = HTMLElement & {
-    name: string;
-    value: any;
-} & (
+type ShoelaceStyleControlElement = HTMLInputElement &
+    (
         | Components.SlCheckbox
         | Components.SlColorPicker
         | Components.SlForm

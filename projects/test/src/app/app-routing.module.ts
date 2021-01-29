@@ -8,6 +8,7 @@ import { FormComponent } from "./pages/form/form.component";
 import { LoadComponent } from "./pages/load/load.component";
 import { OverlayComponent } from "./pages/overlay/overlay.component";
 import { ShowHideComponent } from "./pages/show-hide/show-hide.component";
+import { ValidationComponent } from "./pages/validation/validation.component";
 
 enum ERoutes {
     Clearable = "clearable",
@@ -17,6 +18,7 @@ enum ERoutes {
     Load = "load",
     Overlay = "overlay",
     ShowHide = "show-hide",
+    Validation = "validation",
 }
 
 const routes: Routes = [
@@ -52,6 +54,10 @@ const routes: Routes = [
     {
         path: ERoutes.ShowHide,
         component: ShowHideComponent,
+    },
+    {
+        path: ERoutes.Validation,
+        component: ValidationComponent,
     },
 ];
 

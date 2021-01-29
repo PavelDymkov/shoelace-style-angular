@@ -1,0 +1,8 @@
+<sl-form [data]="form">
+    <sl-input name="text"></sl-input>
+    <br />
+    <sl-button #element submit [disabled]="form.invalid">Submit</sl-button>
+</sl-form>
+
+<button id="log-state" (click)="logDisabled(element)"></button>
+<button id="text-filler" (click)="fillInputText()"></button>

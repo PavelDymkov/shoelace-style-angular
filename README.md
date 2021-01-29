@@ -1,4 +1,4 @@
-# ShoelaceStyleAngular
+# Shoelace for Angular
 
 This is GitHub page. Package README file at link below.
 

@@ -14,6 +14,7 @@ import { FormComponent } from "./pages/form/form.component";
 import { LoadComponent } from "./pages/load/load.component";
 import { OverlayComponent } from "./pages/overlay/overlay.component";
 import { ShowHideComponent } from "./pages/show-hide/show-hide.component";
+import { ValidationComponent } from "./pages/validation/validation.component";
 
 @NgModule({
     imports: [
@@ -32,6 +33,7 @@ import { ShowHideComponent } from "./pages/show-hide/show-hide.component";
         LoadComponent,
         OverlayComponent,
         ShowHideComponent,
+        ValidationComponent,
     ],
     bootstrap: [AppComponent],
     schemas: [CUSTOM_ELEMENTS_SCHEMA],
