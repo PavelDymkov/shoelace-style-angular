@@ -1,0 +1,26 @@
+:host {
+    display: flex;
+    min-height: 100vh;
+}
+
+sl-menu {
+    max-width: 256px;
+    border-right: 1px solid var(--sl-color-gray-300);
+}
+
+sl-menu-item {
+    margin-bottom: var(--sl-spacing-x-small);
+}
+
+sl-menu-item._active {
+    background-color: var(--sl-color-primary-400);
+}
+
+sl-menu-item::part(base) {
+    white-space: initial;
+}
+
+.content {
+    flex: 1;
+    margin: var(--sl-spacing-large) var(--sl-spacing-medium);
+}
