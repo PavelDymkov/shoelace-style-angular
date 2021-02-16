@@ -1,6 +1,6 @@
 import { NgModule } from "@angular/core";
 
-import { ShoelaceStyleControlsDirective } from "./directives/shoelace-style-controls.directive";
+import { ShoelaceStyleControlsDirective } from "./directives/shoelace-style-change.directive";
 import { ShoelaceStyleFormDirective } from "./directives/shoelace-style-form.directive";
 
 @NgModule({

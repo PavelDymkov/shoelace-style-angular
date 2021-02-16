@@ -1,11 +1,15 @@
 <sl-dropdown>
-    <div slot="trigger" class="wrapper">
-        <ng-content select="sl-button"></ng-content>
-    </div>
-
-    <!-- <div slot="panel">
-        <ng-content select="sl-input"></ng-content>
-    </div> -->
+    <sl-button *ngIf="!focused" slot="trigger" caret (focus)="focused = true">
+        Dropdown
+    </sl-button>
+    <sl-input
+        *ngIf="focused"
+        slot="trigger"
+        autofocus
+        (blur)="focused = false"
+    ></sl-input>
 
     <ng-content></ng-content>
 </sl-dropdown>
+
+<input type="hidden" [name]="name" />

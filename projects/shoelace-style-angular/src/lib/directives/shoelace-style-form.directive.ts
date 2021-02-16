@@ -5,17 +5,19 @@ import {
     AfterContentChecked,
     ElementRef,
     EventEmitter,
-    ContentChildren,
-    QueryList,
+    NgZone,
 } from "@angular/core";
-import { FormGroup } from "@angular/forms";
-
+import { AbstractControl } from "@angular/forms";
 import { Components } from "@shoelace-style/shoelace";
-
-import { fromEvent } from "rxjs";
+import { from, fromEvent, Subscription } from "rxjs";
+import { debounceTime, switchMap } from "rxjs/operators";
 import { SubscribableDirective } from "ngx-subscribable";
+import { not } from "logical-not";
 
-import { ShoelaceStyleControlsDirective } from "./shoelace-style-controls.directive";
+interface HTMLFormControl extends HTMLElement {
+    name: string;
+    value: string;
+}
 
 @Directive({
     selector: "sl-form[data]",
@@ -25,15 +27,16 @@ export class ShoelaceStyleFormDirective
     extends SubscribableDirective
     implements OnInit, AfterContentChecked {
     @Input("data")
-    form: FormGroup;
-
-    @ContentChildren(ShoelaceStyleControlsDirective)
-    controlsQueryList: QueryList<ShoelaceStyleControlsDirective>;
+    form: AbstractControl;
 
     submit = new EventEmitter<CustomEvent>();
 
+    private trigger = new EventEmitter<void>();
+    private registry = new Map<HTMLElement, Subscription>();
+
     constructor(
         private elementRef: ElementRef<Components.SlForm & HTMLElement>,
+        private readonly ngZone: NgZone,
     ) {
         super();
     }
@@ -45,16 +48,66 @@ export class ShoelaceStyleFormDirective
             fromEvent(element, "sl-submit").subscribe((event: CustomEvent) => {
                 this.submit.emit(event);
             }),
+            this.trigger
+                .pipe(debounceTime(10))
+                .pipe(
+                    switchMap(() =>
+                        from(this.elementRef.nativeElement.getFormControls()),
+                    ),
+                )
+                .subscribe((controls: HTMLFormControl[]) => {
+                    controls
+                        .filter(
+                            control =>
+                                control.name && not(this.registry.has(control)),
+                        )
+                        .forEach(control => {
+                            const formControl = this.form.get(control.name);
+
+                            if (formControl) {
+                                control.value = formControl.value || "";
+
+                                this.registry.set(
+                                    control,
+                                    fromEvent(
+                                        control,
+                                        getChangeEventName(control),
+                                    ).subscribe(() => {
+                                        formControl.patchValue(control.value);
+                                    }),
+                                );
+                            }
+                        });
+                }),
         );
     }
 
     ngAfterContentChecked(): void {
-        this.controlsQueryList.forEach(control => {
-            const formControl = this.form.get(control.element.name);
+        this.ngZone.runOutsideAngular(() => this.trigger.emit());
+    }
 
-            if (formControl) {
-                control.connectTo(formControl);
-            }
+    ngOnDestroy(): void {
+        this.registry.forEach((subscription, control) => {
+            subscription.unsubscribe();
+
+            this.registry.delete(control);
         });
+
+        super.ngOnDestroy();
+    }
+}
+
+function getChangeEventName(control: HTMLFormControl): string {
+    const tagName = control.tagName.toLowerCase();
+
+    switch (tagName) {
+        case "sl-input":
+        case "sl-textarea":
+            return "sl-input";
+        case "input":
+        case "textarea":
+            return "input";
+        default:
+            return tagName.startsWith("sl-") ? "sl-change" : "change";
     }
 }
