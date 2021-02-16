@@ -5,6 +5,7 @@ import {
     ShoelaceStyleClosableDirective,
     ShoelaceStyleLoadDirective,
     ShoelaceStyleOverlayDirective,
+    ShoelaceStyleSelectDirective,
     ShoelaceStyleShowHideDirective,
 } from "./directives";
 import { ShoelaceStyleFormModule } from "./shoelace-style-form.module";
@@ -15,6 +16,7 @@ import { ShoelaceStyleFormModule } from "./shoelace-style-form.module";
         ShoelaceStyleClosableDirective,
         ShoelaceStyleLoadDirective,
         ShoelaceStyleOverlayDirective,
+        ShoelaceStyleSelectDirective,
         ShoelaceStyleShowHideDirective,
     ],
     exports: [
@@ -23,6 +25,7 @@ import { ShoelaceStyleFormModule } from "./shoelace-style-form.module";
         ShoelaceStyleFormModule,
         ShoelaceStyleLoadDirective,
         ShoelaceStyleOverlayDirective,
+        ShoelaceStyleSelectDirective,
         ShoelaceStyleShowHideDirective,
     ],
 })

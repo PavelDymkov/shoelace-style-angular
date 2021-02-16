@@ -1,12 +1,12 @@
-import { NgModule } from "@angular/core";
-import { Routes, RouterModule } from "@angular/router";
+import { Routes } from "@angular/router";
+
 import { ClearableComponent } from "./pages/clearable/clearable.component";
 import { ClosableComponent } from "./pages/closable/closable.component";
-
 import { FocusableComponent } from "./pages/focusable/focusable.component";
 import { FormComponent } from "./pages/form/form.component";
 import { LoadComponent } from "./pages/load/load.component";
 import { OverlayComponent } from "./pages/overlay/overlay.component";
+import { SelectComponent } from "./pages/select/select.component";
 import { ShowHideComponent } from "./pages/show-hide/show-hide.component";
 import { ValidationComponent } from "./pages/validation/validation.component";
 
@@ -17,11 +17,12 @@ enum ERoutes {
     Form = "form",
     Load = "load",
     Overlay = "overlay",
+    Select = "select",
     ShowHide = "show-hide",
     Validation = "validation",
 }
 
-const routes: Routes = [
+export const routes: Routes = [
     {
         path: "",
         pathMatch: "full",
@@ -52,6 +53,10 @@ const routes: Routes = [
         component: OverlayComponent,
     },
     {
+        path: ERoutes.Select,
+        component: SelectComponent,
+    },
+    {
         path: ERoutes.ShowHide,
         component: ShowHideComponent,
     },
@@ -60,9 +65,3 @@ const routes: Routes = [
         component: ValidationComponent,
     },
 ];
-
-@NgModule({
-    imports: [RouterModule.forRoot(routes)],
-    exports: [RouterModule],
-})
-export class AppRoutingModule {}
