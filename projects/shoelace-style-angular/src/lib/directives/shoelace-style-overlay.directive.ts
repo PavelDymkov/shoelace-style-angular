@@ -1,7 +1,7 @@
 import { Directive, OnInit, EventEmitter, ElementRef } from "@angular/core";
-
-import { fromEvent } from "rxjs";
 import { SubscribableDirective } from "ngx-subscribable";
+
+import { observe } from "../tools/observe";
 
 @Directive({
     selector: `
@@ -24,15 +24,11 @@ export class ShoelaceStyleOverlayDirective
         const element = this.elementRef.nativeElement;
 
         this.subscriptions = [
-            fromEvent(element, "sl-initial-focus").subscribe(
-                (event: CustomEvent) => {
-                    this.initialFocus.emit(event);
-                },
+            observe(element, "sl-initial-focus").subscribe(event =>
+                this.initialFocus.emit(event),
             ),
-            fromEvent(element, "sl-overlay-dismiss").subscribe(
-                (event: CustomEvent) => {
-                    this.overlayDismiss.emit(event);
-                },
+            observe(element, "sl-overlay-dismiss").subscribe(event =>
+                this.overlayDismiss.emit(event),
             ),
         ];
     }

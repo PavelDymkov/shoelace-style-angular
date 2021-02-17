@@ -1,14 +1,10 @@
-<sl-dropdown>
-    <sl-button *ngIf="!focused" slot="trigger" caret (focus)="focused = true">
-        Dropdown
-    </sl-button>
-    <sl-input
-        *ngIf="focused"
-        slot="trigger"
-        autofocus
-        (blur)="focused = false"
-    ></sl-input>
+<sl-button *ngIf="!focused" caret (focus)="focused = true">
+    Dropdown
+</sl-button>
 
+<sl-input *ngIf="focused" autofocus (blur)="focused = false"></sl-input>
+
+<sl-dropdown [open]="focused">
     <ng-content></ng-content>
 </sl-dropdown>
 

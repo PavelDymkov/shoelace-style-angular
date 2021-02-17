@@ -14,6 +14,8 @@ import { debounceTime, switchMap } from "rxjs/operators";
 import { SubscribableDirective } from "ngx-subscribable";
 import { not } from "logical-not";
 
+import { observe } from "../tools/observe";
+
 interface HTMLFormControl extends HTMLElement {
     name: string;
     value: string;
@@ -45,9 +47,9 @@ export class ShoelaceStyleFormDirective
         const element = this.elementRef.nativeElement;
 
         this.subscriptions.push(
-            fromEvent(element, "sl-submit").subscribe((event: CustomEvent) => {
-                this.submit.emit(event);
-            }),
+            observe(element, "sl-submit").subscribe(event =>
+                this.submit.emit(event),
+            ),
             this.trigger
                 .pipe(debounceTime(10))
                 .pipe(

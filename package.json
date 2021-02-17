@@ -27,7 +27,7 @@
         "@angular/platform-browser": "^11.1.0",
         "@angular/platform-browser-dynamic": "^11.1.0",
         "@angular/router": "^11.1.0",
-        "@shoelace-style/shoelace": "^2.0.0-beta.26",
+        "@shoelace-style/shoelace": "^2.0.0-beta.27",
         "@types/node": "^12.11.1",
         "logical-not": "^1.0.7",
         "mocha": "^8.2.1",

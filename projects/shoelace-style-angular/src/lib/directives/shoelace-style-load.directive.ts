@@ -1,7 +1,7 @@
 import { Directive, OnInit, EventEmitter, ElementRef } from "@angular/core";
-
-import { fromEvent } from "rxjs";
 import { SubscribableDirective } from "ngx-subscribable";
+
+import { observe } from "../tools/observe";
 
 @Directive({
     selector: `
@@ -23,12 +23,12 @@ export class ShoelaceStyleLoadDirective
         const element = this.elementRef.nativeElement;
 
         this.subscriptions = [
-            fromEvent(element, "sl-load").subscribe((event: CustomEvent) => {
-                this.load.emit(event);
-            }),
-            fromEvent(element, "sl-error").subscribe((event: CustomEvent) => {
-                this.error.emit(event);
-            }),
+            observe(element, "sl-load").subscribe(event =>
+                this.load.emit(event),
+            ),
+            observe(element, "sl-error").subscribe(event =>
+                this.error.emit(event),
+            ),
         ];
     }
 }

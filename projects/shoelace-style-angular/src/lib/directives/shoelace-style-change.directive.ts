@@ -1,10 +1,8 @@
 import { Directive, OnInit, ElementRef, EventEmitter } from "@angular/core";
-import { AbstractControl } from "@angular/forms";
-
 import { Components } from "@shoelace-style/shoelace";
-
 import { SubscribableDirective } from "ngx-subscribable";
-import { fromEvent } from "rxjs";
+
+import { observe } from "../tools/observe";
 
 type ShoelaceStyleControlElement = HTMLInputElement &
     (
@@ -35,7 +33,7 @@ type ShoelaceStyleControlElement = HTMLInputElement &
     `,
     outputs: ["change"],
 })
-export class ShoelaceStyleControlsDirective
+export class ShoelaceStyleChangeDirective
     extends SubscribableDirective
     implements OnInit {
     readonly change = new EventEmitter<CustomEvent>();
@@ -46,11 +44,10 @@ export class ShoelaceStyleControlsDirective
 
     ngOnInit(): void {
         this.subscriptions = [
-            fromEvent(this.elementRef.nativeElement, "sl-change").subscribe(
-                (event: CustomEvent) => {
-                    this.change.emit(event);
-                },
-            ),
+            observe(
+                this.elementRef.nativeElement,
+                "sl-change",
+            ).subscribe(event => this.change.emit(event)),
         ];
     }
 }

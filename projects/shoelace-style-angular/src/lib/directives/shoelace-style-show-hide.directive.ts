@@ -1,7 +1,7 @@
 import { Directive, OnInit, EventEmitter, ElementRef } from "@angular/core";
-
-import { fromEvent } from "rxjs";
 import { SubscribableDirective } from "ngx-subscribable";
+
+import { observe } from "../tools/observe";
 
 @Directive({
     selector: `
@@ -31,23 +31,49 @@ export class ShoelaceStyleShowHideDirective
         const element = this.elementRef.nativeElement;
 
         this.subscriptions = [
-            fromEvent(element, "sl-show").subscribe((event: CustomEvent) => {
-                this.show.emit(event);
-            }),
-            fromEvent(element, "sl-hide").subscribe((event: CustomEvent) => {
-                this.hide.emit(event);
-            }),
+            observe(element, "sl-show").subscribe(event =>
+                this.show.emit(event),
+            ),
+            observe(element, "sl-hide").subscribe(event =>
+                this.hide.emit(event),
+            ),
 
-            fromEvent(element, "sl-after-show").subscribe(
-                (event: CustomEvent) => {
-                    this.afterShow.emit(event);
-                },
+            observe(element, "sl-after-show").subscribe(event =>
+                this.afterShow.emit(event),
             ),
-            fromEvent(element, "sl-after-hide").subscribe(
-                (event: CustomEvent) => {
-                    this.afterHide.emit(event);
-                },
+            observe(element, "sl-after-hide").subscribe(event =>
+                this.afterHide.emit(event),
             ),
+        ];
+    }
+}
+
+@Directive({
+    selector: `
+        sl-tab-group,
+    `,
+    outputs: ["show", "hide"],
+})
+export class ShoelaceStyleTabGroupShowHideDirective
+    extends SubscribableDirective
+    implements OnInit {
+    show = new EventEmitter<CustomEvent<{ name: string }>>();
+    hide = new EventEmitter<CustomEvent<{ name: string }>>();
+
+    constructor(private elementRef: ElementRef<HTMLElement>) {
+        super();
+    }
+
+    ngOnInit(): void {
+        this.subscriptions = [
+            observe<CustomEvent<{ name: string }>>(
+                this.elementRef.nativeElement,
+                "sl-tab-show",
+            ).subscribe(event => this.show.emit(event)),
+            observe<CustomEvent<{ name: string }>>(
+                this.elementRef.nativeElement,
+                "sl-tab-hide",
+            ).subscribe(event => this.hide.emit(event)),
         ];
     }
 }

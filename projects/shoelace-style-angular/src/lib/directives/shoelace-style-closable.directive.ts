@@ -1,7 +1,7 @@
 import { Directive, OnInit, EventEmitter, ElementRef } from "@angular/core";
-
-import { fromEvent } from "rxjs";
 import { SubscribableDirective } from "ngx-subscribable";
+
+import { observe } from "../tools/observe";
 
 @Directive({
     selector: `
@@ -22,9 +22,9 @@ export class ShoelaceStyleClosableDirective
         const element = this.elementRef.nativeElement;
 
         this.subscriptions = [
-            fromEvent(element, "sl-close").subscribe((event: CustomEvent) => {
-                this.close.emit(event);
-            }),
+            observe(element, "sl-close").subscribe(event =>
+                this.close.emit(event),
+            ),
         ];
     }
 }
