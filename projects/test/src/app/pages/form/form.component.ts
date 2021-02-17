@@ -1,72 +1,82 @@
-import { Component, ElementRef } from "@angular/core";
+import { Component } from "@angular/core";
 import { FormBuilder } from "@angular/forms";
 
-import { not } from "logical-not";
+const simplyFormInitial = {
+    input: "initial",
+    native: "initial",
+};
 
-type FormControlName = "inputByFormData" | "inputBySlValue" | "select";
+const simplyFormPatched = {
+    input: "patched",
+    select: "option-2",
+    radio: "option-2",
+    native: "patched",
+};
+
+const dynamicFormData = [
+    {
+        items: ["foo"],
+        selected: false,
+    },
+    {
+        items: ["foo", "bar"],
+        selected: true,
+    },
+    {
+        items: ["baz"],
+        selected: true,
+    },
+];
 
 @Component({
     selector: "app-form-page",
     templateUrl: "./form.component.html",
 })
 export class FormComponent {
-    form = this.formBuilder.group({
-        inputByFormData: ["formControl text"],
-        inputBySlValue: [null],
+    simplyForm = this.formBuilder.group({
+        input: [],
         select: [],
-    } as Record<FormControlName, any[]>);
+        radio: [],
+        native: [],
+    });
 
-    elements: Record<FormControlName, HTMLElement>;
+    dynamicForm = this.formBuilder.array([]);
 
-    favoriteValue = "cats";
+    constructor(private formBuilder: FormBuilder) {
+        this.simplyForm.patchValue(simplyFormInitial);
+    }
 
-    constructor(
-        private formBuilder: FormBuilder,
-        private elementRef: ElementRef<HTMLElement>,
-    ) {}
+    patchSimplyForm(): void {
+        this.simplyForm.patchValue(simplyFormPatched);
+    }
 
-    ngAfterViewInit(): void {
-        this.elements = $<FormControlName>(this.elementRef.nativeElement, {
-            inputByFormData: `sl-input[name=inputByFormData]`,
-            inputBySlValue: `sl-input[name=inputBySlValue]`,
-            select: `sl-select[name="select"]`,
+    fillDynamicForm(): void {
+        dynamicFormData.forEach(({ items, selected }, i) => {
+            this.dynamicForm.setControl(
+                i,
+                this.formBuilder.group({
+                    items: this.formBuilder.array(
+                        items.map(value => this.formBuilder.control(value)),
+                    ),
+                    selected: [selected],
+                }),
+            );
         });
     }
 
-    patchForm(): void {
-        this.form.patchValue({
-            inputByFormData: "patched value",
-            inputBySlValue: "patched value",
-            select: "option-2",
-        } as Record<FormControlName, any>);
+    changeDynamicForm(): void {
+        this.dynamicForm.clear();
+
+        this.fillDynamicForm();
     }
 
-    logFormData(): void {
-        console.log("sl-form data", this.form.value);
+    logFormData(event: CustomEvent<{ formData: FormData }>): void {
+        const { formData } = event.detail;
+
+        const formValue: any = {};
+
+        formData.forEach((value, key) => (formValue[key] = value));
+
+        console.log("sl-form data", formValue);
     }
-
-    emitSubmit(): void {
-        const slButton = document.querySelector(
-            "sl-button[submit]",
-        ) as HTMLElement;
-
-        slButton.click();
-    }
-}
-
-function $<K extends string>(
-    root: HTMLElement,
-    map: Record<K, string>,
-): Record<K, HTMLElement> {
-    const elements = {} as Record<K, HTMLElement>;
-
-    Object.entries(map).forEach(([name, selector]: [string, string]) => {
-        const element = root.querySelector(selector);
-
-        if (not(element)) throw new Error();
-
-        elements[name] = element;
-    });
-
-    return elements;
 }

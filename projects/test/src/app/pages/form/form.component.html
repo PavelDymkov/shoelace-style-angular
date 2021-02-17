@@ -1,7 +1,5 @@
-<sl-form [data]="form" (submit)="logFormData()">
-    <sl-input name="inputByFormData"></sl-input>
-    <br />
-    <sl-input name="inputBySlValue" value="Sl text"> </sl-input>
+<sl-form [data]="simplyForm" (submit)="logFormData($event)">
+    <sl-input name="input"></sl-input>
     <br />
     <sl-select name="select">
         <sl-menu-item value="option-1">Option 1</sl-menu-item>
@@ -9,8 +7,36 @@
         <sl-menu-item value="option-3">Option 3</sl-menu-item>
     </sl-select>
     <br />
-    <sl-button submit>Submit</sl-button>
+    <sl-radio name="radio" value="option-1">Option 1</sl-radio>
+    <sl-radio name="radio" value="option-2">Option 2</sl-radio>
+    <sl-radio name="radio" value="option-3">Option 3</sl-radio>
+    <br />
+    <input name="native" />
+    <br />
+    <button type="submit" id="simply">Submit</button>
 </sl-form>
 
-<button id="patch" (click)="patchForm()">Patch value</button>
-<button id="submit" (click)="emitSubmit()">Emit submit</button>
+<button id="patch-simply" (click)="patchSimplyForm()">Patch value</button>
+
+<sl-form [data]="dynamicForm" (submit)="logFormData($event)">
+    <div *ngFor="let control of dynamicForm.controls; index as i">
+        <sl-input
+            *ngFor="let item of control.get('items').controls; index as j"
+            [name]="'[' + i + ']items[' + j + ']'"
+        ></sl-input>
+
+        <sl-checkbox [name]="'[' + i + ']selected'" value="selected">
+            Checkbox
+        </sl-checkbox>
+    </div>
+
+    <button type="submit" id="dynamic">Submit</button>
+</sl-form>
+
+<button id="fill-dynamic-form" (click)="fillDynamicForm()">
+    Fill dynamic form
+</button>
+
+<button id="change-dynamic-form" (click)="changeDynamicForm()">
+    Change dynamic form
+</button>
