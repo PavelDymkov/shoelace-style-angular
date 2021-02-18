@@ -130,7 +130,6 @@
                 "build": {
                     "builder": "@angular-devkit/build-angular:browser",
                     "options": {
-                        "outputPath": "dist/documentation",
                         "index": "projects/documentation/src/index.html",
                         "main": "projects/documentation/src/main.ts",
                         "polyfills": "projects/documentation/src/polyfills.ts",
@@ -206,7 +205,8 @@
                     "options": {
                         "browserTarget": "documentation:build",
                         "outFile": "projects/documentation/i18n/ru.json",
-                        "format": "json"
+                        "format": "json",
+                        "i18nLocale": "ru"
                     }
                 }
             },
