@@ -9,6 +9,7 @@ import {
     ShoelaceStyleOverlayDirective,
     ShoelaceStyleSelectDirective,
     ShoelaceStyleShowHideDirective,
+    ShoelaceStyleTabGroupShowHideDirective,
 } from "./directives";
 
 @NgModule({
@@ -21,6 +22,7 @@ import {
         ShoelaceStyleOverlayDirective,
         ShoelaceStyleSelectDirective,
         ShoelaceStyleShowHideDirective,
+        ShoelaceStyleTabGroupShowHideDirective,
     ],
     exports: [
         ShoelaceStyleChangeDirective,
@@ -31,6 +33,7 @@ import {
         ShoelaceStyleOverlayDirective,
         ShoelaceStyleSelectDirective,
         ShoelaceStyleShowHideDirective,
+        ShoelaceStyleTabGroupShowHideDirective,
     ],
 })
 export class ShoelaceStyleAngularModule {}
