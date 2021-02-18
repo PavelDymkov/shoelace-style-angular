@@ -1,7 +1,6 @@
 const { spawn } = require("child_process");
 
 const { port } = require("./config");
-const { url } = require("./tools");
 
 let serveProcess;
 
@@ -10,7 +9,7 @@ module.exports = {
         const sh = `npx ng serve test --prod --port ${port}`;
         const [command, ...args] = sh.split(/\s+/);
 
-        console.log(`starting test server on ${url("/")}`);
+        console.log(`starting test server...`);
 
         serveProcess = spawn(command, args);
 

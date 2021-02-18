@@ -1,27 +1,9 @@
-const puppeteer = require("puppeteer");
-const io = require("puppeteer-io");
-
-const { url } = require("./tools");
-
-let browser;
-
 describe("ShowHide Directive", () => {
-    before(async () => {
-        browser = await puppeteer.launch();
-    });
-
-    after(async () => {
-        await browser.close();
-    });
-
     it("should check show/hide outputs", async () => {
-        const page = await browser.newPage();
-
-        await page.goto(url("/show-hide"));
-
         await io({
-            page,
             async input() {
+                await page.goto(url("/show-hide"));
+
                 await page.click("#toggle");
             },
             async output({ message }) {
@@ -31,7 +13,6 @@ describe("ShowHide Directive", () => {
         });
 
         await io({
-            page,
             async input() {
                 await page.click("#toggle");
             },
@@ -40,7 +21,19 @@ describe("ShowHide Directive", () => {
                 await message("sl-alert atfer hide");
             },
         });
+    });
 
-        await page.close();
+    it("should check tabs show/hide outputs", async () => {
+        await io({
+            async input() {
+                await page.goto(url("/show-hide"));
+
+                await page.click("#switch-tab");
+            },
+            async output({ message }) {
+                await message("sl-tab-hide: panel 1");
+                await message("sl-tab-show: panel 2");
+            },
+        });
     });
 });

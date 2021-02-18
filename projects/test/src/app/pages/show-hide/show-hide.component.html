@@ -9,3 +9,13 @@
 </sl-alert>
 
 <button id="toggle" (click)="isShowAlert = !isShowAlert">Toggle</button>
+
+<sl-tab-group (show)="tabToggle($event)" (hide)="tabToggle($event)">
+    <sl-tab slot="nav" panel="1">1</sl-tab>
+    <sl-tab slot="nav" panel="2">
+        <button id="switch-tab">2</button>
+    </sl-tab>
+
+    <sl-tab-panel name="1">Panel 1</sl-tab-panel>
+    <sl-tab-panel name="2">Panel 2</sl-tab-panel>
+</sl-tab-group>

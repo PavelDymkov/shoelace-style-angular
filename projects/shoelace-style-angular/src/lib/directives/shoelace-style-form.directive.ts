@@ -9,8 +9,13 @@ import {
 } from "@angular/core";
 import { AbstractControl } from "@angular/forms";
 import { Components } from "@shoelace-style/shoelace";
-import { from, Subscription } from "rxjs";
-import { debounceTime, filter, switchMap } from "rxjs/operators";
+import { from, of, Subscription } from "rxjs";
+import {
+    debounceTime,
+    distinctUntilChanged,
+    filter,
+    switchMap,
+} from "rxjs/operators";
 import { SubscribableDirective } from "ngx-subscribable";
 import { not } from "logical-not";
 
@@ -22,6 +27,8 @@ interface HTMLFormControl extends HTMLElement {
     name: string;
     value: string;
     checked: boolean;
+    setCustomValidity?: (message: string) => void;
+    reportValidity?: () => void;
 }
 
 export const validationMessage = "sl-error";
@@ -76,6 +83,8 @@ export class ShoelaceStyleFormDirective
                             registred.delete(element);
 
                             if (not(this.registry.has(element))) {
+                                fixNameAttribute(element);
+
                                 const control = pick(this.form, element.name);
 
                                 if (control)
@@ -104,6 +113,22 @@ export class ShoelaceStyleFormDirective
     ): void {
         setValue(element, control.value);
 
+        const validation =
+            typeof element.setCustomValidity === "function" &&
+            typeof element.reportValidity === "function"
+                ? control.statusChanges
+                      .pipe(distinctUntilChanged())
+                      .subscribe(status => {
+                          const message =
+                              status === "INVALID"
+                                  ? control.getError(validationMessage) || ""
+                                  : "";
+
+                          element.setCustomValidity(message);
+                          element.reportValidity();
+                      })
+                : of(null).subscribe();
+
         switch (getTagName(element)) {
             case "sl-radio":
             case "radio":
@@ -123,6 +148,8 @@ export class ShoelaceStyleFormDirective
                             if (value !== getValue(element))
                                 setValue(element, value);
                         }),
+
+                    validation,
                 ]);
                 break;
             default:
@@ -130,6 +157,7 @@ export class ShoelaceStyleFormDirective
                     observe(element, getChangeEventName(element)).subscribe(
                         () => {
                             const value = getValue(element);
+                            console.log(value);
 
                             if (value !== control.value)
                                 control.patchValue(value);
@@ -140,6 +168,8 @@ export class ShoelaceStyleFormDirective
                         if (value !== getValue(element))
                             setValue(element, value);
                     }),
+
+                    validation,
                 ]);
         }
     }
@@ -151,6 +181,34 @@ export class ShoelaceStyleFormDirective
 
         this.registry.delete(control);
     }
+}
+
+function fixNameAttribute(element: HTMLFormControl): void {
+    let source: string[] | null = null;
+
+    if (Array.isArray(element.name)) source = element.name as string[];
+    else {
+        const parts = element.name.split(",");
+
+        if (parts.length > 1) source = parts;
+    }
+
+    if (source) {
+        const [first] = source;
+        const name =
+            (isNumber(first) ? bracketify(first) : first) +
+            source.slice(1).map(bracketify).join("");
+
+        element.setAttribute("name", name);
+    }
+}
+
+function isNumber(source: string): boolean {
+    return not(Number.isNaN(Number(source)));
+}
+
+function bracketify(source: string): string {
+    return `[${source}]`;
 }
 
 function pick(source: AbstractControl, path: string): AbstractControl | null {
@@ -197,7 +255,7 @@ function getValue(element: HTMLFormControl): any {
         case "checkbox":
         case "radio":
             if (element.value) return element.checked ? element.value : null;
-            else return element.checked;
+            else return element.checked ? "true" : null;
         default:
             return element.value || null;
     }

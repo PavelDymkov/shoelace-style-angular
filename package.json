@@ -11,7 +11,7 @@
     },
     "scripts": {
         "start": "ng serve test",
-        "test": "ng build && mocha test/**/*.test.js --require test/fixtures.js"
+        "test": "ng build && mocha --config test/mocharc.js"
     },
     "private": true,
     "devDependencies": {

@@ -5,7 +5,7 @@
         "types": ["resize-observer-browser"],
         "paths": {
             "shoelace-style-angular": [
-                "projects/shoelace-style-angular/src/lib/shoelace-style-angular.module"
+                "projects/shoelace-style-angular/src/public-api.ts"
             ]
         }
     },

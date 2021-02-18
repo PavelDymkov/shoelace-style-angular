@@ -8,6 +8,7 @@ import { ShoelaceStyleAngularModule } from "shoelace-style-angular";
 import { routes } from "./app.routing";
 import { AppComponent } from "./app.component";
 
+import { ChangeComponent } from "./pages/change/change.component";
 import { ClearableComponent } from "./pages/clearable/clearable.component";
 import { ClosableComponent } from "./pages/closable/closable.component";
 import { FocusableComponent } from "./pages/focusable/focusable.component";
@@ -28,6 +29,7 @@ import { ValidationComponent } from "./pages/validation/validation.component";
     ],
     declarations: [
         AppComponent,
+        ChangeComponent,
         ClearableComponent,
         ClosableComponent,
         FocusableComponent,

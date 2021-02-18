@@ -22,10 +22,10 @@
     <div *ngFor="let control of dynamicForm.controls; index as i">
         <sl-input
             *ngFor="let item of control.get('items').controls; index as j"
-            [name]="'[' + i + ']items[' + j + ']'"
+            [name]="[i, 'items', j]"
         ></sl-input>
 
-        <sl-checkbox [name]="'[' + i + ']selected'" value="selected">
+        <sl-checkbox [name]="[i, 'selected']" value="selected">
             Checkbox
         </sl-checkbox>
     </div>

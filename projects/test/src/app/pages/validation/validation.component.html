@@ -1,8 +1,5 @@
 <sl-form [data]="form">
-    <sl-input name="text"></sl-input>
+    <sl-checkbox name="required">Checkbox</sl-checkbox>
     <br />
-    <sl-button #element submit [disabled]="form.invalid">Submit</sl-button>
+    <button type="submit" [disabled]="form.invalid">Submit</button>
 </sl-form>
-
-<button id="log-state" (click)="logDisabled(element)"></button>
-<button id="text-filler" (click)="fillInputText()"></button>

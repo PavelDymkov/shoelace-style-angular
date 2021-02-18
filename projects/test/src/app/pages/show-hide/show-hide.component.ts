@@ -11,6 +11,10 @@ export class ShowHideComponent {
         console.log(`${this.getTagName(target)} ${prefix}`);
     }
 
+    tabToggle(event: CustomEvent<{ name: string }>): void {
+        console.log(`${event.type}: panel ${event.detail.name}`);
+    }
+
     private getTagName(element: HTMLElement): string {
         return element.tagName.toLowerCase();
     }

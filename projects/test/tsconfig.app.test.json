@@ -2,10 +2,7 @@
     "extends": "./tsconfig.app.json",
     "compilerOptions": {
         "paths": {
-            "shoelace-style-angular": [
-                "lib/shoelace-style-angular/shoelace-style-angular",
-                "lib/shoelace-style-angular"
-            ]
+            "shoelace-style-angular": ["package"]
         }
     }
 }

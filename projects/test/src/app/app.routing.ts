@@ -1,5 +1,6 @@
 import { Routes } from "@angular/router";
 
+import { ChangeComponent } from "./pages/change/change.component";
 import { ClearableComponent } from "./pages/clearable/clearable.component";
 import { ClosableComponent } from "./pages/closable/closable.component";
 import { FocusableComponent } from "./pages/focusable/focusable.component";
@@ -11,6 +12,7 @@ import { ShowHideComponent } from "./pages/show-hide/show-hide.component";
 import { ValidationComponent } from "./pages/validation/validation.component";
 
 enum ERoutes {
+    Change = "change",
     Clearable = "clearable",
     Closable = "closable",
     Focusable = "focusable",
@@ -27,6 +29,10 @@ export const routes: Routes = [
         path: "",
         pathMatch: "full",
         redirectTo: ERoutes.Form,
+    },
+    {
+        path: ERoutes.Change,
+        component: ChangeComponent,
     },
     {
         path: ERoutes.Clearable,
