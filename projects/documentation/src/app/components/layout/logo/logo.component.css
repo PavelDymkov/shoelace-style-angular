@@ -1,0 +1,13 @@
+:host {
+    position: relative;
+    display: block;
+    margin: -9% 21% 0;
+}
+
+.shoelace {
+    position: absolute;
+    width: 100%;
+    left: 0;
+    margin-top: 47%;
+    transform: translate(0, -50%) rotate(-10deg);
+}

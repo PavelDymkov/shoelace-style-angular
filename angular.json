@@ -134,7 +134,7 @@
                         "main": "projects/documentation/src/main.ts",
                         "polyfills": "projects/documentation/src/polyfills.ts",
                         "tsConfig": "projects/documentation/tsconfig.app.json",
-                        "localize": true,
+                        "localize": ["ru"],
                         "aot": true,
                         "assets": [
                             "projects/documentation/src/favicon.ico",
@@ -143,6 +143,11 @@
                                 "glob": "**/*.*",
                                 "input": "node_modules/@shoelace-style/shoelace/dist/shoelace",
                                 "output": "/assets/shoelace"
+                            },
+                            {
+                                "glob": "**/*.*",
+                                "input": "projects/documentation/src/app/examples",
+                                "output": "/assets/examples"
                             }
                         ],
                         "styles": ["projects/documentation/src/styles.css"]
@@ -186,18 +191,16 @@
                                     "with": "projects/documentation/src/environments/translate.en.ts"
                                 }
                             ]
+                        },
+                        "serve": {
+                            "outputPath": "."
                         }
                     }
                 },
                 "serve": {
                     "builder": "@angular-devkit/build-angular:dev-server",
                     "options": {
-                        "browserTarget": "documentation:build:ru"
-                    },
-                    "configurations": {
-                        "production": {
-                            "browserTarget": "documentation:build:production"
-                        }
+                        "browserTarget": "documentation:build:serve:ru"
                     }
                 },
                 "extract-i18n": {

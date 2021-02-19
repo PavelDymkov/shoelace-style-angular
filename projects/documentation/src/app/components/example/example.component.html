@@ -1,0 +1,11 @@
+<sl-tab-group>
+    <sl-tab slot="nav" panel="example">Example</sl-tab>
+    <sl-tab slot="nav" panel="code">Code</sl-tab>
+
+    <sl-tab-panel name="example">
+        <ng-content></ng-content>
+    </sl-tab-panel>
+    <sl-tab-panel name="code">
+        <code>{{ code }}</code>
+    </sl-tab-panel>
+</sl-tab-group>

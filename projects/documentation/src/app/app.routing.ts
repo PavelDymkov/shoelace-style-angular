@@ -1,15 +1,23 @@
 import { Routes } from "@angular/router";
 
 export enum AppRoute {
-    Installation = "",
+    Overview = "",
+    Installation = "installation",
     Forms = "forms",
     Example = "example",
 }
 
 export const routes: Routes = [
     {
-        path: AppRoute.Installation,
+        path: AppRoute.Overview,
         pathMatch: "full",
+        loadChildren: () =>
+            import("./pages/overview/overview.module").then(
+                m => m.OverviewModule,
+            ),
+    },
+    {
+        path: AppRoute.Installation,
         loadChildren: () =>
             import("./pages/installation/installation.module").then(
                 m => m.InstallationModule,

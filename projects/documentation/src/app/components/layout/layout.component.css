@@ -6,6 +6,7 @@
 sl-menu {
     max-width: 256px;
     border-right: 1px solid var(--sl-color-gray-300);
+    background-color: var(--sl-color-primary-50);
 }
 
 sl-menu-item {
