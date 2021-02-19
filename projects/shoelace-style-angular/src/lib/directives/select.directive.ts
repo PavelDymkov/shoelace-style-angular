@@ -14,9 +14,7 @@ type HTMLSlMenuItemElement = Components.SlMenuItem & HTMLElement;
     `,
     outputs: ["select"],
 })
-export class ShoelaceStyleSelectDirective
-    extends SubscribableDirective
-    implements OnInit {
+export class SelectDirective extends SubscribableDirective implements OnInit {
     readonly select = new EventEmitter<
         CustomEvent<{ item: HTMLSlMenuItemElement }>
     >();

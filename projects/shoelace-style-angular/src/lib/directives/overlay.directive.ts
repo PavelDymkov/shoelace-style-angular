@@ -10,9 +10,7 @@ import { observe } from "../tools/observe";
     `,
     outputs: ["initialFocus", "overlayDismiss"],
 })
-export class ShoelaceStyleOverlayDirective
-    extends SubscribableDirective
-    implements OnInit {
+export class OverlayDirective extends SubscribableDirective implements OnInit {
     initialFocus = new EventEmitter<CustomEvent>();
     overlayDismiss = new EventEmitter<CustomEvent>();
 

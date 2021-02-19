@@ -9,7 +9,7 @@ import { observe } from "../tools/observe";
     `,
     outputs: ["clear"],
 })
-export class ShoelaceStyleClearableDirective
+export class ClearableDirective
     extends SubscribableDirective
     implements OnInit {
     readonly clear = new EventEmitter<CustomEvent>();

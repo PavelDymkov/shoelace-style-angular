@@ -15,9 +15,7 @@ import { observe } from "../tools/observe";
     `,
     outputs: ["show", "afterShow", "hide", "afterHide"],
 })
-export class ShoelaceStyleShowHideDirective
-    extends SubscribableDirective
-    implements OnInit {
+export class ShowHideDirective extends SubscribableDirective implements OnInit {
     show = new EventEmitter<CustomEvent>();
     afterShow = new EventEmitter<CustomEvent>();
     hide = new EventEmitter<CustomEvent>();

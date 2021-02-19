@@ -9,9 +9,7 @@ import { observe } from "../tools/observe";
     `,
     outputs: ["close"],
 })
-export class ShoelaceStyleClosableDirective
-    extends SubscribableDirective
-    implements OnInit {
+export class ClosableDirective extends SubscribableDirective implements OnInit {
     readonly close = new EventEmitter<CustomEvent>();
 
     constructor(private elementRef: ElementRef<HTMLElement>) {

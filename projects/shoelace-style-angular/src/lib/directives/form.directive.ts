@@ -37,7 +37,7 @@ export const validationMessage = "sl-error";
     selector: "sl-form[data]",
     outputs: ["submit"],
 })
-export class ShoelaceStyleFormDirective
+export class FormDirective
     extends SubscribableDirective
     implements OnInit, AfterContentChecked {
     @Input("data")

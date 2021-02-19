@@ -9,9 +9,7 @@ import { observe } from "../tools/observe";
     `,
     outputs: ["load", "error"],
 })
-export class ShoelaceStyleLoadDirective
-    extends SubscribableDirective
-    implements OnInit {
+export class LoadDirective extends SubscribableDirective implements OnInit {
     readonly load = new EventEmitter<CustomEvent>();
     readonly error = new EventEmitter<CustomEvent<{ status?: number }>>();
 

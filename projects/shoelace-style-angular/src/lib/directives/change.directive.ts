@@ -4,7 +4,7 @@ import { SubscribableDirective } from "ngx-subscribable";
 
 import { observe } from "../tools/observe";
 
-type ShoelaceStyleControlElement = HTMLInputElement &
+type ElementControl = HTMLInputElement &
     (
         | Components.SlCheckbox
         | Components.SlColorPicker
@@ -33,12 +33,10 @@ type ShoelaceStyleControlElement = HTMLInputElement &
     `,
     outputs: ["change"],
 })
-export class ShoelaceStyleChangeDirective
-    extends SubscribableDirective
-    implements OnInit {
+export class ChangeDirective extends SubscribableDirective implements OnInit {
     readonly change = new EventEmitter<CustomEvent>();
 
-    constructor(private elementRef: ElementRef<ShoelaceStyleControlElement>) {
+    constructor(private elementRef: ElementRef<ElementControl>) {
         super();
     }
 
