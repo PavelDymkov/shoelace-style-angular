@@ -1,0 +1,11 @@
+<sl-dialog
+    #dialog
+    label="Dialog"
+    [(open)]="open"
+    (afterShow)="logDialogState()"
+    (afterHide)="logDialogState()"
+>
+    <sl-button id="close" slot="footer" (click)="open = false">Close</sl-button>
+</sl-dialog>
+
+<sl-button id="open" (click)="open = true">Open</sl-button>

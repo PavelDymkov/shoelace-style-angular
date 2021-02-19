@@ -1,4 +1,3 @@
-import { Event } from "@angular/router";
 import { Observable, fromEvent } from "rxjs";
 import { filter } from "rxjs/operators";
 

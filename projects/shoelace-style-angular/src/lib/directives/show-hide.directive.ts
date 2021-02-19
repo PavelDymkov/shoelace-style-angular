@@ -52,7 +52,7 @@ export class ShowHideDirective extends SubscribableDirective implements OnInit {
     `,
     outputs: ["show", "hide"],
 })
-export class ShoelaceStyleTabGroupShowHideDirective
+export class TabGroupShowHideDirective
     extends SubscribableDirective
     implements OnInit {
     show = new EventEmitter<CustomEvent<{ name: string }>>();

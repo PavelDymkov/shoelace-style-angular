@@ -6,6 +6,7 @@ import { ClosableComponent } from "./pages/closable/closable.component";
 import { FocusableComponent } from "./pages/focusable/focusable.component";
 import { FormComponent } from "./pages/form/form.component";
 import { LoadComponent } from "./pages/load/load.component";
+import { OpenComponent } from "./pages/open/open.component";
 import { OverlayComponent } from "./pages/overlay/overlay.component";
 import { SelectComponent } from "./pages/select/select.component";
 import { ShowHideComponent } from "./pages/show-hide/show-hide.component";
@@ -18,6 +19,7 @@ enum ERoutes {
     Focusable = "focusable",
     Form = "form",
     Load = "load",
+    Open = "open",
     Overlay = "overlay",
     Select = "select",
     ShowHide = "show-hide",
@@ -53,6 +55,10 @@ export const routes: Routes = [
     {
         path: ERoutes.Load,
         component: LoadComponent,
+    },
+    {
+        path: ERoutes.Open,
+        component: OpenComponent,
     },
     {
         path: ERoutes.Overlay,

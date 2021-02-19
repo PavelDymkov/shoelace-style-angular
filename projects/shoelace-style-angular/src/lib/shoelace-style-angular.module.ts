@@ -6,10 +6,11 @@ import {
     ClosableDirective,
     FormDirective,
     LoadDirective,
+    OpenDirective,
     OverlayDirective,
     SelectDirective,
     ShowHideDirective,
-    ShoelaceStyleTabGroupShowHideDirective,
+    TabGroupShowHideDirective,
 } from "./directives";
 
 @NgModule({
@@ -19,10 +20,11 @@ import {
         ClosableDirective,
         FormDirective,
         LoadDirective,
+        OpenDirective,
         OverlayDirective,
         SelectDirective,
         ShowHideDirective,
-        ShoelaceStyleTabGroupShowHideDirective,
+        TabGroupShowHideDirective,
     ],
     exports: [
         ChangeDirective,
@@ -30,10 +32,11 @@ import {
         ClosableDirective,
         FormDirective,
         LoadDirective,
+        OpenDirective,
         OverlayDirective,
         SelectDirective,
         ShowHideDirective,
-        ShoelaceStyleTabGroupShowHideDirective,
+        TabGroupShowHideDirective,
     ],
 })
 export class ShoelaceStyleAngularModule {}
