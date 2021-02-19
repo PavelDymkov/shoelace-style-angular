@@ -1,4 +1,4 @@
-<sl-tab-group>
+<sl-tab-group (show)="onTabEnter($event)">
     <sl-tab slot="nav" panel="example">Example</sl-tab>
     <sl-tab slot="nav" panel="code">Code</sl-tab>
 
@@ -6,6 +6,6 @@
         <ng-content></ng-content>
     </sl-tab-panel>
     <sl-tab-panel name="code">
-        <code>{{ code }}</code>
+        <code #codeContainer>{{ code }}</code>
     </sl-tab-panel>
 </sl-tab-group>

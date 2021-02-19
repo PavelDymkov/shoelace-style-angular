@@ -29,6 +29,7 @@
         "@angular/router": "^11.1.0",
         "@shoelace-style/shoelace": "^2.0.0-beta.27",
         "@types/node": "^12.11.1",
+        "highlight.js": "^10.6.0",
         "logical-not": "^1.0.7",
         "mocha": "^8.2.1",
         "ng-packagr": "^11.1.2",

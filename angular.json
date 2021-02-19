@@ -146,6 +146,11 @@
                             },
                             {
                                 "glob": "**/*.*",
+                                "input": "node_modules/highlight.js",
+                                "output": "/assets/highlight"
+                            },
+                            {
+                                "glob": "**/*.*",
                                 "input": "projects/documentation/src/app/examples",
                                 "output": "/assets/examples"
                             }

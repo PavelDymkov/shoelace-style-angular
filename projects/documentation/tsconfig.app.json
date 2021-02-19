@@ -3,7 +3,12 @@
     "extends": "../../tsconfig.json",
     "compilerOptions": {
         "outDir": "../../out-tsc/app",
-        "skipLibCheck": true
+        "skipLibCheck": true,
+        "paths": {
+            "shoelace-style-angular": [
+                "projects/shoelace-style-angular/src/public-api.ts"
+            ]
+        }
     },
     "files": ["src/main.ts", "src/polyfills.ts"],
     "include": ["src/**/*.d.ts"]

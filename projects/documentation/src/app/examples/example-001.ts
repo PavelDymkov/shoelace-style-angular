@@ -1,7 +1,7 @@
 import { Component } from "@angular/core";
 
 @Component({
-    selector: "app-example-001",
+    selector: "xmpl-simply-dialog",
     template: `
         <sl-dialog label="Диалоговое окно" [(open)]="isDialogOpen">
             Какой-то текст...
@@ -20,6 +20,6 @@ import { Component } from "@angular/core";
         </sl-button>
     `,
 })
-export class Example001 {
+export class SimplyDialog {
     isDialogOpen = false;
 }

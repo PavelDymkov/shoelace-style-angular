@@ -2,13 +2,14 @@ import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { RouterModule } from "@angular/router";
 
+// @ts-ignore
+import { ShoelaceStyleAngularModule } from "shoelace-style-angular";
+
+import { routes } from "./overview.routing";
 import { AboutComponent } from "./overview.component";
 import { ExampleModule } from "../../components/example/example.module";
-import { routes } from "./overview.routing";
 
-import { ShoelaceStyleAngularModule } from "../../../../../shoelace-style-angular/src/public-api";
-
-import { Example001 } from "../../examples/example-001";
+import { SimplyDialog } from "../../examples/example-001";
 
 @NgModule({
     imports: [
@@ -18,7 +19,7 @@ import { Example001 } from "../../examples/example-001";
         ExampleModule,
     ],
     exports: [AboutComponent],
-    declarations: [AboutComponent, Example001],
+    declarations: [AboutComponent, SimplyDialog],
     schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class OverviewModule {}
