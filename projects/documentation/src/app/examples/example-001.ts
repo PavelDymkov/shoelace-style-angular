@@ -1,23 +1,21 @@
 import { Component } from "@angular/core";
 
 @Component({
-    selector: "xmpl-simply-dialog",
+    selector: "simply-dialog",
     template: `
-        <sl-dialog label="Диалоговое окно" [(open)]="isDialogOpen">
-            Какой-то текст...
+        <sl-dialog label="Dialog label" [(open)]="isDialogOpen">
+            Content
 
             <sl-button
                 slot="footer"
                 type="primary"
                 (click)="isDialogOpen = false"
             >
-                Закрыть диалоговое окно
+                Close
             </sl-button>
         </sl-dialog>
 
-        <sl-button (click)="isDialogOpen = true">
-            Открыть диалоговое окно
-        </sl-button>
+        <sl-button (click)="isDialogOpen = true">Open dialog</sl-button>
     `,
 })
 export class SimplyDialog {

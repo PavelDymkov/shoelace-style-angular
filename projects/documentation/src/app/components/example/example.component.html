@@ -1,11 +1,15 @@
-<sl-tab-group (show)="onTabEnter($event)">
-    <sl-tab slot="nav" panel="example">Example</sl-tab>
-    <sl-tab slot="nav" panel="code">Code</sl-tab>
+<sl-tab-group *ngIf="exampleTemplate; else content">
+    <sl-tab slot="nav" panel="code" i18n>Код</sl-tab>
+    <sl-tab slot="nav" panel="example" i18n>Живой пример</sl-tab>
 
-    <sl-tab-panel name="example">
-        <ng-content></ng-content>
-    </sl-tab-panel>
     <sl-tab-panel name="code">
-        <code #codeContainer>{{ code }}</code>
+        <code>{{ code }}</code>
+    </sl-tab-panel>
+    <sl-tab-panel name="example">
+        <ng-container *ngTemplateOutlet="exampleTemplate"></ng-container>
     </sl-tab-panel>
 </sl-tab-group>
+
+<ng-template #content>
+    <ng-content></ng-content>
+</ng-template>

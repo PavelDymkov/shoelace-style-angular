@@ -199,6 +199,9 @@
                         },
                         "serve": {
                             "outputPath": "."
+                        },
+                        "i18n": {
+                            "outputPath": "."
                         }
                     }
                 },
@@ -211,10 +214,9 @@
                 "extract-i18n": {
                     "builder": "@angular-devkit/build-angular:extract-i18n",
                     "options": {
-                        "browserTarget": "documentation:build",
+                        "browserTarget": "documentation:build:i18n",
                         "outFile": "projects/documentation/i18n/ru.json",
-                        "format": "json",
-                        "i18nLocale": "ru"
+                        "format": "json"
                     }
                 }
             },

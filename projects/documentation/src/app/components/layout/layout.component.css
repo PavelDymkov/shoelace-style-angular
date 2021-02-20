@@ -14,15 +14,22 @@ sl-menu-item {
 }
 
 sl-menu-item::part(base) {
+    color: var(--sl-color-gray-700);
     white-space: initial;
 }
 
+sl-menu-item::part(base):hover {
+    background-color: var(--sl-color-primary-200);
+}
+
 sl-menu-item._active::part(base) {
-    color: var(--sl-color-gray-700);
-    background-color: var(--sl-color-primary-400);
+    color: var(--sl-color-white);
+    background-color: var(--sl-color-primary-500);
 }
 
 .content {
     flex: 1;
-    margin: var(--sl-spacing-large) var(--sl-spacing-medium);
+    max-width: 860px;
+    margin: var(--sl-spacing-large) auto;
+    padding: 0 var(--sl-spacing-medium);
 }

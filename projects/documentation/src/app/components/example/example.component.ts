@@ -1,52 +1,67 @@
 import {
+    AfterViewInit,
     ChangeDetectorRef,
     Component,
     ElementRef,
     Input,
     OnInit,
-    ViewChild,
+    TemplateRef,
 } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
-import { BehaviorSubject, forkJoin } from "rxjs";
 import { highlightBlock } from "highlight.js";
+import not from "logical-not";
+
+import { Language, highlightFor } from "./highlighters";
 
 @Component({
     selector: "app-example",
     templateUrl: "./example.component.html",
     styleUrls: ["./example.component.css"],
 })
-export class ExampleComponent implements OnInit {
+export class ExampleComponent implements OnInit, AfterViewInit {
+    @Input()
+    language: Language = "angular";
+
+    @Input()
+    exampleTemplate: TemplateRef<any>;
+
     @Input()
     fileName: string;
-
     code: string;
 
-    @ViewChild("codeContainer")
-    codeContainer!: ElementRef<HTMLElement>;
-
-    private codeTabAwaiting = new BehaviorSubject<void>(void 0);
-
     constructor(
+        private readonly elementRef: ElementRef<HTMLElement>,
         private readonly httpClient: HttpClient,
         private readonly changeDetectorRef: ChangeDetectorRef,
     ) {}
 
     ngOnInit(): void {
-        forkJoin({
-            code: this.httpClient.get(`assets/examples/${this.fileName}.ts`, {
-                responseType: "text",
-            }),
-            onTab: this.codeTabAwaiting,
-        }).subscribe(({ code }) => {
-            this.code = code.trim();
+        if (this.fileName)
+            this.httpClient
+                .get(`assets/examples/${this.fileName}.ts`, {
+                    responseType: "text",
+                })
+                .subscribe(code => {
+                    this.code = code.trim();
 
-            this.changeDetectorRef.detectChanges();
+                    this.changeDetectorRef.detectChanges();
 
-            highlightBlock(this.codeContainer.nativeElement);
-        });
+                    this.initializeCodeBlocks();
+                });
     }
 
-    onTabEnter(event: CustomEvent<{ name: string }>): void {
-        if (event.detail.name === "code") this.codeTabAwaiting.complete();
+    ngAfterViewInit(): void {
+        if (not(this.fileName)) this.initializeCodeBlocks();
+    }
+
+    private initializeCodeBlocks(): void {
+        this.elementRef.nativeElement
+            .querySelectorAll("code")
+            .forEach(
+                element =>
+                    (element.innerHTML = highlightFor[this.language](
+                        element.innerHTML,
+                    )),
+            );
     }
 }

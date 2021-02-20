@@ -1,9 +1,36 @@
 <p i18n>
-    Shoelace - библиотека, основанная на web компонентах. shoelace-style-angular
-    добавляет поддежку свойств (Property binding) и событий (Event binding) в
-    шаблонах angular.
+    <a href="https://shoelace.style/" target="_blank">Shoelace</a> - библиотека,
+    основанная на web компонентах.
+    <a
+        href="https://github.com/PavelDymkov/shoelace-style-angular"
+        target="_blank"
+        >shoelace-style-angular</a
+    >
+    добавляет поддежку свойств (<a
+        href="https://angular.io/guide/property-binding"
+        target="_blank"
+        >Property binding</a
+    >) и событий (<a
+        href="https://angular.io/guide/event-binding"
+        target="_blank"
+        >Event binding</a
+    >) в шаблонах angular, которые можно использовать так, как если бы это были
+    компоненты angular.
 </p>
 
-<app-example fileName="example-001">
-    <xmpl-simply-dialog></xmpl-simply-dialog>
+<p>
+    Рассмотрим простой пример открытия диалогового окна. У элемента sl-dialog
+    предусмотрено свойство open, для его открытия. Для управления этим свойством
+    воспользуемся
+    <a href="https://angular.io/guide/two-way-binding" target="_blank"
+        >двусторонней привязкой</a
+    >, чтобы можно было с одной стороной устанавливать свойство в коде,
+    например, для открытия. Но и значение isDialogOpen сохраняло актуальное
+    состояние, например, при закрытии окна через крестик.
+</p>
+
+<app-example fileName="example-001" [exampleTemplate]="simplyDialog">
+    <ng-template #simplyDialog>
+        <simply-dialog></simply-dialog>
+    </ng-template>
 </app-example>

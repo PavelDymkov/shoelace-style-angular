@@ -1,3 +1,7 @@
+sl-tab-panel::part(base) {
+    padding: var(--sl-spacing-large) 0;
+}
+
 code {
     white-space: pre;
 }
