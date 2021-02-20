@@ -42,11 +42,11 @@ export class ExampleComponent implements OnInit, AfterViewInit {
                     responseType: "text",
                 })
                 .subscribe(code => {
-                    this.code = code.trim();
+                    this.code = highlightFor[this.language](code.trim());
 
                     this.changeDetectorRef.detectChanges();
 
-                    this.initializeCodeBlocks();
+                    // this.initializeCodeBlocks();
                 });
     }
 
@@ -57,11 +57,13 @@ export class ExampleComponent implements OnInit, AfterViewInit {
     private initializeCodeBlocks(): void {
         this.elementRef.nativeElement
             .querySelectorAll("code")
-            .forEach(
-                element =>
-                    (element.innerHTML = highlightFor[this.language](
-                        element.innerHTML,
-                    )),
+            .forEach(element =>
+                Object.assign(element, {
+                    className: "hljs",
+                    innerHTML: highlightFor[this.language](
+                        element.innerHTML.trim(),
+                    ),
+                }),
             );
     }
 }

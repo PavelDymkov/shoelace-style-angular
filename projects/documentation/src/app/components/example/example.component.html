@@ -3,7 +3,7 @@
     <sl-tab slot="nav" panel="example" i18n>Живой пример</sl-tab>
 
     <sl-tab-panel name="code">
-        <code>{{ code }}</code>
+        <code [innerHTML]="code" class="hljs"></code>
     </sl-tab-panel>
     <sl-tab-panel name="example">
         <ng-container *ngTemplateOutlet="exampleTemplate"></ng-container>
