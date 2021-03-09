@@ -66,7 +66,7 @@
                             "projects/test/src/assets",
                             {
                                 "glob": "**/*.*",
-                                "input": "node_modules/@shoelace-style/shoelace/dist/shoelace",
+                                "input": "node_modules/@shoelace-style/shoelace/dist",
                                 "output": "/assets/shoelace"
                             }
                         ]

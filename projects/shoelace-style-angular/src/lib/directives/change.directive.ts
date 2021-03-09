@@ -1,21 +1,32 @@
 import { Directive, OnInit, ElementRef, EventEmitter } from "@angular/core";
-import { Components } from "@shoelace-style/shoelace";
+import {
+    SlCheckbox,
+    SlColorPicker,
+    SlForm,
+    SlInput,
+    SlRadio,
+    SlRange,
+    SlRating,
+    SlSelect,
+    SlSwitch,
+    SlTextarea,
+} from "@shoelace-style/shoelace";
 import { SubscribableDirective } from "ngx-subscribable";
 
 import { observe } from "../tools/observe";
 
 type ElementControl = HTMLInputElement &
     (
-        | Components.SlCheckbox
-        | Components.SlColorPicker
-        | Components.SlForm
-        | Components.SlInput
-        | Components.SlRadio
-        | Components.SlRange
-        | Components.SlRating
-        | Components.SlSelect
-        | Components.SlSwitch
-        | Components.SlTextarea
+        | SlCheckbox
+        | SlColorPicker
+        | SlForm
+        | SlInput
+        | SlRadio
+        | SlRange
+        | SlRating
+        | SlSelect
+        | SlSwitch
+        | SlTextarea
     );
 
 @Directive({

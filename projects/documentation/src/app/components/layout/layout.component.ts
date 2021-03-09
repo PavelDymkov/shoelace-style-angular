@@ -9,7 +9,7 @@ import {
     QueryList,
 } from "@angular/core";
 import { Router, RouterLink } from "@angular/router";
-import { Components } from "@shoelace-style/shoelace";
+import { SlMenu, SlMenuItem } from "@shoelace-style/shoelace";
 
 import { AppRoute } from "../../app.routing";
 
@@ -22,8 +22,8 @@ export class LayoutComponent implements AfterViewInit, AfterViewChecked {
     readonly AppRoute = AppRoute;
 
     @ViewChild("menu", { static: true })
-    menu: ElementRef<Components.SlMenu & HTMLElement>;
-    menuItems: (Components.SlMenuItem & HTMLElement)[];
+    menu: ElementRef<SlMenu>;
+    menuItems: SlMenuItem[];
 
     @ViewChildren(RouterLink)
     routerLinks: QueryList<RouterLink>;
@@ -32,9 +32,9 @@ export class LayoutComponent implements AfterViewInit, AfterViewChecked {
 
     ngAfterViewInit(): void {
         this.menuItems = Array.from(
-            this.menu.nativeElement.querySelectorAll<
-                Components.SlMenuItem & HTMLElement
-            >("sl-menu-item"),
+            this.menu.nativeElement.querySelectorAll<SlMenuItem>(
+                "sl-menu-item",
+            ),
         );
     }
 

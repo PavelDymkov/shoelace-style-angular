@@ -1,5 +1,5 @@
 <sl-alert
-    [attr.open]="isShowAlert"
+    [open]="isShowAlert"
     (show)="logMessage('show', $event.target)"
     (hide)="logMessage('hide', $event.target)"
     (afterShow)="logMessage('after show', $event.target)"

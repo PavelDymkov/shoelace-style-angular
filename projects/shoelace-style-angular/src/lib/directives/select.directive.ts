@@ -1,12 +1,9 @@
 import { Directive, OnInit, EventEmitter, ElementRef } from "@angular/core";
 
-import { Components } from "@shoelace-style/shoelace";
+import { SlMenu, SlMenuItem } from "@shoelace-style/shoelace";
 import { SubscribableDirective } from "ngx-subscribable";
 
 import { observe } from "../tools/observe";
-
-type SlMenu = Components.SlMenu & HTMLElement;
-type HTMLSlMenuItemElement = Components.SlMenuItem & HTMLElement;
 
 @Directive({
     selector: `
@@ -15,9 +12,7 @@ type HTMLSlMenuItemElement = Components.SlMenuItem & HTMLElement;
     outputs: ["select"],
 })
 export class SelectDirective extends SubscribableDirective implements OnInit {
-    readonly select = new EventEmitter<
-        CustomEvent<{ item: HTMLSlMenuItemElement }>
-    >();
+    readonly select = new EventEmitter<CustomEvent<{ item: SlMenuItem }>>();
 
     constructor(private elementRef: ElementRef<SlMenu>) {
         super();
@@ -27,7 +22,7 @@ export class SelectDirective extends SubscribableDirective implements OnInit {
         const element = this.elementRef.nativeElement;
 
         this.subscriptions = [
-            observe<CustomEvent<{ item: HTMLSlMenuItemElement }>>(
+            observe<CustomEvent<{ item: SlMenuItem }>>(
                 element,
                 "sl-select",
             ).subscribe(event => this.select.emit(event)),

@@ -8,20 +8,13 @@ import {
     NgZone,
 } from "@angular/core";
 import { AbstractControl } from "@angular/forms";
-import { Components } from "@shoelace-style/shoelace";
-import { from, of, Subscription } from "rxjs";
-import {
-    debounceTime,
-    distinctUntilChanged,
-    filter,
-    switchMap,
-} from "rxjs/operators";
+import { SlForm } from "@shoelace-style/shoelace";
+import { of, Subscription } from "rxjs";
+import { debounceTime, distinctUntilChanged, filter } from "rxjs/operators";
 import { SubscribableDirective } from "ngx-subscribable";
 import { not } from "logical-not";
 
 import { observe } from "../tools/observe";
-
-type SlForm = Components.SlForm & HTMLElement;
 
 interface HTMLFormControl extends HTMLElement {
     name: string;
@@ -65,35 +58,28 @@ export class FormDirective
                 CustomEvent<{ formData: FormData; formControls: HTMLElement[] }>
             >(element, "sl-submit").subscribe(event => this.submit.emit(event)),
 
-            this.trigger
-                .pipe(debounceTime(10))
-                .pipe(
-                    switchMap(() =>
-                        from(this.elementRef.nativeElement.getFormControls()),
-                    ),
-                )
-                .subscribe((elements: HTMLFormControl[]) => {
-                    const registred = new Set<HTMLFormControl>(
-                        this.registry.keys(),
-                    );
+            this.trigger.pipe(debounceTime(10)).subscribe(() => {
+                const elements = this.elementRef.nativeElement.getFormControls() as HTMLFormControl[];
+                const registred = new Set<HTMLFormControl>(
+                    this.registry.keys(),
+                );
 
-                    elements
-                        .filter(element => element.name)
-                        .forEach(element => {
-                            registred.delete(element);
+                elements
+                    .filter(element => element.name)
+                    .forEach(element => {
+                        registred.delete(element);
 
-                            if (not(this.registry.has(element))) {
-                                fixNameAttribute(element);
+                        if (not(this.registry.has(element))) {
+                            fixNameAttribute(element);
 
-                                const control = pick(this.form, element.name);
+                            const control = pick(this.form, element.name);
 
-                                if (control)
-                                    this.addToRegistry(element, control);
-                            }
-                        });
+                            if (control) this.addToRegistry(element, control);
+                        }
+                    });
 
-                    registred.forEach(control => this.free(control));
-                }),
+                registred.forEach(control => this.free(control));
+            }),
         ];
     }
 

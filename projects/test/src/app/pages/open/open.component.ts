@@ -1,5 +1,5 @@
 import { Component, ElementRef, ViewChild } from "@angular/core";
-import { Components } from "@shoelace-style/shoelace";
+import { SlDialog } from "@shoelace-style/shoelace";
 
 @Component({
     selector: "app-open-page",
@@ -9,7 +9,7 @@ export class OpenComponent {
     open = false;
 
     @ViewChild("dialog")
-    dialogRef: ElementRef<HTMLElement & Components.SlDialog>;
+    dialogRef: ElementRef<SlDialog>;
 
     logDialogState(): void {
         const { open } = this.dialogRef.nativeElement;
