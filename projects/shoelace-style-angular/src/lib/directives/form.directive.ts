@@ -143,7 +143,6 @@ export class FormDirective
                     observe(element, getChangeEventName(element)).subscribe(
                         () => {
                             const value = getValue(element);
-                            console.log(value);
 
                             if (value !== control.value)
                                 control.patchValue(value);
