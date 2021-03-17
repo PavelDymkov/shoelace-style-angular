@@ -10,6 +10,7 @@
         "url": "https://github.com/PavelDymkov/shoelace-style-angular.git"
     },
     "scripts": {
+        "build": "ng build",
         "start": "ng serve test",
         "test": "ng build && mocha --config test/mocha.config.js"
     },
