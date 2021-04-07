@@ -1,5 +1,5 @@
 import { Component, AfterViewInit } from "@angular/core";
-
+import { SlInput } from "@shoelace-style/shoelace";
 import { from } from "rxjs";
 import { delay, tap } from "rxjs/operators";
 
@@ -11,9 +11,9 @@ export class FocusableComponent implements AfterViewInit {
     ngAfterViewInit(): void {
         from(Array.from(document.querySelector("app-focusable-page").children))
             .pipe(delay(100))
-            .pipe(tap(item => (item as any).setFocus()))
+            .pipe(tap((item: SlInput) => item.focus()))
             .pipe(delay(100))
-            .pipe(tap(item => (item as any).removeFocus()))
+            .pipe(tap((item: SlInput) => item.blur()))
             .subscribe();
     }
 

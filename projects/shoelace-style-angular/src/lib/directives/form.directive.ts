@@ -160,9 +160,9 @@ export class FormDirective
     }
 
     private free(control: HTMLFormControl): void {
-        this.registry
-            .get(control)
-            ?.forEach(subscription => subscription.unsubscribe());
+        this.registry.get(control)?.forEach(subscription => {
+            subscription.unsubscribe();
+        });
 
         this.registry.delete(control);
     }
@@ -237,10 +237,11 @@ function getValue(element: HTMLFormControl): any {
     switch (tagName) {
         case "sl-checkbox":
         case "sl-radio":
+        case "sl-switch":
         case "checkbox":
         case "radio":
             if (element.value) return element.checked ? element.value : null;
-            else return element.checked ? "true" : null;
+            else return element.checked;
         default:
             return element.value || null;
     }
@@ -250,6 +251,7 @@ function setValue(element: HTMLFormControl, value: any): void {
     switch (getTagName(element)) {
         case "sl-checkbox":
         case "sl-radio":
+        case "sl-switch":
             element.checked = Boolean(value);
             break;
         case "checkbox":

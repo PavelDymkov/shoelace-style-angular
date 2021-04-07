@@ -15,9 +15,16 @@ describe("Form Directive", () => {
                 const formData = await dataFromMessage("sl-form data");
 
                 isEqual(formData, {
+                    checkbox: null,
+                    checkboxFalse: null,
+                    checkboxValue: null,
+                    checkboxValueNull: null,
                     input: "initial",
-                    select: "",
                     native: "initial",
+                    radio: null,
+                    select: null,
+                    switch: null,
+                    switchValue: null,
                 });
             },
         });
@@ -31,10 +38,16 @@ describe("Form Directive", () => {
                 const formData = await dataFromMessage("sl-form data");
 
                 isEqual(formData, {
+                    checkbox: true,
+                    checkboxFalse: false,
+                    checkboxValue: "checkbox-value",
+                    checkboxValueNull: null,
                     input: "patched",
                     native: "patched",
                     radio: "option-2",
                     select: "option-2",
+                    switch: true,
+                    switchValue: "switch-value",
                 });
             },
         });
@@ -54,14 +67,11 @@ describe("Form Directive", () => {
             async output({ dataFromMessage }) {
                 const formData = await dataFromMessage("sl-form data");
 
-                isEqual(formData, {
-                    "[0][items][0]": "foo",
-                    "[1][items][0]": "foo",
-                    "[1][items][1]": "bar",
-                    "[1][selected]": "selected",
-                    "[2][items][0]": "baz",
-                    "[2][selected]": "selected",
-                });
+                isEqual(formData, [
+                    { items: ["foo"], selected: false },
+                    { items: ["foo", "bar"], selected: "selected" },
+                    { items: ["baz"], selected: "selected" },
+                ]);
             },
         });
 
@@ -74,14 +84,11 @@ describe("Form Directive", () => {
             async output({ dataFromMessage }) {
                 const formData = await dataFromMessage("sl-form data");
 
-                isEqual(formData, {
-                    "[0][items][0]": "foo",
-                    "[1][items][0]": "foo",
-                    "[1][items][1]": "bar",
-                    "[1][selected]": "selected",
-                    "[2][items][0]": "baz",
-                    "[2][selected]": "selected",
-                });
+                isEqual(formData, [
+                    { items: ["foo"], selected: false },
+                    { items: ["foo", "bar"], selected: "selected" },
+                    { items: ["baz"], selected: "selected" },
+                ]);
             },
         });
     });

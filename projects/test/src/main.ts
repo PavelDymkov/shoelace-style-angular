@@ -1,4 +1,4 @@
-/// <reference path="../../../node_modules/@shoelace-style/shoelace/dist/all.shoelace.d.ts" />
+/// <reference path="../../../node_modules/@shoelace-style/shoelace/dist/shoelace.d.ts" />
 
 import { enableProdMode } from "@angular/core";
 import { platformBrowserDynamic } from "@angular/platform-browser-dynamic";

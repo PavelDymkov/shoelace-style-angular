@@ -1,4 +1,4 @@
-<sl-form [data]="simplyForm" (submit)="logFormData($event)">
+<sl-form [data]="simplyForm" (submit)="logFormData(simplyForm)">
     <sl-input name="input"></sl-input>
     <br />
     <sl-select name="select">
@@ -11,6 +11,19 @@
     <sl-radio name="radio" value="option-2">Option 2</sl-radio>
     <sl-radio name="radio" value="option-3">Option 3</sl-radio>
     <br />
+    <sl-checkbox name="checkbox">Checkbox</sl-checkbox>
+    <sl-checkbox name="checkboxValue" value="checkbox-value">
+        Checkbox Value
+    </sl-checkbox>
+    <br />
+    <sl-checkbox name="checkboxFalse">Checkbox False</sl-checkbox>
+    <sl-checkbox name="checkboxValueNull" value="checkbox-value">
+        Checkbox Value Null
+    </sl-checkbox>
+    <br />
+    <sl-switch name="switch">Switch</sl-switch>
+    <sl-switch name="switchValue" value="switch-value">Switch Value</sl-switch>
+    <br />
     <input name="native" />
     <br />
     <button type="submit" id="simply">Submit</button>
@@ -18,7 +31,7 @@
 
 <button id="patch-simply" (click)="patchSimplyForm()">Patch value</button>
 
-<sl-form [data]="dynamicForm" (submit)="logFormData($event)">
+<sl-form [data]="dynamicForm" (submit)="logFormData(dynamicForm)">
     <div *ngFor="let control of dynamicForm.controls; index as i">
         <sl-input
             *ngFor="let item of control.get('items').controls; index as j"

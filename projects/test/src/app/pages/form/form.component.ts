@@ -1,5 +1,5 @@
 import { Component } from "@angular/core";
-import { FormBuilder } from "@angular/forms";
+import { AbstractControl, FormBuilder, FormGroup } from "@angular/forms";
 
 @Component({
     selector: "app-form-page",
@@ -10,6 +10,12 @@ export class FormComponent {
         input: ["initial"],
         select: [],
         radio: [],
+        checkbox: [],
+        checkboxValue: [],
+        checkboxFalse: [],
+        checkboxValueNull: [],
+        switch: [],
+        switchValue: [],
         native: ["initial"],
     });
 
@@ -22,6 +28,12 @@ export class FormComponent {
             input: "patched",
             select: "option-2",
             radio: "option-2",
+            checkbox: true,
+            checkboxValue: true,
+            checkboxFalse: false,
+            checkboxValueNull: null,
+            switch: true,
+            switchValue: "switch-value",
             native: "patched",
         });
     }
@@ -61,13 +73,7 @@ export class FormComponent {
         this.fillDynamicForm();
     }
 
-    logFormData(event: CustomEvent<{ formData: FormData }>): void {
-        const { formData } = event.detail;
-
-        const formValue: any = {};
-
-        formData.forEach((value, key) => (formValue[key] = value));
-
-        console.log("sl-form data", formValue);
+    logFormData(form: AbstractControl): void {
+        console.log("sl-form data", form.value);
     }
 }
