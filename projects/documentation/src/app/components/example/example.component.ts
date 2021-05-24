@@ -8,8 +8,7 @@ import {
     TemplateRef,
 } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
-import { highlightBlock } from "highlight.js";
-import not from "logical-not";
+import { not } from "logical-not";
 
 import { Language, highlightFor } from "./highlighters";
 
