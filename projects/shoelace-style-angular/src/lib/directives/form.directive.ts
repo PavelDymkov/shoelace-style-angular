@@ -74,7 +74,10 @@ export class FormDirective
 
                             const control = pick(this.form, element.name);
 
-                            if (control) this.addToRegistry(element, control);
+                            if (control)
+                                this.ngZone.run(() =>
+                                    this.addToRegistry(element, control),
+                                );
                         }
                     });
 

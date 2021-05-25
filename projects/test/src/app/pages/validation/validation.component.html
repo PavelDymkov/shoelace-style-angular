@@ -1,5 +1,11 @@
-<sl-form [data]="form">
+<sl-form [data]="form" class="form-1">
     <sl-checkbox name="required">Checkbox</sl-checkbox>
     <br />
     <button type="submit" [disabled]="form.invalid">Submit</button>
+</sl-form>
+
+<sl-form [data]="form2" class="form-2">
+    <sl-input name="required"></sl-input>
+    <br />
+    <button type="submit" [disabled]="form2.invalid">Submit</button>
 </sl-form>

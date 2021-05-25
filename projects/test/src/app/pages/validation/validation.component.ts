@@ -10,5 +10,9 @@ export class ValidationComponent {
         required: [null, Validators.required],
     });
 
+    form2 = this.formBuilder.group({
+        required: [null, Validators.required],
+    });
+
     constructor(private formBuilder: FormBuilder) {}
 }
