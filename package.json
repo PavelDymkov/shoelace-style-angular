@@ -39,6 +39,7 @@
         "prettier": "^2.1.1",
         "puppeteer": "^5.5.0",
         "puppeteer-io": "^1.12.0",
+        "puppeteer-shadow-selector": "^1.0.1",
         "rxjs": "^6.6.3",
         "ts-node": "~8.3.0",
         "tslib": "^2.0.0",
