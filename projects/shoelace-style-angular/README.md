@@ -31,7 +31,7 @@ export class AppModule {}
 
 ```ts
 @Component({
-    selector: "app-my-component",
+    selector: "my-component",
     template: `
         <sl-form [data]="form" (submit)="isDialogOpen = true">
             <sl-input name="message" label="Enter message"></sl-input>
@@ -39,23 +39,19 @@ export class AppModule {}
             <sl-button submit>Show dialog</sl-button>
         </sl-form>
 
-        <sl-dialog
-            label="You entered"
-            [open]="isDialogOpen"
-            (hide)="isDialogOpen = false"
-        >
+        sl-dialog label="Message is" [(open)]="isDialogOpen">
             {{ form.get("message").value }}
         </sl-dialog>
     `,
 })
-export class FormComponent {
+export class MyComponent {
     form = this.formBuilder.group({
         message: ["initial text"],
     });
 
     isDialogOpen = false;
 
-    constructor(formBuilder: FormBuilder) {}
+    constructor(private formBuilder: FormBuilder) {}
 }
 ```
 
@@ -66,7 +62,7 @@ export class FormComponent {
         <tr>
             <th>Shoelace event</th>
             <th>Angular output</th>
-            <th>Components</th>
+            <th>In template</th>
         </tr>
     </thead>
     <tbody>
