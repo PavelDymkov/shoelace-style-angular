@@ -35,7 +35,7 @@
         "logical-not": "^1.0.7",
         "mocha": "^8.2.1",
         "ng-packagr": "^11.1.2",
-        "ngx-subscribable": "^1.0.0",
+        "ngx-subscribable": "^1.0.1",
         "prettier": "^2.1.1",
         "puppeteer": "^5.5.0",
         "puppeteer-io": "^1.12.0",
