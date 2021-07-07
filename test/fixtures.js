@@ -6,7 +6,7 @@ let serveProcess;
 
 module.exports = {
     async mochaGlobalSetup() {
-        const sh = `npx ng serve test --prod --port ${port}`;
+        const sh = `npx ng serve test --configuration production --port ${port}`;
         const [command, ...args] = sh.split(/\s+/);
 
         console.log(`starting test server...`);

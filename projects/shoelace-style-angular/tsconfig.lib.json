@@ -5,10 +5,12 @@
         "declarationMap": false,
         "target": "es2015",
         "declaration": true,
-        "inlineSources": true
+        "inlineSources": true,
+        "skipLibCheck": true
     },
     "angularCompilerOptions": {
-        "enableIvy": false,
+        "enableIvy": true,
+        "compilationMode": "partial",
         "enableResourceInlining": true,
         "skipTemplateCodegen": true,
         "strictMetadataEmit": true

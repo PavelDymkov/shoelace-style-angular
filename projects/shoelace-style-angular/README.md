@@ -102,8 +102,8 @@ export class FormComponent {
             <td>sl-icon</td>
         </tr>
         <tr>
-            <td>sl-initial-focus,<br>sl-overlay-dismiss</td>
-            <td>initialFocus,<br>overlayDismiss</td>
+            <td>sl-initial-focus,<br>sl-request-close</td>
+            <td>initialFocus,<br>requestClose</td>
             <td>sl-dialog,<br>sl-drawer</td>
         </tr>
         <tr>

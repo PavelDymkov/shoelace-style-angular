@@ -10,7 +10,8 @@
         "url": "https://github.com/PavelDymkov/shoelace-style-angular.git"
     },
     "scripts": {
-        "build": "ng build",
+        "build": "ng build && npm run badges",
+        "badges": "tsc --project badges/tsconfig.json && node badges/create.js",
         "start": "ng serve test",
         "test": "ng build && mocha --config test/mocha.config.js"
     },
@@ -28,9 +29,10 @@
         "@angular/platform-browser": "^12.1.1",
         "@angular/platform-browser-dynamic": "^12.1.1",
         "@angular/router": "^12.1.1",
-        "@shoelace-style/shoelace": "^2.0.0-beta.40",
+        "@shoelace-style/shoelace": "^2.0.0-beta.45",
         "@types/node": "^12.11.1",
         "@types/resize-observer-browser": "^0.1.5",
+        "badge-maker": "^3.3.1",
         "highlight.js": "^10.6.0",
         "logical-not": "^1.0.7",
         "mocha": "^8.2.1",
@@ -40,6 +42,7 @@
         "puppeteer": "^5.5.0",
         "puppeteer-io": "^1.12.0",
         "puppeteer-shadow-selector": "^1.0.1",
+        "rimraf": "^3.0.2",
         "rxjs": "^6.6.3",
         "ts-node": "~8.3.0",
         "tslib": "^2.3.0",

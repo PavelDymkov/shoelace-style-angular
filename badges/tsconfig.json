@@ -1,0 +1,8 @@
+{
+    "files": ["./create.ts"],
+    "compilerOptions": {
+        "module": "CommonJS",
+        "moduleResolution": "Node",
+        "skipLibCheck": true
+    }
+}

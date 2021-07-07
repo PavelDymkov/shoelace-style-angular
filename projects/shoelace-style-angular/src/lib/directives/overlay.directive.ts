@@ -8,11 +8,11 @@ import { observe } from "../tools/observe";
         sl-dialog,
         sl-drawer,
     `,
-    outputs: ["initialFocus", "overlayDismiss"],
+    outputs: ["initialFocus", "requestClose"],
 })
 export class OverlayDirective extends SubscribableDirective implements OnInit {
     initialFocus = new EventEmitter<CustomEvent>();
-    overlayDismiss = new EventEmitter<CustomEvent>();
+    requestClose = new EventEmitter<CustomEvent>();
 
     constructor(private elementRef: ElementRef<HTMLElement>) {
         super();
@@ -25,8 +25,8 @@ export class OverlayDirective extends SubscribableDirective implements OnInit {
             observe(element, "sl-initial-focus").subscribe(event =>
                 this.initialFocus.emit(event),
             ),
-            observe(element, "sl-overlay-dismiss").subscribe(event =>
-                this.overlayDismiss.emit(event),
+            observe(element, "sl-request-close").subscribe(event =>
+                this.requestClose.emit(event),
             ),
         ];
     }

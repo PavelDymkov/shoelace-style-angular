@@ -8,7 +8,7 @@
             "ngx-subscribable": "ngx-subscribable"
         }
     },
-    "whitelistedNonPeerDependencies": [
+    "allowedNonPeerDependencies": [
         "logical-not",
         "ngx-subscribable",
         "tslib"
