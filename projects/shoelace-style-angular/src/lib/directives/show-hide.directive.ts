@@ -54,7 +54,8 @@ export class ShowHideDirective extends SubscribableDirective implements OnInit {
 })
 export class TabGroupShowHideDirective
     extends SubscribableDirective
-    implements OnInit {
+    implements OnInit
+{
     show = new EventEmitter<CustomEvent<{ name: string }>>();
     hide = new EventEmitter<CustomEvent<{ name: string }>>();
 

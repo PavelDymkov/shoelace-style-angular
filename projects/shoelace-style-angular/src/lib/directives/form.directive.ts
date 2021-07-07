@@ -32,7 +32,8 @@ export const validationMessage = "sl-error";
 })
 export class FormDirective
     extends SubscribableDirective
-    implements OnInit, AfterContentChecked {
+    implements OnInit, AfterContentChecked
+{
     @Input("data")
     form: AbstractControl;
 
@@ -59,7 +60,8 @@ export class FormDirective
             >(element, "sl-submit").subscribe(event => this.submit.emit(event)),
 
             this.trigger.pipe(debounceTime(10)).subscribe(() => {
-                const elements = this.elementRef.nativeElement.getFormControls() as HTMLFormControl[];
+                const elements =
+                    this.elementRef.nativeElement.getFormControls() as HTMLFormControl[];
                 const registred = new Set<HTMLFormControl>(
                     this.registry.keys(),
                 );

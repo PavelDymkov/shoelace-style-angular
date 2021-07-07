@@ -11,7 +11,8 @@ import { observe } from "../tools/observe";
 })
 export class ClearableDirective
     extends SubscribableDirective
-    implements OnInit {
+    implements OnInit
+{
     readonly clear = new EventEmitter<CustomEvent>();
 
     constructor(private elementRef: ElementRef<HTMLElement>) {

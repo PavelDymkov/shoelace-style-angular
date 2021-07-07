@@ -53,10 +53,9 @@ export class ChangeDirective extends SubscribableDirective implements OnInit {
 
     ngOnInit(): void {
         this.subscriptions = [
-            observe(
-                this.elementRef.nativeElement,
-                "sl-change",
-            ).subscribe(event => this.change.emit(event)),
+            observe(this.elementRef.nativeElement, "sl-change").subscribe(
+                event => this.change.emit(event),
+            ),
         ];
     }
 }

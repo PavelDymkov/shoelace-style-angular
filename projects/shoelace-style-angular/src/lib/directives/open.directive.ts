@@ -29,7 +29,8 @@ interface Openable {
 })
 export class OpenDirective
     extends SubscribableDirective
-    implements OnInit, OnChanges {
+    implements OnInit, OnChanges
+{
     @Input()
     open: boolean = false;
 
