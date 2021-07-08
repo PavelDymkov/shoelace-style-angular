@@ -32,7 +32,7 @@ createBadge("license", () => {
     const { license } = require("../package/package");
 
     return {
-        label: "npm",
+        label: "license",
         message: String(license),
         color: "green",
     };
