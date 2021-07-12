@@ -16,8 +16,8 @@ describe("Overlay Directive", () => {
                 await closeButton.click();
             },
             async output({ message }) {
-                await message("initialFocus");
-                await message("requestClose");
+                await message("SL-DRAWER dispatch sl-initial-focus");
+                await message("SL-DRAWER dispatch sl-request-close");
             },
         });
     });

@@ -14,7 +14,7 @@ describe("Closable Directive", () => {
                 await button.click();
             },
             async output({ message }) {
-                await message("sl-tab closed");
+                await message("SL-TAB dispatch sl-close");
             },
         });
     });

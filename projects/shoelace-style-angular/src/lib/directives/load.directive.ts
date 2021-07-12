@@ -6,6 +6,7 @@ import { observe } from "../tools/observe";
 @Directive({
     selector: `
         sl-icon,
+        sl-include,
     `,
     outputs: ["load", "error"],
 })

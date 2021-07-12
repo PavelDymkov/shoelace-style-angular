@@ -10,7 +10,7 @@ describe("Select Directive", () => {
                 await page.click("#trigger");
             },
             async output({ message }) {
-                await message("success");
+                await message("SL-MENU dispatch sl-select with success");
             },
         });
     });

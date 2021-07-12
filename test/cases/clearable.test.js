@@ -14,7 +14,7 @@ describe("Clearable Directive", () => {
                 await button.click();
             },
             async output({ message }) {
-                await message("sl-tag cleared");
+                await message("SL-TAG dispatch sl-clear");
             },
         });
     });

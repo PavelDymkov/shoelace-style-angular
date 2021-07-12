@@ -1,16 +1,19 @@
 <sl-alert
     [open]="isShowAlert"
-    (show)="logMessage('show', $event.target)"
-    (hide)="logMessage('hide', $event.target)"
-    (afterShow)="logMessage('after show', $event.target)"
-    (afterHide)="logMessage('atfer hide', $event.target)"
+    (show)="log($event)"
+    (hide)="log($event)"
+    (afterShow)="log($event)"
+    (afterHide)="log($event)"
 >
     Shoelace Style Alert
 </sl-alert>
 
 <button id="toggle" (click)="isShowAlert = !isShowAlert">Toggle</button>
 
-<sl-tab-group (show)="tabToggle($event)" (hide)="tabToggle($event)">
+<sl-tab-group
+    (show)="logDetail($event, 'name')"
+    (hide)="logDetail($event, 'name')"
+>
     <sl-tab slot="nav" panel="1">1</sl-tab>
     <sl-tab slot="nav" panel="2">
         <button id="switch-tab">2</button>

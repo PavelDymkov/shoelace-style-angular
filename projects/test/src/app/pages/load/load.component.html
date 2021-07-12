@@ -1,2 +1,30 @@
-<sl-icon name="check-square" (load)="onLoad()"></sl-icon>
-<sl-icon name="__icon-not-exists__" (error)="onError()"></sl-icon>
+<button id="test1" (click)="test = 1">Test 1</button>
+<button id="test2" (click)="test = 2">Test 2</button>
+<button id="test3" (click)="test = 3">Test 3</button>
+<button id="test4" (click)="test = 4">Test 4</button>
+
+<ng-container [ngSwitch]="test">
+    <sl-icon
+        *ngSwitchCase="1"
+        name="check-square"
+        (load)="log($event)"
+    ></sl-icon>
+
+    <sl-icon
+        *ngSwitchCase="2"
+        name="__icon-not-exists__"
+        (error)="log($event)"
+    ></sl-icon>
+
+    <sl-include
+        *ngSwitchCase="3"
+        src="/assets/include.html"
+        (load)="log($event)"
+    ></sl-include>
+
+    <sl-include
+        *ngSwitchCase="4"
+        src="/assets/not-exists.html"
+        (error)="log($event)"
+    ></sl-include>
+</ng-container>

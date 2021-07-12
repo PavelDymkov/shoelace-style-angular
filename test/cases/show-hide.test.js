@@ -7,8 +7,8 @@ describe("ShowHide Directive", () => {
                 await page.click("#toggle");
             },
             async output({ message }) {
-                await message("sl-alert show");
-                await message("sl-alert after show");
+                await message("SL-ALERT dispatch sl-show");
+                await message("SL-ALERT dispatch sl-after-show");
             },
         });
 
@@ -17,8 +17,8 @@ describe("ShowHide Directive", () => {
                 await page.click("#toggle");
             },
             async output({ message }) {
-                await message("sl-alert hide");
-                await message("sl-alert atfer hide");
+                await message("SL-ALERT dispatch sl-hide");
+                await message("SL-ALERT dispatch sl-after-hide");
             },
         });
     });
@@ -31,8 +31,8 @@ describe("ShowHide Directive", () => {
                 await page.click("#switch-tab");
             },
             async output({ message }) {
-                await message("sl-tab-hide: panel 1");
-                await message("sl-tab-show: panel 2");
+                await message("SL-TAB-GROUP dispatch sl-tab-hide with 1");
+                await message("SL-TAB-GROUP dispatch sl-tab-show with 2");
             },
         });
     });

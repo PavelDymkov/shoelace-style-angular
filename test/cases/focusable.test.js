@@ -19,10 +19,10 @@ describe("Focusable Directive", () => {
                 await button.focus();
             },
             async output({ message }) {
-                await message("focus: sl-input");
-                await message("blur: sl-input");
-                await message("focus: sl-button");
-                await message("blur: sl-button");
+                await message("SL-INPUT dispatch focus");
+                await message("SL-INPUT dispatch blur");
+                await message("SL-BUTTON dispatch focus");
+                await message("SL-BUTTON dispatch blur");
             },
         });
     });

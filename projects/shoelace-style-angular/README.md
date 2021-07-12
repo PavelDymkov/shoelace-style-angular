@@ -30,23 +30,27 @@ export class AppModule {}
 ## Example
 
 ```ts
+import { Component } from "@angular/core";
+import { FormBuilder, Validators } from "@angular/forms";
+
 @Component({
-    selector: "my-component",
+    selector: "app-greeter",
     template: `
         <sl-form [data]="form" (submit)="isDialogOpen = true">
-            <sl-input name="message" label="Enter message"></sl-input>
+            <sl-input name="username" label="Enter your name"></sl-input>
             <br />
-            <sl-button submit>Show dialog</sl-button>
+            <sl-button submit [disabled]="form.invalid">Say Hello</sl-button>
         </sl-form>
 
-        sl-dialog label="Message is" [(open)]="isDialogOpen">
-            {{ form.get("message").value }}
+        <sl-dialog label="Greetings" [(open)]="isDialogOpen">
+            Hello,
+            {{ form.get("username").value }}!
         </sl-dialog>
     `,
 })
-export class MyComponent {
+export class GreeterComponent {
     form = this.formBuilder.group({
-        message: ["initial text"],
+        username: ["World", Validators.required],
     });
 
     isDialogOpen = false;
@@ -100,7 +104,7 @@ export class MyComponent {
         <tr>
             <td>sl-load</td>
             <td>load</td>
-            <td>sl-icon</td>
+            <td>sl-icon,<br>sl-include</td>
         </tr>
         <tr>
             <td>sl-initial-focus,<br>sl-request-close</td>
@@ -129,6 +133,24 @@ export class MyComponent {
                 sl-dropdown,<br>
                 sl-tooltip
             </td>
+        </tr>
+        <tr>
+            <td>
+                sl-start,<br>
+                sl-finish,<br>
+                sl-cancel
+            </td>
+            <td>
+                start,<br>
+                finish,<br>
+                cancel
+            </td>
+            <td>sl-animation</td>
+        </tr>
+        <tr>
+            <td>sl-resize</td>
+            <td>resize</td>
+            <td>sl-resize-observer</td>
         </tr>
     </tbody>
 </table>

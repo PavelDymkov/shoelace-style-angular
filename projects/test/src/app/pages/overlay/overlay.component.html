@@ -3,6 +3,6 @@
 <sl-drawer
     label="Drawer"
     [(open)]="isDrawerShown"
-    (initialFocus)="log('initialFocus')"
-    (requestClose)="log('requestClose')"
+    (initialFocus)="log($event)"
+    (requestClose)="log($event)"
 ></sl-drawer>

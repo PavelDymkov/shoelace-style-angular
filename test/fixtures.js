@@ -1,4 +1,4 @@
-const { spawn } = require("child_process");
+const { spawn, spawnSync } = require("child_process");
 
 const { port } = require("./config");
 
@@ -6,12 +6,16 @@ let serveProcess;
 
 module.exports = {
     async mochaGlobalSetup() {
-        const sh = `npx ng serve test --configuration production --port ${port}`;
-        const [command, ...args] = sh.split(/\s+/);
+        spawnSync("npx", args("ng build"), {
+            stdio: ["inherit", "inherit", "inherit"],
+        });
 
         console.log(`starting test server...`);
 
-        serveProcess = spawn(command, args);
+        serveProcess = spawn(
+            "npx",
+            args(`ng serve test --configuration production --port ${port}`),
+        );
 
         serveProcess.stdout.on("data", data => {
             process.stdout.write(data);
@@ -42,3 +46,7 @@ module.exports = {
         serveProcess.kill();
     },
 };
+
+function args(source) {
+    return source.split(/\s+/);
+}
