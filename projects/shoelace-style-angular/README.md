@@ -27,6 +27,30 @@ import { ShoelaceStyleAngularModule } from "shoelace-style-angular";
 export class AppModule {}
 ```
 
+For using `shoelace` assets, add to [config](https://angular.io/guide/workspace-config#asset-config):
+
+```json
+{
+    "glob": "**/*.*",
+    "input": "node_modules/@shoelace-style/shoelace/dist",
+    "output": "/assets/shoelace"
+}
+```
+
+and to `src/main.ts`:
+
+```ts
+import { setBasePath } from "@shoelace-style/shoelace";
+
+setBasePath("/assets/shoelace");
+```
+
+For using `shoelace` css, add to `index.html`:
+
+```html
+<link rel="stylesheet" href="/assets/shoelace/themes/base.css" />
+```
+
 ## Example
 
 ```ts
