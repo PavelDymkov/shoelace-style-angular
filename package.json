@@ -10,8 +10,9 @@
         "url": "https://github.com/PavelDymkov/shoelace-style-angular.git"
     },
     "scripts": {
-        "build": "ng build && npm run badges",
+        "build": "ng build && npm run copy-assets && npm run badges",
         "badges": "tsc --project badges/tsconfig.json && node badges/create.js",
+        "copy-assets": "cp README.md LICENSE package",
         "start": "ng serve test",
         "test": "mocha --config test/mocha.config.js"
     },
