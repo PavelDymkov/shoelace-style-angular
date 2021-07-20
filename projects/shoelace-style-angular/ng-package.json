@@ -8,9 +8,6 @@
             "ngx-subscribable": "ngx-subscribable"
         }
     },
-    "allowedNonPeerDependencies": [
-        "logical-not",
-        "ngx-subscribable",
-        "tslib"
-    ]
+    "assets": ["../../README.md", "../../LICENSE"],
+    "allowedNonPeerDependencies": ["logical-not", "ngx-subscribable", "tslib"]
 }
