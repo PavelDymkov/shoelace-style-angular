@@ -45,10 +45,11 @@ import { setBasePath } from "@shoelace-style/shoelace";
 setBasePath("/assets/shoelace");
 ```
 
-For using `shoelace` css, add to `index.html`:
+Provide `shoelace` components and styles to `index.html`:
 
 ```html
 <link rel="stylesheet" href="/assets/shoelace/themes/base.css" />
+<script type="module" src="/assets/shoelace/shoelace.js"></script>
 ```
 
 ## Example
