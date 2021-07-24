@@ -1,9 +1,9 @@
 import { Component } from "@angular/core";
 
-import { Logger } from "../../logger";
+import { Logger } from "../../tools/logger";
 
 @Component({
     selector: "app-select-page",
     templateUrl: "./select.component.html",
 })
-export class SelectComponent extends Logger {}
+export class SelectPageComponent extends Logger {}

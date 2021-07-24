@@ -5,7 +5,7 @@ import { SlDialog } from "@shoelace-style/shoelace";
     selector: "app-open-page",
     templateUrl: "./open.component.html",
 })
-export class OpenComponent {
+export class OpenPageComponent {
     open = false;
 
     @ViewChild("dialog")

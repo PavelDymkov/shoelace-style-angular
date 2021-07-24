@@ -5,7 +5,7 @@ import { AbstractControl, FormBuilder, FormGroup } from "@angular/forms";
     selector: "app-form-page",
     templateUrl: "./form.component.html",
 })
-export class FormComponent {
+export class FormPageComponent {
     simplyForm = this.formBuilder.group({
         input: ["initial"],
         select: [],

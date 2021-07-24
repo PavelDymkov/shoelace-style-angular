@@ -1,15 +1,11 @@
-import { AfterViewInit, Component } from "@angular/core";
+import { Component } from "@angular/core";
 
-import { Logger } from "../../logger";
+import { Logger } from "../../tools/logger";
 
 @Component({
     selector: "app-resize-page",
     templateUrl: "./resize.component.html",
 })
-export class ResizeComponent extends Logger implements AfterViewInit {
+export class ResizePageComponent extends Logger {
     width = "100px";
-
-    ngAfterViewInit(): void {
-        setTimeout(() => (this.width = "200px"), 0);
-    }
 }

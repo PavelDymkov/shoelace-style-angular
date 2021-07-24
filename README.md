@@ -54,6 +54,8 @@ Provide `shoelace` components and styles to `index.html`:
 
 ## Example
 
+> Use two-way bindings for sl-dialog open attribute!
+
 ```ts
 import { Component } from "@angular/core";
 import { FormBuilder, Validators } from "@angular/forms";

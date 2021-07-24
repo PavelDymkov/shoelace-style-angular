@@ -1,9 +1,9 @@
 import { Component } from "@angular/core";
 
-import { Logger } from "../../logger";
+import { Logger } from "../../tools/logger";
 
 @Component({
     selector: "app-closable-page",
     templateUrl: "./closable.component.html",
 })
-export class ClosableComponent extends Logger {}
+export class ClosablePageComponent extends Logger {}

@@ -1,12 +1,12 @@
 import { Component } from "@angular/core";
 
-import { Logger } from "../../logger";
+import { Logger } from "../../tools/logger";
 
 @Component({
     selector: "app-show-hide-page",
     templateUrl: "./show-hide.component.html",
 })
-export class ShowHideComponent extends Logger {
+export class ShowHidePageComponent extends Logger {
     isShowAlert = false;
 
     logMessage(prefix: string, target: HTMLElement): void {

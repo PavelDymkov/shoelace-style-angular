@@ -1,11 +1,11 @@
 import { Component } from "@angular/core";
 
-import { Logger } from "../../logger";
+import { Logger } from "../../tools/logger";
 
 @Component({
     selector: "app-load-page",
     templateUrl: "./load.component.html",
 })
-export class LoadComponent extends Logger {
+export class LoadPageComponent extends Logger {
     test = 0;
 }

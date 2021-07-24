@@ -1,3 +1,5 @@
+<button (click)="width = '200px'">Resize</button>
+
 <div [style.width]="width">
     <sl-resize-observer (resize)="log($event)">
         <div>Content</div>

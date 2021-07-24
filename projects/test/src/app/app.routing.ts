@@ -1,20 +1,5 @@
 import { Routes } from "@angular/router";
 
-import { AnimationComponent } from "./pages/animation/animation.component";
-import { ChangeComponent } from "./pages/change/change.component";
-import { ClearableComponent } from "./pages/clearable/clearable.component";
-import { ClosableComponent } from "./pages/closable/closable.component";
-import { FocusableComponent } from "./pages/focusable/focusable.component";
-import { FormComponent } from "./pages/form/form.component";
-import { GreeterComponent } from "./pages/greeter/greeter.component";
-import { LoadComponent } from "./pages/load/load.component";
-import { OpenComponent } from "./pages/open/open.component";
-import { OverlayComponent } from "./pages/overlay/overlay.component";
-import { ResizeComponent } from "./pages/resize/resize.component";
-import { SelectComponent } from "./pages/select/select.component";
-import { ShowHideComponent } from "./pages/show-hide/show-hide.component";
-import { ValidationComponent } from "./pages/validation/validation.component";
-
 enum Route {
     Animation = "animation",
     Change = "change",
@@ -22,7 +7,6 @@ enum Route {
     Closable = "closable",
     Focusable = "focusable",
     Form = "form",
-    Greeter = "greeter",
     Load = "load",
     Open = "open",
     Overlay = "overlay",
@@ -36,62 +20,94 @@ export const routes: Routes = [
     {
         path: "",
         pathMatch: "full",
-        redirectTo: Route.Form,
+        loadChildren: () =>
+            import("./pages/greeter/greeter.module").then(
+                m => m.GreeterPageModule,
+            ),
     },
     {
         path: Route.Animation,
-        component: AnimationComponent,
+        loadChildren: () =>
+            import("./pages/animation/animation.module").then(
+                m => m.AnimationPageModule,
+            ),
     },
     {
         path: Route.Change,
-        component: ChangeComponent,
+        loadChildren: () =>
+            import("./pages/change/change.module").then(
+                m => m.ChangePageModule,
+            ),
     },
     {
         path: Route.Clearable,
-        component: ClearableComponent,
+        loadChildren: () =>
+            import("./pages/clearable/clearable.module").then(
+                m => m.ClearablePageModule,
+            ),
     },
     {
         path: Route.Closable,
-        component: ClosableComponent,
+        loadChildren: () =>
+            import("./pages/closable/closable.module").then(
+                m => m.ClosablePageModule,
+            ),
     },
     {
         path: Route.Focusable,
-        component: FocusableComponent,
+        loadChildren: () =>
+            import("./pages/focusable/focusable.module").then(
+                m => m.FocusablePageModule,
+            ),
     },
     {
         path: Route.Form,
-        component: FormComponent,
-    },
-    {
-        path: Route.Greeter,
-        component: GreeterComponent,
+        loadChildren: () =>
+            import("./pages/form/form.module").then(m => m.FormPageModule),
     },
     {
         path: Route.Load,
-        component: LoadComponent,
+        loadChildren: () =>
+            import("./pages/load/load.module").then(m => m.LoadPageModule),
     },
     {
         path: Route.Open,
-        component: OpenComponent,
+        loadChildren: () =>
+            import("./pages/open/open.module").then(m => m.OpenPageModule),
     },
     {
         path: Route.Overlay,
-        component: OverlayComponent,
+        loadChildren: () =>
+            import("./pages/overlay/overlay.module").then(
+                m => m.OverlayPageModule,
+            ),
     },
     {
         path: Route.Resize,
-        component: ResizeComponent,
+        loadChildren: () =>
+            import("./pages/resize/resize.module").then(
+                m => m.ResizePageModule,
+            ),
     },
     {
         path: Route.Select,
-        component: SelectComponent,
+        loadChildren: () =>
+            import("./pages/select/select.module").then(
+                m => m.SelectPageModule,
+            ),
     },
     {
         path: Route.ShowHide,
-        component: ShowHideComponent,
+        loadChildren: () =>
+            import("./pages/show-hide/show-hide.module").then(
+                m => m.ShowHidePageModule,
+            ),
     },
     {
         path: Route.Validation,
-        component: ValidationComponent,
+        loadChildren: () =>
+            import("./pages/validation/validation.module").then(
+                m => m.ValidationPageModule,
+            ),
     },
 ];

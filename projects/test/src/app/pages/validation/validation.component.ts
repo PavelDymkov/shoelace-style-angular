@@ -5,7 +5,7 @@ import { FormBuilder, Validators } from "@angular/forms";
     selector: "app-validation-page",
     templateUrl: "./validation.component.html",
 })
-export class ValidationComponent {
+export class ValidationPageComponent {
     form = this.formBuilder.group({
         required: [null, Validators.required],
     });
