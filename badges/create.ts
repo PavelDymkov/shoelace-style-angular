@@ -40,7 +40,7 @@ createBadge("license", () => {
 
 function createBadge(name: string, getFormat: () => Format): void {
     const filePath = join(__dirname, name + ".svg");
-    const svg = makeBadge(getFormat());
+    const svg = makeBadge(getFormat()) + "\n";
 
     write(filePath, svg);
 }
