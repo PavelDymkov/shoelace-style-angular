@@ -1,0 +1,4 @@
+<button *ngIf="showInput" id="hide" (click)="showInput = false">Hide</button>
+<button *ngIf="!showInput" id="show" (click)="showInput = true">Show</button>
+
+<sl-input *ngIf="showInput" autofocus (focus)="log($event)"></sl-input>

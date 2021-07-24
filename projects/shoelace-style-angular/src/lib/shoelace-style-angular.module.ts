@@ -2,6 +2,7 @@ import { NgModule } from "@angular/core";
 
 import {
     AnimationDirective,
+    AutofocusDirective,
     ChangeDirective,
     ClearableDirective,
     ClosableDirective,
@@ -18,6 +19,7 @@ import {
 @NgModule({
     declarations: [
         AnimationDirective,
+        AutofocusDirective,
         ChangeDirective,
         ClearableDirective,
         ClosableDirective,
@@ -32,6 +34,7 @@ import {
     ],
     exports: [
         AnimationDirective,
+        AutofocusDirective,
         ChangeDirective,
         ClearableDirective,
         ClosableDirective,

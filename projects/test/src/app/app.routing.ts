@@ -1,21 +1,5 @@
 import { Routes } from "@angular/router";
 
-enum Route {
-    Animation = "animation",
-    Change = "change",
-    Clearable = "clearable",
-    Closable = "closable",
-    Focusable = "focusable",
-    Form = "form",
-    Load = "load",
-    Open = "open",
-    Overlay = "overlay",
-    Resize = "resize",
-    Select = "select",
-    ShowHide = "show-hide",
-    Validation = "validation",
-}
-
 export const routes: Routes = [
     {
         path: "",
@@ -26,85 +10,92 @@ export const routes: Routes = [
             ),
     },
     {
-        path: Route.Animation,
+        path: "animation",
         loadChildren: () =>
             import("./pages/animation/animation.module").then(
                 m => m.AnimationPageModule,
             ),
     },
     {
-        path: Route.Change,
+        path: "autofocus",
+        loadChildren: () =>
+            import("./pages/autofocus/autofocus.module").then(
+                m => m.AutofocusPageModule,
+            ),
+    },
+    {
+        path: "change",
         loadChildren: () =>
             import("./pages/change/change.module").then(
                 m => m.ChangePageModule,
             ),
     },
     {
-        path: Route.Clearable,
+        path: "clearable",
         loadChildren: () =>
             import("./pages/clearable/clearable.module").then(
                 m => m.ClearablePageModule,
             ),
     },
     {
-        path: Route.Closable,
+        path: "closable",
         loadChildren: () =>
             import("./pages/closable/closable.module").then(
                 m => m.ClosablePageModule,
             ),
     },
     {
-        path: Route.Focusable,
+        path: "focusable",
         loadChildren: () =>
             import("./pages/focusable/focusable.module").then(
                 m => m.FocusablePageModule,
             ),
     },
     {
-        path: Route.Form,
+        path: "form",
         loadChildren: () =>
             import("./pages/form/form.module").then(m => m.FormPageModule),
     },
     {
-        path: Route.Load,
+        path: "load",
         loadChildren: () =>
             import("./pages/load/load.module").then(m => m.LoadPageModule),
     },
     {
-        path: Route.Open,
+        path: "open",
         loadChildren: () =>
             import("./pages/open/open.module").then(m => m.OpenPageModule),
     },
     {
-        path: Route.Overlay,
+        path: "overlay",
         loadChildren: () =>
             import("./pages/overlay/overlay.module").then(
                 m => m.OverlayPageModule,
             ),
     },
     {
-        path: Route.Resize,
+        path: "resize",
         loadChildren: () =>
             import("./pages/resize/resize.module").then(
                 m => m.ResizePageModule,
             ),
     },
     {
-        path: Route.Select,
+        path: "select",
         loadChildren: () =>
             import("./pages/select/select.module").then(
                 m => m.SelectPageModule,
             ),
     },
     {
-        path: Route.ShowHide,
+        path: "show-hide",
         loadChildren: () =>
             import("./pages/show-hide/show-hide.module").then(
                 m => m.ShowHidePageModule,
             ),
     },
     {
-        path: Route.Validation,
+        path: "validation",
         loadChildren: () =>
             import("./pages/validation/validation.module").then(
                 m => m.ValidationPageModule,

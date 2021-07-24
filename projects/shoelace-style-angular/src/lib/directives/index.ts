@@ -1,4 +1,5 @@
 export * from "./animation.directive";
+export * from "./autofocus.directive";
 export * from "./change.directive";
 export * from "./clearable.directive";
 export * from "./closable.directive";
