@@ -34,7 +34,6 @@
         "@types/node": "^12.11.1",
         "@types/resize-observer-browser": "^0.1.5",
         "badge-maker": "^3.3.1",
-        "highlight.js": "^10.6.0",
         "logical-not": "^1.0.7",
         "mocha": "^8.2.1",
         "ng-packagr": "^12.1.2",
