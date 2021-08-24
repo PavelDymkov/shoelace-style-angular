@@ -2,12 +2,7 @@
     "extends": "../../tsconfig.json",
     "compilerOptions": {
         "outDir": "../../test/app",
-        "types": ["resize-observer-browser"],
-        "paths": {
-            "shoelace-style-angular": [
-                "projects/shoelace-style-angular/src/public-api.ts"
-            ]
-        }
+        "types": ["resize-observer-browser"]
     },
     "files": ["src/main.ts", "src/polyfills.ts"],
     "include": ["src/**/*.d.ts"]

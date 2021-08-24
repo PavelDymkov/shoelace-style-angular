@@ -1,5 +1,5 @@
 import { Component } from "@angular/core";
-import { AbstractControl, FormBuilder, FormGroup } from "@angular/forms";
+import { AbstractControl, FormBuilder } from "@angular/forms";
 
 @Component({
     selector: "app-form-page",
@@ -29,7 +29,7 @@ export class FormPageComponent {
             select: "option-2",
             radio: "option-2",
             checkbox: true,
-            checkboxValue: true,
+            checkboxValue: "checkbox-value",
             checkboxFalse: false,
             checkboxValueNull: null,
             switch: true,
@@ -42,7 +42,7 @@ export class FormPageComponent {
         const dynamicFormData = [
             {
                 items: ["foo"],
-                selected: false,
+                selected: null,
             },
             {
                 items: ["foo", "bar"],

@@ -68,9 +68,9 @@ describe("Form Directive", () => {
                 const formData = await dataFromMessage("sl-form data");
 
                 isEqual(formData, [
-                    { items: ["foo"], selected: false },
-                    { items: ["foo", "bar"], selected: "selected" },
-                    { items: ["baz"], selected: "selected" },
+                    { items: ["foo"], selected: null },
+                    { items: ["foo", "bar"], selected: true },
+                    { items: ["baz"], selected: true },
                 ]);
             },
         });
@@ -85,9 +85,9 @@ describe("Form Directive", () => {
                 const formData = await dataFromMessage("sl-form data");
 
                 isEqual(formData, [
-                    { items: ["foo"], selected: false },
-                    { items: ["foo", "bar"], selected: "selected" },
-                    { items: ["baz"], selected: "selected" },
+                    { items: ["foo"], selected: null },
+                    { items: ["foo", "bar"], selected: true },
+                    { items: ["baz"], selected: true },
                 ]);
             },
         });

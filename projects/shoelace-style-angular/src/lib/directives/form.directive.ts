@@ -257,8 +257,6 @@ function setValue(element: HTMLFormControl, value: any): void {
         case "sl-checkbox":
         case "sl-radio":
         case "sl-switch":
-            element.checked = Boolean(value);
-            break;
         case "checkbox":
         case "radio":
             element.checked = (element.value || true) === value;

@@ -11,6 +11,11 @@
         "importHelpers": true,
         "target": "es2015",
         "module": "es2020",
-        "lib": ["es2018", "dom"]
+        "lib": ["es2018", "dom"],
+        "paths": {
+            "shoelace-style-angular": [
+                "projects/shoelace-style-angular/src/public-api.ts"
+            ]
+        }
     }
 }
