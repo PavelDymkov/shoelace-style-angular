@@ -12,7 +12,7 @@ import { FormBuilder, Validators } from "@angular/forms";
 
         <sl-dialog label="Greetings" [(open)]="isDialogOpen">
             Hello,
-            {{ form.get("username").value }}!
+            {{ form.get("username")!.value }}!
         </sl-dialog>
     `,
 })

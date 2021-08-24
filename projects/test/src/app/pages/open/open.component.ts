@@ -9,7 +9,7 @@ export class OpenPageComponent {
     open = false;
 
     @ViewChild("dialog")
-    dialogRef: ElementRef<SlDialog>;
+    dialogRef!: ElementRef<SlDialog>;
 
     logDialogState(): void {
         const { open } = this.dialogRef.nativeElement;

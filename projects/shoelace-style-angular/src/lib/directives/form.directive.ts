@@ -35,7 +35,7 @@ export class FormDirective
     implements OnInit, AfterContentChecked
 {
     @Input("data")
-    form: AbstractControl;
+    form?: AbstractControl;
 
     submit = new EventEmitter<
         CustomEvent<{ formData: FormData; formControls: HTMLElement[] }>
@@ -52,6 +52,8 @@ export class FormDirective
     }
 
     ngOnInit(): void {
+        if (not(this.form)) return;
+
         const element = this.elementRef.nativeElement;
 
         this.subscriptions = [
@@ -74,7 +76,7 @@ export class FormDirective
                         if (not(this.registry.has(element))) {
                             fixNameAttribute(element);
 
-                            const control = pick(this.form, element.name);
+                            const control = pick(this.form!, element.name);
 
                             if (control)
                                 this.ngZone.run(() =>
@@ -115,8 +117,8 @@ export class FormDirective
                                   ? control.getError(validationMessage) || ""
                                   : "";
 
-                          element.setCustomValidity(message);
-                          element.reportValidity();
+                          element.setCustomValidity?.(message);
+                          element.reportValidity?.();
                       })
                 : of(null).subscribe();
 
@@ -204,12 +206,12 @@ function bracketify(source: string): string {
 function pick(source: AbstractControl, path: string): AbstractControl | null {
     const picker = /[\[](.+?)[\]]|[^\[\]]+/g;
 
-    let match: RegExpExecArray;
+    let match: RegExpExecArray | null;
 
     while ((match = picker.exec(path))) {
         const name = match[1] || match[0];
 
-        source = source.get(name);
+        source = source.get(name)!;
 
         if (not(source)) return null;
     }

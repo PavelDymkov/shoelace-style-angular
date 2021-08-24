@@ -3,6 +3,7 @@
     "compilerOptions": {
         "baseUrl": "./",
         "outDir": "./lib",
+        "strict": true,
         "sourceMap": true,
         "declaration": false,
         "downlevelIteration": true,
