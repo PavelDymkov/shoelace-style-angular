@@ -10,4 +10,3 @@ export * from "./overlay.directive";
 export * from "./resize.directive";
 export * from "./select.directive";
 export * from "./show-hide.directive";
-export * from "./toast.directive";

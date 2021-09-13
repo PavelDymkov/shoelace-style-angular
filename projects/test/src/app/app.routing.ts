@@ -95,11 +95,6 @@ export const routes: Routes = [
             ),
     },
     {
-        path: "toast",
-        loadChildren: () =>
-            import("./pages/toast/toast.module").then(m => m.ToastPageModule),
-    },
-    {
         path: "validation",
         loadChildren: () =>
             import("./pages/validation/validation.module").then(

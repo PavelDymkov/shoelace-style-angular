@@ -14,7 +14,6 @@ import {
     SelectDirective,
     ShowHideDirective,
     TabGroupShowHideDirective,
-    ToastDirective,
 } from "./directives";
 
 @NgModule({
@@ -32,7 +31,6 @@ import {
         SelectDirective,
         ShowHideDirective,
         TabGroupShowHideDirective,
-        ToastDirective,
     ],
     exports: [
         AnimationDirective,
@@ -48,7 +46,6 @@ import {
         SelectDirective,
         ShowHideDirective,
         TabGroupShowHideDirective,
-        ToastDirective,
     ],
 })
 export class ShoelaceStyleAngularModule {}
