@@ -64,7 +64,7 @@
                             {
                                 "glob": "**/*.*",
                                 "input": "node_modules/@shoelace-style/shoelace/dist",
-                                "output": "/assets/shoelace"
+                                "output": "assets/shoelace"
                             }
                         ],
                         "vendorChunk": true,

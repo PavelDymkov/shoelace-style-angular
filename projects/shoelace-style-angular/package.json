@@ -1,6 +1,6 @@
 {
     "name": "shoelace-style-angular",
-    "version": "1.0.5",
+    "version": "1.0.7",
     "description": "Provide @shoelace-style to Angular",
     "keywords": [
         "@shoelace-style",
@@ -17,14 +17,14 @@
     },
     "license": "MIT",
     "dependencies": {
-        "logical-not": "^1.0.7",
+        "logical-not": "^1.0.9",
         "ngx-subscribable": "^1.0.0",
         "tslib": "^2.0.0"
     },
     "peerDependencies": {
         "@angular/core": "*",
         "@angular/forms": "*",
-        "@shoelace-style/shoelace": "^2.0.0-beta.47",
+        "@shoelace-style/shoelace": "^2.0.0-beta.57",
         "rxjs": "*"
     }
 }
