@@ -11,16 +11,15 @@ import { observe } from "../tools/observe";
 
 @Directive({
     selector: `
-        sl-icon,
-        sl-include,
+        sl-tag[removable],
     `,
 })
-export class LoadDirective extends SubscribableDirective implements OnInit {
+export class RemovableDirective
+    extends SubscribableDirective
+    implements OnInit
+{
     @Output()
-    readonly load = new EventEmitter<CustomEvent>();
-
-    @Output()
-    readonly error = new EventEmitter<CustomEvent<{ status?: number }>>();
+    readonly remove = new EventEmitter<CustomEvent>();
 
     constructor(private host: ElementRef<HTMLElement>) {
         super();
@@ -30,9 +29,8 @@ export class LoadDirective extends SubscribableDirective implements OnInit {
         const host = this.host.nativeElement;
 
         this.subscriptions = [
-            observe(host, "sl-load").subscribe(event => this.load.emit(event)),
-            observe(host, "sl-error").subscribe(event =>
-                this.error.emit(event),
+            observe(host, "sl-remove").subscribe(event =>
+                this.remove.emit(event),
             ),
         ];
     }

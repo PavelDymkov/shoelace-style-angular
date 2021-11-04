@@ -12,13 +12,13 @@ export class AutofocusDirective
     extends SubscribableDirective
     implements AfterViewInit
 {
-    constructor(private elementRef: ElementRef<SlInput | SlTextarea>) {
+    constructor(private host: ElementRef<SlInput | SlTextarea>) {
         super();
     }
 
     ngAfterViewInit(): void {
-        const element = this.elementRef.nativeElement;
+        const host = this.host.nativeElement;
 
-        setTimeout(() => element.focus());
+        setTimeout(() => host.focus());
     }
 }

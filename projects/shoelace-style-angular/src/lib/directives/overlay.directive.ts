@@ -1,4 +1,10 @@
-import { Directive, OnInit, EventEmitter, ElementRef } from "@angular/core";
+import {
+    Directive,
+    OnInit,
+    EventEmitter,
+    ElementRef,
+    Output,
+} from "@angular/core";
 import { SubscribableDirective } from "ngx-subscribable";
 
 import { observe } from "../tools/observe";
@@ -8,24 +14,26 @@ import { observe } from "../tools/observe";
         sl-dialog,
         sl-drawer,
     `,
-    outputs: ["initialFocus", "requestClose"],
 })
 export class OverlayDirective extends SubscribableDirective implements OnInit {
-    initialFocus = new EventEmitter<CustomEvent>();
-    requestClose = new EventEmitter<CustomEvent>();
+    @Output()
+    readonly initialFocus = new EventEmitter<CustomEvent>();
 
-    constructor(private elementRef: ElementRef<HTMLElement>) {
+    @Output()
+    readonly requestClose = new EventEmitter<CustomEvent>();
+
+    constructor(private host: ElementRef<HTMLElement>) {
         super();
     }
 
     ngOnInit(): void {
-        const element = this.elementRef.nativeElement;
+        const host = this.host.nativeElement;
 
         this.subscriptions = [
-            observe(element, "sl-initial-focus").subscribe(event =>
+            observe(host, "sl-initial-focus").subscribe(event =>
                 this.initialFocus.emit(event),
             ),
-            observe(element, "sl-request-close").subscribe(event =>
+            observe(host, "sl-request-close").subscribe(event =>
                 this.requestClose.emit(event),
             ),
         ];

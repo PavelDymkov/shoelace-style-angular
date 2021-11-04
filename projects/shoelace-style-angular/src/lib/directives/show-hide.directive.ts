@@ -1,4 +1,10 @@
-import { Directive, OnInit, EventEmitter, ElementRef } from "@angular/core";
+import {
+    Directive,
+    OnInit,
+    EventEmitter,
+    ElementRef,
+    Output,
+} from "@angular/core";
 import { SubscribableDirective } from "ngx-subscribable";
 
 import { observe } from "../tools/observe";
@@ -21,25 +27,21 @@ export class ShowHideDirective extends SubscribableDirective implements OnInit {
     hide = new EventEmitter<CustomEvent>();
     afterHide = new EventEmitter<CustomEvent>();
 
-    constructor(private elementRef: ElementRef<HTMLElement>) {
+    constructor(private host: ElementRef<HTMLElement>) {
         super();
     }
 
     ngOnInit(): void {
-        const element = this.elementRef.nativeElement;
+        const host = this.host.nativeElement;
 
         this.subscriptions = [
-            observe(element, "sl-show").subscribe(event =>
-                this.show.emit(event),
-            ),
-            observe(element, "sl-hide").subscribe(event =>
-                this.hide.emit(event),
-            ),
+            observe(host, "sl-show").subscribe(event => this.show.emit(event)),
+            observe(host, "sl-hide").subscribe(event => this.hide.emit(event)),
 
-            observe(element, "sl-after-show").subscribe(event =>
+            observe(host, "sl-after-show").subscribe(event =>
                 this.afterShow.emit(event),
             ),
-            observe(element, "sl-after-hide").subscribe(event =>
+            observe(host, "sl-after-hide").subscribe(event =>
                 this.afterHide.emit(event),
             ),
         ];
@@ -50,27 +52,31 @@ export class ShowHideDirective extends SubscribableDirective implements OnInit {
     selector: `
         sl-tab-group,
     `,
-    outputs: ["show", "hide"],
 })
 export class TabGroupShowHideDirective
     extends SubscribableDirective
     implements OnInit
 {
+    @Output()
     show = new EventEmitter<CustomEvent<{ name: string }>>();
+
+    @Output()
     hide = new EventEmitter<CustomEvent<{ name: string }>>();
 
-    constructor(private elementRef: ElementRef<HTMLElement>) {
+    constructor(private host: ElementRef<HTMLElement>) {
         super();
     }
 
     ngOnInit(): void {
+        const host = this.host.nativeElement;
+
         this.subscriptions = [
             observe<CustomEvent<{ name: string }>>(
-                this.elementRef.nativeElement,
+                host,
                 "sl-tab-show",
             ).subscribe(event => this.show.emit(event)),
             observe<CustomEvent<{ name: string }>>(
-                this.elementRef.nativeElement,
+                host,
                 "sl-tab-hide",
             ).subscribe(event => this.hide.emit(event)),
         ];

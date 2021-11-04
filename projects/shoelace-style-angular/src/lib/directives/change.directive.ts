@@ -1,4 +1,10 @@
-import { Directive, OnInit, ElementRef, EventEmitter } from "@angular/core";
+import {
+    Directive,
+    OnInit,
+    ElementRef,
+    EventEmitter,
+    Output,
+} from "@angular/core";
 import {
     SlCheckbox,
     SlColorPicker,
@@ -42,19 +48,19 @@ type ElementControl = HTMLInputElement &
         sl-switch,
         sl-textarea,
     `,
-    outputs: ["change"],
 })
 export class ChangeDirective extends SubscribableDirective implements OnInit {
+    @Output()
     readonly change = new EventEmitter<CustomEvent>();
 
-    constructor(private elementRef: ElementRef<ElementControl>) {
+    constructor(private host: ElementRef<ElementControl>) {
         super();
     }
 
     ngOnInit(): void {
         this.subscriptions = [
-            observe(this.elementRef.nativeElement, "sl-change").subscribe(
-                event => this.change.emit(event),
+            observe(this.host.nativeElement, "sl-change").subscribe(event =>
+                this.change.emit(event),
             ),
         ];
     }

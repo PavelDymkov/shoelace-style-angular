@@ -1,10 +1,10 @@
 const { $ } = require("puppeteer-shadow-selector");
 
-describe("Clearable Directive", () => {
-    it("should check clear output", async () => {
+describe("Removable Directive", () => {
+    it("should check remove output", async () => {
         await io({
             async input() {
-                await page.goto(url("/clearable"));
+                await page.goto(url("/removable"));
 
                 const button = await $(
                     page,
@@ -14,7 +14,7 @@ describe("Clearable Directive", () => {
                 await button.click();
             },
             async output({ message }) {
-                await message("SL-TAG dispatch sl-clear");
+                await message("SL-TAG dispatch sl-remove");
             },
         });
     });

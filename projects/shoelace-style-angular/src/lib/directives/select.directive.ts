@@ -1,4 +1,10 @@
-import { Directive, OnInit, EventEmitter, ElementRef } from "@angular/core";
+import {
+    Directive,
+    OnInit,
+    EventEmitter,
+    ElementRef,
+    Output,
+} from "@angular/core";
 
 import { SlMenu, SlMenuItem } from "@shoelace-style/shoelace";
 import { SubscribableDirective } from "ngx-subscribable";
@@ -9,21 +15,21 @@ import { observe } from "../tools/observe";
     selector: `
         sl-menu,
     `,
-    outputs: ["select"],
 })
 export class SelectDirective extends SubscribableDirective implements OnInit {
+    @Output()
     readonly select = new EventEmitter<CustomEvent<{ item: SlMenuItem }>>();
 
-    constructor(private elementRef: ElementRef<SlMenu>) {
+    constructor(private host: ElementRef<SlMenu>) {
         super();
     }
 
     ngOnInit(): void {
-        const element = this.elementRef.nativeElement;
+        const host = this.host.nativeElement;
 
         this.subscriptions = [
             observe<CustomEvent<{ item: SlMenuItem }>>(
-                element,
+                host,
                 "sl-select",
             ).subscribe(event => this.select.emit(event)),
         ];

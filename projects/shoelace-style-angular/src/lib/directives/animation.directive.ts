@@ -1,4 +1,10 @@
-import { Directive, OnInit, EventEmitter, ElementRef } from "@angular/core";
+import {
+    Directive,
+    OnInit,
+    EventEmitter,
+    ElementRef,
+    Output,
+} from "@angular/core";
 import { SlAnimation } from "@shoelace-style/shoelace";
 import { SubscribableDirective } from "ngx-subscribable";
 
@@ -8,31 +14,35 @@ import { observe } from "../tools/observe";
     selector: `
         sl-animation,
     `,
-    outputs: ["cancel", "finish", "start"],
 })
 export class AnimationDirective
     extends SubscribableDirective
     implements OnInit
 {
-    readonly cancel = new EventEmitter<CustomEvent>();
-    readonly finish = new EventEmitter<CustomEvent>();
+    @Output()
     readonly start = new EventEmitter<CustomEvent>();
 
-    constructor(private elementRef: ElementRef<SlAnimation>) {
+    @Output()
+    readonly finish = new EventEmitter<CustomEvent>();
+
+    @Output()
+    readonly cancel = new EventEmitter<CustomEvent>();
+
+    constructor(private host: ElementRef<SlAnimation>) {
         super();
     }
 
     ngOnInit(): void {
-        const element = this.elementRef.nativeElement;
+        const host = this.host.nativeElement;
 
         this.subscriptions = [
-            observe(element, "sl-cancel").subscribe(event =>
+            observe(host, "sl-cancel").subscribe(event =>
                 this.cancel.emit(event),
             ),
-            observe(element, "sl-finish").subscribe(event =>
+            observe(host, "sl-finish").subscribe(event =>
                 this.finish.emit(event),
             ),
-            observe(element, "sl-start").subscribe(event =>
+            observe(host, "sl-start").subscribe(event =>
                 this.start.emit(event),
             ),
         ];

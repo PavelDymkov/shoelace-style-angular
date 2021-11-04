@@ -31,13 +31,6 @@ export const routes: Routes = [
             ),
     },
     {
-        path: "clearable",
-        loadChildren: () =>
-            import("./pages/clearable/clearable.module").then(
-                m => m.ClearablePageModule,
-            ),
-    },
-    {
         path: "closable",
         loadChildren: () =>
             import("./pages/closable/closable.module").then(
@@ -71,6 +64,13 @@ export const routes: Routes = [
         loadChildren: () =>
             import("./pages/overlay/overlay.module").then(
                 m => m.OverlayPageModule,
+            ),
+    },
+    {
+        path: "removable",
+        loadChildren: () =>
+            import("./pages/removable/removable.module").then(
+                m => m.RemovablePageModule,
             ),
     },
     {

@@ -18,7 +18,7 @@ describe("Validation", () => {
 
         const input = await $(page, `sl-input::part(input)`);
 
-        input.type("X");
+        await input.type("X");
 
         await page.waitForSelector(enabled(".form-2"));
     });

@@ -6,6 +6,7 @@ import {
     ElementRef,
     EventEmitter,
     NgZone,
+    Output,
 } from "@angular/core";
 import { AbstractControl } from "@angular/forms";
 import { SlForm } from "@shoelace-style/shoelace";
@@ -28,7 +29,6 @@ export const validationMessage = "sl-error";
 
 @Directive({
     selector: "sl-form[data]",
-    outputs: ["submit"],
 })
 export class FormDirective
     extends SubscribableDirective
@@ -37,6 +37,7 @@ export class FormDirective
     @Input("data")
     form?: AbstractControl;
 
+    @Output()
     submit = new EventEmitter<
         CustomEvent<{ formData: FormData; formControls: HTMLElement[] }>
     >();
@@ -45,7 +46,7 @@ export class FormDirective
     private registry = new Map<HTMLFormControl, Subscription[]>();
 
     constructor(
-        private readonly elementRef: ElementRef<SlForm>,
+        private readonly host: ElementRef<SlForm>,
         private readonly ngZone: NgZone,
     ) {
         super();
@@ -54,16 +55,16 @@ export class FormDirective
     ngOnInit(): void {
         if (not(this.form)) return;
 
-        const element = this.elementRef.nativeElement;
+        const host = this.host.nativeElement;
 
         this.subscriptions = [
             observe<
                 CustomEvent<{ formData: FormData; formControls: HTMLElement[] }>
-            >(element, "sl-submit").subscribe(event => this.submit.emit(event)),
+            >(host, "sl-submit").subscribe(event => this.submit.emit(event)),
 
             this.trigger.pipe(debounceTime(10)).subscribe(() => {
                 const elements =
-                    this.elementRef.nativeElement.getFormControls() as HTMLFormControl[];
+                    this.host.nativeElement.getFormControls() as HTMLFormControl[];
                 const registred = new Set<HTMLFormControl>(
                     this.registry.keys(),
                 );

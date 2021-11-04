@@ -1,4 +1,10 @@
-import { Directive, OnInit, EventEmitter, ElementRef } from "@angular/core";
+import {
+    Directive,
+    OnInit,
+    EventEmitter,
+    ElementRef,
+    Output,
+} from "@angular/core";
 import { SubscribableDirective } from "ngx-subscribable";
 
 import { observe } from "../tools/observe";
@@ -7,20 +13,20 @@ import { observe } from "../tools/observe";
     selector: `
         sl-tab[closable],
     `,
-    outputs: ["close"],
 })
 export class ClosableDirective extends SubscribableDirective implements OnInit {
+    @Output()
     readonly close = new EventEmitter<CustomEvent>();
 
-    constructor(private elementRef: ElementRef<HTMLElement>) {
+    constructor(private host: ElementRef<HTMLElement>) {
         super();
     }
 
     ngOnInit(): void {
-        const element = this.elementRef.nativeElement;
+        const host = this.host.nativeElement;
 
         this.subscriptions = [
-            observe(element, "sl-close").subscribe(event =>
+            observe(host, "sl-close").subscribe(event =>
                 this.close.emit(event),
             ),
         ];
