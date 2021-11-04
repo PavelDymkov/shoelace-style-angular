@@ -31,7 +31,7 @@ createBadge("npm-version", () => {
     return {
         label: "npm",
         message: String(version),
-        color: "blue",
+        messageColor: "blue",
     };
 });
 
@@ -41,7 +41,7 @@ createBadge("license", () => {
     return {
         label: "license",
         message: String(license),
-        color: "green",
+        messageColor: "green",
     };
 });
 
