@@ -10,9 +10,8 @@
         "url": "https://github.com/PavelDymkov/shoelace-style-angular.git"
     },
     "scripts": {
-        "build": "ng build && npm run copy-assets && npm run badges",
-        "badges": "tsc --project badges/tsconfig.json && node badges/create.js",
-        "copy-assets": "cp README.md LICENSE package",
+        "build": "ts-node --project scripts/tsconfig.json scripts/build.ts",
+        "prepublishOnly": "exit 1",
         "start": "ng serve test",
         "test": "mocha --config test/mocha.config.js"
     },
@@ -38,6 +37,7 @@
         "mocha": "^8.4.0",
         "ng-packagr": "^12.2.3",
         "ngx-subscribable": "^1.0.1",
+        "package-badges": "^0.7.3",
         "prettier": "^2.4.1",
         "puppeteer": "^5.5.0",
         "puppeteer-io": "^1.12.0",

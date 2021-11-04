@@ -1,5 +1,4 @@
 {
-    "compileOnSave": false,
     "compilerOptions": {
         "baseUrl": "./",
         "outDir": "./lib",
@@ -18,5 +17,7 @@
                 "projects/shoelace-style-angular/src/public-api.ts"
             ]
         }
-    }
+    },
+
+    "exclude": ["scripts/*.ts"]
 }

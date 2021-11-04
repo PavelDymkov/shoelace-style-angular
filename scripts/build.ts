@@ -1,6 +1,13 @@
-import { Format, makeBadge } from "badge-maker";
-import { writeFileSync as write } from "fs";
+import { clean, createBadge } from "package-badges";
 import { join } from "path";
+import { exit } from "process";
+import { cp, exec, rm, test } from "shelljs";
+
+if (process.cwd() !== join(__dirname, "..")) exit(1);
+
+if (test("-d", "package")) rm("-rf", "package");
+
+exec("npx ng build");
 
 clean();
 
@@ -38,16 +45,4 @@ createBadge("license", () => {
     };
 });
 
-function createBadge(name: string, getFormat: () => Format): void {
-    const filePath = join(__dirname, name + ".svg");
-    const svg = makeBadge(getFormat()) + "\n";
-
-    write(filePath, svg);
-}
-
-function clean(): void {
-    const rm = require("rimraf").sync as (glob: string) => void;
-    const glob = join(__dirname, "*.svg");
-
-    rm(glob);
-}
+cp(["README.md", "LICENSE"], "package");
