@@ -19,5 +19,5 @@
         }
     },
 
-    "exclude": ["scripts/*.ts"]
+    "exclude": ["npm-packagr.ts"]
 }
