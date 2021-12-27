@@ -1,12 +1,7 @@
-import {
-    Directive,
-    OnInit,
-    EventEmitter,
-    ElementRef,
-    Output,
-} from "@angular/core";
+import { Directive, OnInit, ElementRef, Output } from "@angular/core";
 import { SubscribableDirective } from "ngx-subscribable";
 
+import { event } from "../tools/event";
 import { observe } from "../tools/observe";
 
 @Directive({
@@ -16,7 +11,7 @@ import { observe } from "../tools/observe";
 })
 export class ClosableDirective extends SubscribableDirective implements OnInit {
     @Output()
-    readonly close = new EventEmitter<CustomEvent>();
+    readonly close = event();
 
     constructor(private hostRef: ElementRef<HTMLElement>) {
         super();

@@ -1,13 +1,8 @@
-import {
-    Directive,
-    OnInit,
-    EventEmitter,
-    ElementRef,
-    Output,
-} from "@angular/core";
+import { Directive, OnInit, ElementRef, Output } from "@angular/core";
 import { SlResizeObserver } from "@shoelace-style/shoelace";
 import { SubscribableDirective } from "ngx-subscribable";
 
+import { event } from "../tools/event";
 import { observe } from "../tools/observe";
 
 @Directive({
@@ -17,7 +12,7 @@ import { observe } from "../tools/observe";
 })
 export class ResizeDirective extends SubscribableDirective implements OnInit {
     @Output()
-    readonly resize = new EventEmitter<CustomEvent>();
+    readonly resize = event();
 
     constructor(private hostRef: ElementRef<SlResizeObserver>) {
         super();

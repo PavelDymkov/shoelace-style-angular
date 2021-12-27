@@ -1,9 +1,9 @@
 import { npmPackagr } from "npm-packagr";
-import { assets, badge, Pipeline } from "npm-packagr/pipelines";
+import { assets, badge, npx, Pipeline } from "npm-packagr/pipelines";
 
 npmPackagr({
     pipelines: [
-        ({ exec }) => exec("npx ng build"),
+        npx("ng build"),
 
         badge("tests", {
             label: "tests",

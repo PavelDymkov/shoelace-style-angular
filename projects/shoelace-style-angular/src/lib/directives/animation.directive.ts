@@ -1,13 +1,8 @@
-import {
-    Directive,
-    OnInit,
-    EventEmitter,
-    ElementRef,
-    Output,
-} from "@angular/core";
+import { Directive, OnInit, ElementRef, Output } from "@angular/core";
 import { SlAnimation } from "@shoelace-style/shoelace";
 import { SubscribableDirective } from "ngx-subscribable";
 
+import { event } from "../tools/event";
 import { observe } from "../tools/observe";
 
 @Directive({
@@ -20,13 +15,13 @@ export class AnimationDirective
     implements OnInit
 {
     @Output()
-    readonly start = new EventEmitter<CustomEvent>();
+    readonly start = event();
 
     @Output()
-    readonly finish = new EventEmitter<CustomEvent>();
+    readonly finish = event();
 
     @Output()
-    readonly cancel = new EventEmitter<CustomEvent>();
+    readonly cancel = event();
 
     constructor(private hostRef: ElementRef<SlAnimation>) {
         super();

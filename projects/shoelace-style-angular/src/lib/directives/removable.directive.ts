@@ -1,12 +1,7 @@
-import {
-    Directive,
-    OnInit,
-    EventEmitter,
-    ElementRef,
-    Output,
-} from "@angular/core";
+import { Directive, OnInit, ElementRef, Output } from "@angular/core";
 import { SubscribableDirective } from "ngx-subscribable";
 
+import { event } from "../tools/event";
 import { observe } from "../tools/observe";
 
 @Directive({
@@ -19,7 +14,7 @@ export class RemovableDirective
     implements OnInit
 {
     @Output()
-    readonly remove = new EventEmitter<CustomEvent>();
+    readonly remove = event();
 
     constructor(private hostRef: ElementRef<HTMLElement>) {
         super();

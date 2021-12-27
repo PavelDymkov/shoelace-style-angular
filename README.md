@@ -1,8 +1,8 @@
 # ShoelaceStyleAngular
 
 ![tests: passing](https://raw.githubusercontent.com/PavelDymkov/shoelace-style-angular/master/badges/tests.svg)
-![tests with @shoelace-style/shoelace: 2.0.0-beta.61](https://raw.githubusercontent.com/PavelDymkov/shoelace-style-angular/master/badges/shoelace-version.svg)
-![npm: 1.0.11](https://raw.githubusercontent.com/PavelDymkov/shoelace-style-angular/master/badges/npm-version.svg)
+![tests with @shoelace-style/shoelace: 2.0.0-beta.63](https://raw.githubusercontent.com/PavelDymkov/shoelace-style-angular/master/badges/shoelace-version.svg)
+![npm: 1.0.13](https://raw.githubusercontent.com/PavelDymkov/shoelace-style-angular/master/badges/npm-version.svg)
 ![license: MIT](https://raw.githubusercontent.com/PavelDymkov/shoelace-style-angular/master/badges/license.svg)
 
 ## Shoelace and Angular
@@ -48,13 +48,13 @@ setBasePath("/assets/shoelace");
 Provide `shoelace` components and styles to `index.html`:
 
 ```html
-<link rel="stylesheet" href="/assets/shoelace/themes/base.css" />
+<link rel="stylesheet" href="/assets/shoelace/themes/light.css" />
 <script type="module" src="/assets/shoelace/shoelace.js"></script>
 ```
 
 ## Example
 
-> Use two-way bindings for sl-dialog open attribute!
+Pay attention to use two-way bindings for sl-dialog open attribute!
 
 ```ts
 import { Component } from "@angular/core";

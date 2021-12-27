@@ -1,12 +1,7 @@
-import {
-    Directive,
-    OnInit,
-    EventEmitter,
-    ElementRef,
-    Output,
-} from "@angular/core";
+import { Directive, OnInit, ElementRef, Output } from "@angular/core";
 import { SubscribableDirective } from "ngx-subscribable";
 
+import { event } from "../tools/event";
 import { observe } from "../tools/observe";
 
 @Directive({
@@ -17,10 +12,10 @@ import { observe } from "../tools/observe";
 })
 export class LoadDirective extends SubscribableDirective implements OnInit {
     @Output()
-    readonly load = new EventEmitter<CustomEvent>();
+    readonly load = event();
 
     @Output()
-    readonly error = new EventEmitter<CustomEvent<{ status?: number }>>();
+    readonly error = event<{ status?: number }>();
 
     constructor(private hostRef: ElementRef<HTMLElement>) {
         super();

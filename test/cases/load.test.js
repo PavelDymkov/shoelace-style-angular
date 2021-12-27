@@ -1,5 +1,3 @@
-const { Input } = require("@angular/core");
-
 describe("Load Directive", () => {
     it("should check sl-icon load output", async () => {
         await io({

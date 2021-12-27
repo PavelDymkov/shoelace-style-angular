@@ -10,11 +10,12 @@ import {
 } from "@angular/core";
 import { AbstractControl } from "@angular/forms";
 import { SlForm } from "@shoelace-style/shoelace";
+import { not } from "logical-not";
+import { SubscribableDirective } from "ngx-subscribable";
 import { of, Subscription } from "rxjs";
 import { debounceTime, distinctUntilChanged, filter } from "rxjs/operators";
-import { SubscribableDirective } from "ngx-subscribable";
-import { not } from "logical-not";
 
+import { event } from "../tools/event";
 import { observe } from "../tools/observe";
 
 interface HTMLFormControl extends HTMLElement {
@@ -35,15 +36,26 @@ export class FormDirective
     implements OnInit, AfterContentChecked
 {
     @Input("data")
-    form?: AbstractControl;
+    form!: AbstractControl;
+
+    @Input()
+    set novalidate(value: "" | boolean) {
+        this.novalidateByInput = true;
+
+        const host = this.hostRef.nativeElement;
+
+        host.novalidate = typeof value === "boolean" ? value : true;
+    }
 
     @Output()
-    submit = new EventEmitter<
-        CustomEvent<{ formData: FormData; formControls: HTMLElement[] }>
-    >();
+    submit = event<{
+        formData: FormData;
+        formControls: [];
+    }>();
 
     private trigger = new EventEmitter<void>();
     private registry = new Map<HTMLFormControl, Subscription[]>();
+    private novalidateByInput = false;
 
     constructor(
         private readonly hostRef: ElementRef<SlForm>,
@@ -53,14 +65,14 @@ export class FormDirective
     }
 
     ngOnInit(): void {
-        if (not(this.form)) return;
-
         const host = this.hostRef.nativeElement;
 
+        if (not(this.novalidateByInput)) host.novalidate = true;
+
         this.subscriptions = [
-            observe<
-                CustomEvent<{ formData: FormData; formControls: HTMLElement[] }>
-            >(host, "sl-submit").subscribe(event => this.submit.emit(event)),
+            observe(host, "sl-submit").subscribe(event =>
+                this.submit.emit(event),
+            ),
 
             this.trigger.pipe(debounceTime(10)).subscribe(() => {
                 const elements =

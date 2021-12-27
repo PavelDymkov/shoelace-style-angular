@@ -1,10 +1,4 @@
-import {
-    Directive,
-    OnInit,
-    ElementRef,
-    EventEmitter,
-    Output,
-} from "@angular/core";
+import { Directive, OnInit, ElementRef, Output } from "@angular/core";
 import {
     SlCheckbox,
     SlColorPicker,
@@ -19,9 +13,10 @@ import {
 } from "@shoelace-style/shoelace";
 import { SubscribableDirective } from "ngx-subscribable";
 
+import { event } from "../tools/event";
 import { observe } from "../tools/observe";
 
-type ElementControl =
+type SlElement =
     | SlCheckbox
     | SlColorPicker
     | SlForm
@@ -49,9 +44,9 @@ type ElementControl =
 })
 export class ChangeDirective extends SubscribableDirective implements OnInit {
     @Output()
-    readonly change = new EventEmitter<CustomEvent>();
+    readonly change = event();
 
-    constructor(private hostRef: ElementRef<ElementControl>) {
+    constructor(private hostRef: ElementRef<SlElement>) {
         super();
     }
 

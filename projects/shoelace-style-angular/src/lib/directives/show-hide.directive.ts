@@ -1,12 +1,7 @@
-import {
-    Directive,
-    OnInit,
-    EventEmitter,
-    ElementRef,
-    Output,
-} from "@angular/core";
+import { Directive, OnInit, ElementRef, Output } from "@angular/core";
 import { SubscribableDirective } from "ngx-subscribable";
 
+import { event } from "../tools/event";
 import { observe } from "../tools/observe";
 
 @Directive({
@@ -22,10 +17,10 @@ import { observe } from "../tools/observe";
     outputs: ["show", "afterShow", "hide", "afterHide"],
 })
 export class ShowHideDirective extends SubscribableDirective implements OnInit {
-    show = new EventEmitter<CustomEvent>();
-    afterShow = new EventEmitter<CustomEvent>();
-    hide = new EventEmitter<CustomEvent>();
-    afterHide = new EventEmitter<CustomEvent>();
+    show = event();
+    afterShow = event();
+    hide = event();
+    afterHide = event();
 
     constructor(private host: ElementRef<HTMLElement>) {
         super();
@@ -58,10 +53,10 @@ export class TabGroupShowHideDirective
     implements OnInit
 {
     @Output()
-    show = new EventEmitter<CustomEvent<{ name: string }>>();
+    show = event<{ name: string }>();
 
     @Output()
-    hide = new EventEmitter<CustomEvent<{ name: string }>>();
+    hide = event<{ name: string }>();
 
     constructor(private hostRef: ElementRef<HTMLElement>) {
         super();
@@ -71,14 +66,12 @@ export class TabGroupShowHideDirective
         const host = this.hostRef.nativeElement;
 
         this.subscriptions = [
-            observe<CustomEvent<{ name: string }>>(
-                host,
-                "sl-tab-show",
-            ).subscribe(event => this.show.emit(event)),
-            observe<CustomEvent<{ name: string }>>(
-                host,
-                "sl-tab-hide",
-            ).subscribe(event => this.hide.emit(event)),
+            observe(host, "sl-tab-show").subscribe(event =>
+                this.show.emit(event),
+            ),
+            observe(host, "sl-tab-hide").subscribe(event =>
+                this.hide.emit(event),
+            ),
         ];
     }
 }

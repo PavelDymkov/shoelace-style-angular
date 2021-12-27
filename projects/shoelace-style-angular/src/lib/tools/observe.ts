@@ -1,11 +1,11 @@
 import { Observable, fromEvent } from "rxjs";
 import { filter } from "rxjs/operators";
 
-export function observe<T = CustomEvent>(
+export function observe(
     element: HTMLElement,
     eventName: string,
-): Observable<T> {
-    return fromEvent<T>(element, eventName).pipe(
+): Observable<CustomEvent> {
+    return fromEvent(element, eventName).pipe(
         filter((event: any) => event?.target === element),
     );
 }

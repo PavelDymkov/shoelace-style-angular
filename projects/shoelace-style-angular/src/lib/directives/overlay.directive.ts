@@ -1,12 +1,7 @@
-import {
-    Directive,
-    OnInit,
-    EventEmitter,
-    ElementRef,
-    Output,
-} from "@angular/core";
+import { Directive, OnInit, ElementRef, Output } from "@angular/core";
 import { SubscribableDirective } from "ngx-subscribable";
 
+import { event } from "../tools/event";
 import { observe } from "../tools/observe";
 
 @Directive({
@@ -17,10 +12,10 @@ import { observe } from "../tools/observe";
 })
 export class OverlayDirective extends SubscribableDirective implements OnInit {
     @Output()
-    readonly initialFocus = new EventEmitter<CustomEvent>();
+    readonly initialFocus = event();
 
     @Output()
-    readonly requestClose = new EventEmitter<CustomEvent>();
+    readonly requestClose = event();
 
     constructor(private hostRef: ElementRef<HTMLElement>) {
         super();
