@@ -37,12 +37,12 @@ export class OpenDirective
     @Output()
     openChange = new EventEmitter<boolean>();
 
-    constructor(private host: ElementRef<HTMLElement & Openable>) {
+    constructor(private hostRef: ElementRef<HTMLElement & Openable>) {
         super();
     }
 
     ngOnInit(): void {
-        const host = this.host.nativeElement;
+        const host = this.hostRef.nativeElement;
 
         this.subscriptions = [
             observe(host, "sl-after-show").subscribe(() =>
@@ -56,7 +56,7 @@ export class OpenDirective
 
     ngOnChanges(changes: SimpleChanges): void {
         if (changes.open)
-            this.host.nativeElement.open = changes.open.currentValue;
+            this.hostRef.nativeElement.open = changes.open.currentValue;
     }
 
     private changeOpen(value: boolean): void {

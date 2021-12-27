@@ -22,12 +22,12 @@ export class LoadDirective extends SubscribableDirective implements OnInit {
     @Output()
     readonly error = new EventEmitter<CustomEvent<{ status?: number }>>();
 
-    constructor(private host: ElementRef<HTMLElement>) {
+    constructor(private hostRef: ElementRef<HTMLElement>) {
         super();
     }
 
     ngOnInit(): void {
-        const host = this.host.nativeElement;
+        const host = this.hostRef.nativeElement;
 
         this.subscriptions = [
             observe(host, "sl-load").subscribe(event => this.load.emit(event)),

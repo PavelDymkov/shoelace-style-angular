@@ -46,7 +46,7 @@ export class FormDirective
     private registry = new Map<HTMLFormControl, Subscription[]>();
 
     constructor(
-        private readonly host: ElementRef<SlForm>,
+        private readonly hostRef: ElementRef<SlForm>,
         private readonly ngZone: NgZone,
     ) {
         super();
@@ -55,7 +55,7 @@ export class FormDirective
     ngOnInit(): void {
         if (not(this.form)) return;
 
-        const host = this.host.nativeElement;
+        const host = this.hostRef.nativeElement;
 
         this.subscriptions = [
             observe<
@@ -64,7 +64,7 @@ export class FormDirective
 
             this.trigger.pipe(debounceTime(10)).subscribe(() => {
                 const elements =
-                    this.host.nativeElement.getFormControls() as HTMLFormControl[];
+                    this.hostRef.nativeElement.getFormControls() as HTMLFormControl[];
                 const registred = new Set<HTMLFormControl>(
                     this.registry.keys(),
                 );

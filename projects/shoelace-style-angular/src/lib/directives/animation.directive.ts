@@ -28,12 +28,12 @@ export class AnimationDirective
     @Output()
     readonly cancel = new EventEmitter<CustomEvent>();
 
-    constructor(private host: ElementRef<SlAnimation>) {
+    constructor(private hostRef: ElementRef<SlAnimation>) {
         super();
     }
 
     ngOnInit(): void {
-        const host = this.host.nativeElement;
+        const host = this.hostRef.nativeElement;
 
         this.subscriptions = [
             observe(host, "sl-cancel").subscribe(event =>

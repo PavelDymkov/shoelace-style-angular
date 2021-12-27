@@ -21,12 +21,12 @@ export class RemovableDirective
     @Output()
     readonly remove = new EventEmitter<CustomEvent>();
 
-    constructor(private host: ElementRef<HTMLElement>) {
+    constructor(private hostRef: ElementRef<HTMLElement>) {
         super();
     }
 
     ngOnInit(): void {
-        const host = this.host.nativeElement;
+        const host = this.hostRef.nativeElement;
 
         this.subscriptions = [
             observe(host, "sl-remove").subscribe(event =>

@@ -19,12 +19,12 @@ export class ResizeDirective extends SubscribableDirective implements OnInit {
     @Output()
     readonly resize = new EventEmitter<CustomEvent>();
 
-    constructor(private host: ElementRef<SlResizeObserver>) {
+    constructor(private hostRef: ElementRef<SlResizeObserver>) {
         super();
     }
 
     ngOnInit(): void {
-        const host = this.host.nativeElement;
+        const host = this.hostRef.nativeElement;
 
         this.subscriptions = [
             observe(host, "sl-resize").subscribe(event =>

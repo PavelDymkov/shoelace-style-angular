@@ -63,12 +63,12 @@ export class TabGroupShowHideDirective
     @Output()
     hide = new EventEmitter<CustomEvent<{ name: string }>>();
 
-    constructor(private host: ElementRef<HTMLElement>) {
+    constructor(private hostRef: ElementRef<HTMLElement>) {
         super();
     }
 
     ngOnInit(): void {
-        const host = this.host.nativeElement;
+        const host = this.hostRef.nativeElement;
 
         this.subscriptions = [
             observe<CustomEvent<{ name: string }>>(

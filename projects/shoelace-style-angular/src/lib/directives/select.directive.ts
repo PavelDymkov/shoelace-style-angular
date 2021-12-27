@@ -20,12 +20,12 @@ export class SelectDirective extends SubscribableDirective implements OnInit {
     @Output()
     readonly select = new EventEmitter<CustomEvent<{ item: SlMenuItem }>>();
 
-    constructor(private host: ElementRef<SlMenu>) {
+    constructor(private hostRef: ElementRef<SlMenu>) {
         super();
     }
 
     ngOnInit(): void {
-        const host = this.host.nativeElement;
+        const host = this.hostRef.nativeElement;
 
         this.subscriptions = [
             observe<CustomEvent<{ item: SlMenuItem }>>(
