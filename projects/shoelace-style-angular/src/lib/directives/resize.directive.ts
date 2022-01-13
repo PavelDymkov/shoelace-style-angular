@@ -12,7 +12,7 @@ import { observe } from "../tools/observe";
 })
 export class ResizeDirective extends SubscribableDirective implements OnInit {
     @Output()
-    readonly resize = event();
+    readonly resize = event<{ entries: ResizeObserverEntry[] }>();
 
     constructor(private hostRef: ElementRef<SlResizeObserver>) {
         super();
