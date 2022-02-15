@@ -1,6 +1,6 @@
 {
     "name": "shoelace-style-angular",
-    "version": "1.0.15",
+    "version": "1.0.16",
     "description": "Provide @shoelace-style to Angular",
     "keywords": [
         "@shoelace-style",
@@ -24,7 +24,7 @@
     "peerDependencies": {
         "@angular/core": "*",
         "@angular/forms": "*",
-        "@shoelace-style/shoelace": "^2.0.0-beta.61",
+        "@shoelace-style/shoelace": "^2.0.0-beta.68",
         "rxjs": "*"
     }
 }

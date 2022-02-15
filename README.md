@@ -1,8 +1,8 @@
 # ShoelaceStyleAngular
 
 ![tests: passing](https://raw.githubusercontent.com/PavelDymkov/shoelace-style-angular/master/badges/tests.svg)
-![tests with @shoelace-style/shoelace: 2.0.0-beta.63](https://raw.githubusercontent.com/PavelDymkov/shoelace-style-angular/master/badges/shoelace-version.svg)
-![npm: 1.0.15](https://raw.githubusercontent.com/PavelDymkov/shoelace-style-angular/master/badges/npm-version.svg)
+![tests with @shoelace-style/shoelace: 2.0.0-beta.68](https://raw.githubusercontent.com/PavelDymkov/shoelace-style-angular/master/badges/shoelace-version.svg)
+![npm: 1.0.16](https://raw.githubusercontent.com/PavelDymkov/shoelace-style-angular/master/badges/npm-version.svg)
 ![license: MIT](https://raw.githubusercontent.com/PavelDymkov/shoelace-style-angular/master/badges/license.svg)
 
 ## Shoelace and Angular
