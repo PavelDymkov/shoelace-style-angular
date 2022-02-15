@@ -16,11 +16,7 @@ import { BrowserModule } from "@angular/platform-browser";
 import { ShoelaceStyleAngularModule } from "shoelace-style-angular";
 
 @NgModule({
-    imports: [
-        BrowserModule,
-        // provide angular outputs for shoelace events:
-        ShoelaceStyleAngularModule,
-    ],
+    imports: [BrowserModule, ShoelaceStyleAngularModule],
     // required 'cause shoelace based on Web Components:
     schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
@@ -63,15 +59,20 @@ import { FormBuilder, Validators } from "@angular/forms";
 @Component({
     selector: "app-greeter",
     template: `
-        <sl-form [data]="form" (submit)="isDialogOpen = true">
-            <sl-input name="username" label="Enter your name"></sl-input>
+        <form [formGroup]="form" (submit)="isDialogOpen = true">
+            <sl-input
+                label="Enter your name"
+                formControlName="username"
+            ></sl-input>
             <br />
-            <sl-button submit [disabled]="form.invalid">Say Hello</sl-button>
-        </sl-form>
+            <sl-button type="submit" [disabled]="form.invalid">
+                Say Hello
+            </sl-button>
+        </form>
 
         <sl-dialog label="Greetings" [(open)]="isDialogOpen">
             Hello,
-            {{ form.get("username").value }}!
+            {{ form.get("username")!.value }}!
         </sl-dialog>
     `,
 })
@@ -85,99 +86,3 @@ export class GreeterComponent {
     constructor(private formBuilder: FormBuilder) {}
 }
 ```
-
-## Provided Shoelace events
-
-<table>
-    <thead>
-        <tr>
-            <th>Shoelace event</th>
-            <th>Angular output</th>
-            <th>In template</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td>sl-submit</td>
-            <td>submit</td>
-            <td>sl-form[data]</td>
-        </tr>
-        <tr>
-            <td>sl-change</td>
-            <td>change</td>
-            <td>
-                sl-checkbox,<br>
-                sl-color-picker,<br>
-                sl-form,<br>
-                sl-input,<br>
-                sl-radio,<br>
-                sl-range,<br>
-                sl-rating,<br>
-                sl-select,<br>
-                sl-switch,<br>
-                sl-textarea
-            </td>
-        </tr>
-        <tr>
-            <td>sl-clear</td>
-            <td>clear</td>
-            <td>sl-tag[clearable]</td>
-        </tr>
-        <tr>
-            <td>sl-close</td>
-            <td>close</td>
-            <td>sl-tab[closable]</td>
-        </tr>
-        <tr>
-            <td>sl-load</td>
-            <td>load</td>
-            <td>sl-icon,<br>sl-include</td>
-        </tr>
-        <tr>
-            <td>sl-initial-focus,<br>sl-request-close</td>
-            <td>initialFocus,<br>requestClose</td>
-            <td>sl-dialog,<br>sl-drawer</td>
-        </tr>
-        <tr>
-            <td>
-                sl-show,<br>
-                sl-hide,<br>
-                sl-after-show,<br>
-                sl-after-hide
-            </td>
-            <td>
-                show,<br>
-                hide,<br>
-                afterShow,<br>
-                afterHide
-            </td>
-            <td>
-                sl-alert,<br>
-                sl-color-picker,<br>
-                sl-details,<br>
-                sl-dialog,<br>
-                sl-drawer,<br>
-                sl-dropdown,<br>
-                sl-tooltip
-            </td>
-        </tr>
-        <tr>
-            <td>
-                sl-start,<br>
-                sl-finish,<br>
-                sl-cancel
-            </td>
-            <td>
-                start,<br>
-                finish,<br>
-                cancel
-            </td>
-            <td>sl-animation</td>
-        </tr>
-        <tr>
-            <td>sl-resize</td>
-            <td>resize</td>
-            <td>sl-resize-observer</td>
-        </tr>
-    </tbody>
-</table>

@@ -1,6 +1,7 @@
 {
     "extends": "../../tsconfig.json",
     "compilerOptions": {
+        "skipLibCheck": true,
         "outDir": "../../test/app",
         "types": ["resize-observer-browser"]
     },

@@ -5,7 +5,7 @@ describe("Autofocus Directive", () => {
                 await page.goto(url("/autofocus"));
             },
             async output({ message }) {
-                await message("SL-INPUT dispatch focus");
+                await message("SL-INPUT dispatch sl-focus");
             },
         });
 
@@ -15,7 +15,7 @@ describe("Autofocus Directive", () => {
                 await page.click("button#show");
             },
             async output({ message }) {
-                await message("SL-INPUT dispatch focus");
+                await message("SL-INPUT dispatch sl-focus");
             },
         });
     });

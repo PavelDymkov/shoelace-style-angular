@@ -4,11 +4,16 @@ import { FormBuilder, Validators } from "@angular/forms";
 @Component({
     selector: "app-greeter",
     template: `
-        <sl-form [data]="form" (submit)="isDialogOpen = true">
-            <sl-input name="username" label="Enter your name"></sl-input>
+        <form [formGroup]="form" (submit)="isDialogOpen = true">
+            <sl-input
+                label="Enter your name"
+                formControlName="username"
+            ></sl-input>
             <br />
-            <sl-button submit [disabled]="form.invalid">Say Hello</sl-button>
-        </sl-form>
+            <sl-button type="submit" [disabled]="form.invalid">
+                Say Hello
+            </sl-button>
+        </form>
 
         <sl-dialog label="Greetings" [(open)]="isDialogOpen">
             Hello,

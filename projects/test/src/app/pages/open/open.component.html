@@ -2,8 +2,8 @@
     #dialog
     label="Dialog"
     [(open)]="open"
-    (afterShow)="logDialogState()"
-    (afterHide)="logDialogState()"
+    (sl-after-show)="logDialogState()"
+    (sl-after-hide)="logDialogState()"
 >
     <sl-button id="close" slot="footer" (click)="open = false">Close</sl-button>
 </sl-dialog>

@@ -1,95 +1,52 @@
-const { deepStrictEqual: isEqual } = require("assert");
+const { deepStrictEqual: isEqual, ok } = require("assert");
 
 describe("Form Directive", () => {
-    it("should check simply form", async () => {
-        await io({
-            async input() {
-                await page.goto(url("/form"));
+    it("should check value applied", async () => {
+        await page.goto(url("/form"));
 
-                await page.waitForSelector(`button[type="submit"]#simply`);
-                await delay(100);
+        await page.waitForSelector(`form`);
+        await delay(100);
 
-                await page.click(`button[type="submit"]#simply`);
-            },
-            async output({ dataFromMessage }) {
-                const formData = await dataFromMessage("sl-form data");
+        const [checkbox, checkboxWithValue] = await page.$$("sl-checkbox");
 
-                isEqual(formData, {
-                    checkbox: null,
-                    checkboxFalse: null,
-                    checkboxValue: null,
-                    checkboxValueNull: null,
-                    input: "initial",
-                    native: "initial",
-                    radio: null,
-                    select: null,
-                    switch: null,
-                    switchValue: null,
-                });
-            },
-        });
+        ok(await getAttribute(checkbox, "checked"));
+        ok(await getAttribute(checkboxWithValue, "checked"));
 
-        await io({
-            async input() {
-                await page.click("#patch-simply");
-                await page.click(`button[type="submit"]#simply`);
-            },
-            async output({ dataFromMessage }) {
-                const formData = await dataFromMessage("sl-form data");
+        const [slSwitch, slSwitchWithValue] = await page.$$("sl-switch");
 
-                isEqual(formData, {
-                    checkbox: true,
-                    checkboxFalse: false,
-                    checkboxValue: "checkbox-value",
-                    checkboxValueNull: null,
-                    input: "patched",
-                    native: "patched",
-                    radio: "option-2",
-                    select: "option-2",
-                    switch: true,
-                    switchValue: "switch-value",
-                });
-            },
-        });
-    });
+        ok(await getAttribute(slSwitch, "checked"));
+        ok(await getAttribute(slSwitchWithValue, "checked"));
 
-    it("should check dynamic form", async () => {
-        await io({
-            async input() {
-                await page.goto(url("/form"));
+        isEqual(await getValue("sl-color-picker"), "#aaa");
 
-                await page.waitForSelector(`button[type="submit"]#dynamic`);
-                await delay(100);
+        isEqual(await getValue("sl-input[type=text]"), "abc");
+        isEqual(await getValue("sl-textarea"), "abc");
 
-                await page.click("#fill-dynamic-form");
-                await page.click(`button[type="submit"]#dynamic`);
-            },
-            async output({ dataFromMessage }) {
-                const formData = await dataFromMessage("sl-form data");
+        isEqual(await getValue("sl-input[type=number]"), "123");
+        isEqual(await getValue("sl-range"), "30");
+        isEqual(await getValue("sl-rating"), "2");
 
-                isEqual(formData, [
-                    { items: ["foo"], selected: null },
-                    { items: ["foo", "bar"], selected: true },
-                    { items: ["baz"], selected: true },
-                ]);
-            },
-        });
+        const radio = await page.$$("sl-radio");
 
-        await io({
-            async input() {
-                await page.click("#change-dynamic-form");
-                await delay(100);
-                await page.click(`button[type="submit"]#dynamic`);
-            },
-            async output({ dataFromMessage }) {
-                const formData = await dataFromMessage("sl-form data");
+        isEqual(await getAttribute(radio[0], "checked"), false);
+        isEqual(await getAttribute(radio[1], "checked"), true);
 
-                isEqual(formData, [
-                    { items: ["foo"], selected: null },
-                    { items: ["foo", "bar"], selected: true },
-                    { items: ["baz"], selected: true },
-                ]);
-            },
-        });
+        isEqual(await getValue("sl-select:not([multiple])"), "option-1");
+        isEqual(await getValue("sl-select[multiple]"), [
+            "option-2",
+            "option-3",
+        ]);
+
+        async function getAttribute(element, attribute) {
+            return element
+                .getProperty(attribute)
+                .then(item => item.jsonValue());
+        }
+
+        async function getValue(selector) {
+            const element = await page.$(selector);
+
+            return element.getProperty("value").then(item => item.jsonValue());
+        }
     });
 });
