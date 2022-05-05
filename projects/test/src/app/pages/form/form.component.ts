@@ -29,6 +29,7 @@ export class FormPageComponent {
         }),
 
         radio: ["2"],
+        radioButton: ["2"],
 
         select: ["option-1"],
         multiselect: [["option-2", "option-3"]],

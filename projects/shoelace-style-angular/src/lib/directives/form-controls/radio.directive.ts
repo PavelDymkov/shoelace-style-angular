@@ -1,11 +1,13 @@
 import { Directive, ElementRef, forwardRef } from "@angular/core";
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from "@angular/forms";
-import { SlRadio } from "@shoelace-style/shoelace";
+import { SlRadio, SlRadioButton } from "@shoelace-style/shoelace";
 
 @Directive({
     selector: `
         sl-radio[formControlName],
         sl-radio[formControl],
+        sl-radio-button[formControlName],
+        sl-radio-button[formControl],
     `,
     providers: [
         {
@@ -16,7 +18,7 @@ import { SlRadio } from "@shoelace-style/shoelace";
     ],
 })
 export class FormControlRadio implements ControlValueAccessor {
-    constructor(private hostRef: ElementRef<SlRadio>) {}
+    constructor(private hostRef: ElementRef<SlRadio | SlRadioButton>) {}
 
     writeValue(value: any): void {
         const host = this.hostRef.nativeElement;

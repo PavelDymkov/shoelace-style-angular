@@ -13,8 +13,8 @@ module.exports = {
         console.log(`starting test server...`);
 
         serveProcess = spawn(
-            "npx",
-            args(`ng serve test --configuration production --port ${port}`),
+            "./node_modules/.bin/ng",
+            args(`serve test --configuration production --port ${port}`),
         );
 
         serveProcess.stdout.on("data", data => {

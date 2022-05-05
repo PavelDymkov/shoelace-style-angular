@@ -31,6 +31,11 @@ describe("Form Directive", () => {
         isEqual(await getAttribute(radio[0], "checked"), false);
         isEqual(await getAttribute(radio[1], "checked"), true);
 
+        const radioButton = await page.$$("sl-radio-button");
+
+        isEqual(await getAttribute(radioButton[0], "checked"), false);
+        isEqual(await getAttribute(radioButton[1], "checked"), true);
+
         isEqual(await getValue("sl-select:not([multiple])"), "option-1");
         isEqual(await getValue("sl-select[multiple]"), [
             "option-2",

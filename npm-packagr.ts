@@ -1,9 +1,19 @@
 import { npmPackagr } from "npm-packagr";
-import { assets, badge, npx, Pipeline } from "npm-packagr/pipelines";
+import {
+    assets,
+    badge,
+    git,
+    npx,
+    Pipeline,
+    publish,
+    test,
+} from "npm-packagr/pipelines";
 
 npmPackagr({
     pipelines: [
         npx("ng build"),
+
+        test(),
 
         badge("tests", {
             label: "tests",
@@ -15,6 +25,20 @@ npmPackagr({
         createBadge(license),
 
         assets("LICENSE", "README.md"),
+
+        ({ exec, packageDirectory }) => {
+            const projectDirectory = "projects/shoelace-style-angular";
+
+            exec("npm version patch", { cd: projectDirectory });
+            exec("npm version patch", { cd: packageDirectory });
+        },
+
+        git("commit", "shoelace-style-angular"),
+        git("push"),
+
+        publish({
+            login: { account: "paveldymkov", email: "dymkov86@gmail.com" },
+        }),
     ],
 });
 
