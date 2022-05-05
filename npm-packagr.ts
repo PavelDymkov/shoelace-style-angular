@@ -21,7 +21,6 @@ npmPackagr({
         }),
 
         createBadge(shoelaceVersion),
-        createBadge(npmVersion),
         createBadge(license),
 
         assets("LICENSE", "README.md"),
@@ -32,6 +31,8 @@ npmPackagr({
             exec("npm version patch", { cd: projectDirectory });
             exec("npm version patch", { cd: packageDirectory });
         },
+
+        createBadge(npmVersion),
 
         git("commit", "shoelace-style-angular"),
         git("push"),
