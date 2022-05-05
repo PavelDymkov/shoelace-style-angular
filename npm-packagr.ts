@@ -20,11 +20,6 @@ npmPackagr({
             message: "passing",
         }),
 
-        createBadge(shoelaceVersion),
-        createBadge(license),
-
-        assets("LICENSE", "README.md"),
-
         ({ exec, packageDirectory }) => {
             const projectDirectory = "projects/shoelace-style-angular";
 
@@ -33,6 +28,10 @@ npmPackagr({
         },
 
         createBadge(npmVersion),
+        createBadge(shoelaceVersion),
+        createBadge(license),
+
+        assets("LICENSE", "README.md"),
 
         git("commit", "shoelace-style-angular"),
         git("push"),
