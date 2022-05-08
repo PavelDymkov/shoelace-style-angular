@@ -100,7 +100,7 @@ import { FormBuilder, Validators } from "@angular/forms";
                 label="Enter your name"
                 formControlName="username"
             ></sl-input>
-            <br />
+
             <sl-button type="submit" [disabled]="form.invalid">
                 Say Hello
             </sl-button>
