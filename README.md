@@ -1,7 +1,7 @@
 # ShoelaceStyleAngular
 
 ![tests: passing](https://raw.githubusercontent.com/PavelDymkov/shoelace-style-angular/master/badges/tests.svg)
-![npm: 1.0.20](https://raw.githubusercontent.com/PavelDymkov/shoelace-style-angular/master/badges/npm-version.svg)
+![npm: 1.0.21](https://raw.githubusercontent.com/PavelDymkov/shoelace-style-angular/master/badges/npm-version.svg)
 ![tests with @shoelace-style/shoelace: 2.0.0-beta.73](https://raw.githubusercontent.com/PavelDymkov/shoelace-style-angular/master/badges/shoelace-version.svg)
 ![license: MIT](https://raw.githubusercontent.com/PavelDymkov/shoelace-style-angular/master/badges/license.svg)
 
@@ -22,6 +22,37 @@ import { ShoelaceStyleAngularModule } from "shoelace-style-angular";
 })
 export class AppModule {}
 ```
+
+### Outputs (shoelace events)
+
+Add to `src/main.ts`:
+
+```ts
+/// <reference types="shoelace-style-angular/events" />
+```
+
+Now you can use outputs on every elements in templates. Events are bubbling:
+
+```html
+<div (sl-change)="onChange($event)">
+    <sl-switch value="1">Switch 1</sl-switch>
+    <sl-switch value="2">Switch 2</sl-switch>
+</div>
+```
+
+```ts
+onChange(event: CustomEvent): void {
+    console.assert(event instanceof CustomEvent);
+
+    if (event.target instanceof SlSwitch) {
+        const { checked, value } = event.target;
+
+        console.log(checked, value);
+    }
+}
+```
+
+### Assets
 
 For using `shoelace` assets, add to [config](https://angular.io/guide/workspace-config#asset-config):
 
@@ -45,7 +76,12 @@ Provide `shoelace` components and styles to `index.html`:
 
 ```html
 <link rel="stylesheet" href="/assets/shoelace/themes/light.css" />
-<script type="module" src="/assets/shoelace/shoelace.js"></script>
+
+<!--
+    add script if never import "@shoelace-style/shoelace" in code:
+
+    <script type="module" src="/assets/shoelace/shoelace.js"></script>
+-->
 ```
 
 ## Example

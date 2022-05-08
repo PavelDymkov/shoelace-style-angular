@@ -1,4 +1,3 @@
-export * from "./events";
 export * from "./form-controls";
 
 export * from "./autofocus.directive";

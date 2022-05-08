@@ -13,9 +13,8 @@
         "module": "es2020",
         "lib": ["es2018", "dom"],
         "paths": {
-            "shoelace-style-angular": [
-                "projects/shoelace-style-angular/src/public-api.ts"
-            ]
+            "shoelace-style-angular": ["package"],
+            "shoelace-style-angular/*": ["package/*"]
         }
     },
 

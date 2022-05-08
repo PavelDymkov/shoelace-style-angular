@@ -1,4 +1,4 @@
-const { spawn, spawnSync } = require("child_process");
+const { spawn } = require("child_process");
 
 const { port } = require("./config");
 
@@ -6,10 +6,6 @@ let serveProcess;
 
 module.exports = {
     async mochaGlobalSetup() {
-        spawnSync("npx", args("ng build"), {
-            stdio: ["inherit", "inherit", "inherit"],
-        });
-
         console.log(`starting test server...`);
 
         serveProcess = spawn(

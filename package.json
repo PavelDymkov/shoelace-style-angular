@@ -34,7 +34,7 @@
         "mocha": "^9.1.3",
         "ng-packagr": "^13.1.2",
         "ngx-subscribable": "^1.0.1",
-        "npm-packagr": "^1.0.35",
+        "npm-packagr": "^1.0.37",
         "prettier": "^2.5.1",
         "puppeteer": "^5.5.0",
         "puppeteer-io": "^1.12.0",

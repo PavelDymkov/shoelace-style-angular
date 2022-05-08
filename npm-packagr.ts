@@ -9,9 +9,15 @@ import {
     test,
 } from "npm-packagr/pipelines";
 
+import { createEventsDeclaration } from "./projects/events-declaration/create";
+
 npmPackagr({
     pipelines: [
         npx("ng build"),
+
+        ({ packageDirectory }) => {
+            createEventsDeclaration(packageDirectory);
+        },
 
         test(),
 
