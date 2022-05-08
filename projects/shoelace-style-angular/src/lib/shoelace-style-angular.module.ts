@@ -33,4 +33,4 @@ import {
         OpenDirective,
     ],
 })
-export class ShoelaceStyleAngularModule {}
+export class ShoelaceStyleModule {}

@@ -1,7 +1,7 @@
 # ShoelaceStyleAngular
 
 ![tests: passing](https://raw.githubusercontent.com/PavelDymkov/shoelace-style-angular/master/badges/tests.svg)
-![npm: 1.0.21](https://raw.githubusercontent.com/PavelDymkov/shoelace-style-angular/master/badges/npm-version.svg)
+![npm: 1.0.22](https://raw.githubusercontent.com/PavelDymkov/shoelace-style-angular/master/badges/npm-version.svg)
 ![tests with @shoelace-style/shoelace: 2.0.0-beta.73](https://raw.githubusercontent.com/PavelDymkov/shoelace-style-angular/master/badges/shoelace-version.svg)
 ![license: MIT](https://raw.githubusercontent.com/PavelDymkov/shoelace-style-angular/master/badges/license.svg)
 
@@ -13,10 +13,10 @@ _src/app/app.module.ts_
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
 import { BrowserModule } from "@angular/platform-browser";
 
-import { ShoelaceStyleAngularModule } from "shoelace-style-angular";
+import { ShoelaceStyleModule } from "shoelace-style-angular";
 
 @NgModule({
-    imports: [BrowserModule, ShoelaceStyleAngularModule],
+    imports: [BrowserModule, ShoelaceStyleModule],
     // required 'cause shoelace based on Web Components:
     schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })

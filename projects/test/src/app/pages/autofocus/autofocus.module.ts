@@ -1,7 +1,7 @@
 import { CommonModule } from "@angular/common";
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from "@angular/core";
 import { RouterModule } from "@angular/router";
-import { ShoelaceStyleAngularModule } from "shoelace-style-angular";
+import { ShoelaceStyleModule } from "shoelace-style-angular";
 
 import { AutofocusPageComponent } from "./autofocus.component";
 
@@ -11,7 +11,7 @@ import { AutofocusPageComponent } from "./autofocus.component";
         RouterModule.forChild([
             { path: "", component: AutofocusPageComponent },
         ]),
-        ShoelaceStyleAngularModule,
+        ShoelaceStyleModule,
     ],
     declarations: [AutofocusPageComponent],
     schemas: [CUSTOM_ELEMENTS_SCHEMA],
