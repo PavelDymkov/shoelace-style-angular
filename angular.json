@@ -75,9 +75,7 @@
                         "namedChunks": true
                     },
                     "configurations": {
-                        "production": {
-                            "tsConfig": "projects/test/tsconfig.app.test.json"
-                        }
+                        "production": {}
                     },
                     "defaultConfiguration": ""
                 },
