@@ -13,11 +13,11 @@ import { createEventsDeclaration } from "./projects/events-declaration/create";
 
 npmPackagr({
     pipelines: [
+        git("commit", "shoelace-style-angular"),
+
         npx("ng build"),
 
-        ({ packageDirectory }) => {
-            createEventsDeclaration(packageDirectory);
-        },
+        ({ packageDirectory }) => createEventsDeclaration(packageDirectory),
 
         test(),
 

@@ -75,7 +75,11 @@
                         "namedChunks": true
                     },
                     "configurations": {
-                        "production": {}
+                        "production": {
+                            "buildOptimizer": true,
+                            "sourceMap": false,
+                            "tsConfig": "projects/test/tsconfig.app.test.json"
+                        }
                     },
                     "defaultConfiguration": ""
                 },
@@ -83,11 +87,6 @@
                     "builder": "@angular-devkit/build-angular:dev-server",
                     "options": {
                         "browserTarget": "test:build"
-                    },
-                    "configurations": {
-                        "production": {
-                            "browserTarget": "test:build:production"
-                        }
                     }
                 }
             }

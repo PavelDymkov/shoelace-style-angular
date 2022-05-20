@@ -1,6 +1,9 @@
+const { join } = require("path");
+
+const { casesDirectory } = require("./config");
+
 module.exports = {
-    spec: ["test/cases/**/*.test.js"],
+    spec: [join(casesDirectory, "*.test.js")],
     parallel: false,
-    require: ["test/fixtures.js", "test/hooks.js"],
-    globals: ["page", "io", "url", "delay"],
+    require: [join("test", "fixtures.js"), join("test", "hooks.js")],
 };

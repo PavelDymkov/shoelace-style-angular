@@ -1,48 +1,19 @@
-const { spawn } = require("child_process");
+const { projects } = require("../angular.json");
+const { TestServer } = require("./server/test-server");
+const { casesDirectory, port } = require("./config");
 
-const { port } = require("./config");
-
-let serveProcess;
+const server = new TestServer({
+    staticRoot: projects.test.architect.build.options.outputPath,
+    casesDirectory,
+    port,
+});
 
 module.exports = {
-    async mochaGlobalSetup() {
-        console.log(`starting test server...`);
-
-        serveProcess = spawn(
-            "./node_modules/.bin/ng",
-            args(`serve test --configuration production --port ${port}`),
-        );
-
-        serveProcess.stdout.on("data", data => {
-            process.stdout.write(data);
-        });
-
-        serveProcess.stderr.on("data", data => {
-            process.stderr.write(data);
-        });
-
-        serveProcess.once("close", code => {
-            if (code) throw new Error();
-        });
-
-        return new Promise(resolve => {
-            serveProcess.stdout.on("data", data => {
-                const message = String(data);
-
-                if (message.includes("Compiled successfully")) {
-                    console.log("test server started");
-
-                    resolve();
-                }
-            });
-        });
+    mochaGlobalSetup() {
+        return server.run();
     },
 
-    async mochaGlobalTeardown() {
-        serveProcess.kill();
+    mochaGlobalTeardown() {
+        return server.shutdown();
     },
 };
-
-function args(source) {
-    return source.split(/\s+/);
-}

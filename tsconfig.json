@@ -1,21 +1,20 @@
 {
     "compilerOptions": {
         "baseUrl": "./",
-        "outDir": "./lib",
-        "strict": true,
-        "sourceMap": true,
-        "declaration": false,
         "downlevelIteration": true,
         "experimentalDecorators": true,
-        "moduleResolution": "node",
         "importHelpers": true,
-        "target": "es2015",
-        "module": "es2020",
-        "lib": ["es2018", "dom"],
+        "lib": ["ES2020", "DOM"],
+        "module": "ES2020",
+        "moduleResolution": "Node",
         "paths": {
-            "shoelace-style-angular": ["package"],
-            "shoelace-style-angular/*": ["package/*"]
-        }
+            "shoelace-style-angular": [
+                "projects/shoelace-style-angular/src/lib/shoelace-style.module.ts"
+            ]
+        },
+        "target": "ES2020",
+        "skipLibCheck": true,
+        "strict": true
     },
 
     "exclude": ["npm-packagr.ts"]

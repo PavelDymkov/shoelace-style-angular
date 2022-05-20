@@ -27,6 +27,13 @@ export const routes: Routes = [
             import("./pages/open/open.module").then(m => m.OpenPageModule),
     },
     {
+        path: "openable",
+        loadChildren: () =>
+            import("./pages/openable/openable.module").then(
+                m => m.OpenableModule,
+            ),
+    },
+    {
         path: "validation",
         loadChildren: () =>
             import("./pages/validation/validation.module").then(

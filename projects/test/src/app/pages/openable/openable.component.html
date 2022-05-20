@@ -1,0 +1,12 @@
+<sl-dialog
+    #dialog
+    (sl-after-show)="log($event)"
+    (hide)="selfTarget($event)"
+    (sl-hide)="log($event)"
+>
+    <sl-tooltip content="Tooltip" trigger="click">
+        <sl-button id="toogle-tooltip">Button</sl-button>
+    </sl-tooltip>
+</sl-dialog>
+
+<sl-button id="run-test" (click)="dialog.show()">Oen dialog</sl-button>

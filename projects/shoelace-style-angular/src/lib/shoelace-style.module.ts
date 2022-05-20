@@ -8,6 +8,8 @@ import {
     FormControlNumber,
     FormControlRadio,
     FormControlSelect,
+    OpenableDirective,
+    OpenableExtendedDirective,
     OpenDirective,
 } from "./directives";
 
@@ -20,6 +22,8 @@ import {
         FormControlNumber,
         FormControlRadio,
         FormControlSelect,
+        OpenableDirective,
+        OpenableExtendedDirective,
         OpenDirective,
     ],
     declarations: [
@@ -30,6 +34,8 @@ import {
         FormControlNumber,
         FormControlRadio,
         FormControlSelect,
+        OpenableDirective,
+        OpenableExtendedDirective,
         OpenDirective,
     ],
 })
