@@ -13,9 +13,10 @@
         "build:test-app": "ng build test --configuration production",
         "build:test-server": "tsc --project projects/test-server/tsconfig.json",
         "prepublishOnly": "exit 1",
+        "pretest": "npm run build:test-server && npm run build:test-app",
         "pub": "packagr",
         "start": "ng serve test",
-        "test": "npm run build:test-server && npm run build:test-app && mocha --config test/mocha.config.js"
+        "test": "mocha --config test/mocha.config.js"
     },
     "private": true,
     "devDependencies": {
@@ -30,7 +31,7 @@
         "@angular/platform-browser": "~13.1.1",
         "@angular/platform-browser-dynamic": "~13.1.1",
         "@angular/router": "~13.1.1",
-        "@shoelace-style/shoelace": "^2.0.0-beta.73",
+        "@shoelace-style/shoelace": "^2.0.0-beta.74",
         "@types/node": "^12.20.33",
         "@types/serve-handler": "^6.1.1",
         "logical-not": "^1.0.9",
