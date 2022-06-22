@@ -30,10 +30,10 @@ npmPackagr({
         createShoelaceVersionBadge(),
         createAngularVersionBadge(),
 
-        // ({ exec, packageDirectory, sourceDirectory }) => {
-        //     exec("npm version patch", { cd: sourceDirectory });
-        //     exec("npm version patch", { cd: packageDirectory });
-        // },
+        ({ exec, packageDirectory, sourceDirectory }) => {
+            exec("npm version patch", { cd: sourceDirectory });
+            exec("npm version patch", { cd: packageDirectory });
+        },
 
         badge(BadgeType.License),
 
