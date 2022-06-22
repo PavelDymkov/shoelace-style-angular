@@ -5,7 +5,8 @@
     "keywords": [
         "@shoelace-style",
         "shoelace",
-        "angular"
+        "angular",
+        "ng"
     ],
     "author": {
         "name": "Pavel Dymkov",

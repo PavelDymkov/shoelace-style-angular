@@ -1,5 +1,5 @@
 import { Component } from "@angular/core";
-import { FormBuilder, Validators } from "@angular/forms";
+import { UntypedFormBuilder, Validators } from "@angular/forms";
 
 @Component({
     selector: "app-validation-page",
@@ -14,5 +14,5 @@ export class ValidationPageComponent {
         required: [null, Validators.required],
     });
 
-    constructor(private formBuilder: FormBuilder) {}
+    constructor(private formBuilder: UntypedFormBuilder) {}
 }

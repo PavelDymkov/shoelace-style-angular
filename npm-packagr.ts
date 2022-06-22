@@ -2,40 +2,40 @@ import { npmPackagr } from "npm-packagr";
 import {
     assets,
     badge,
+    BadgeType,
     git,
     npx,
-    Pipeline,
+    Pipe,
     publish,
     test,
-} from "npm-packagr/pipelines";
+} from "npm-packagr/pipes";
 
 import { createEventsDeclaration } from "./projects/events-declaration/create";
 
+const projectName = "shoelace-style-angular";
+
 npmPackagr({
-    pipelines: [
+    sourceDirectory: getSourceRootDirectory(),
+    pipeline: [
         git("commit", "shoelace-style-angular"),
 
-        npx("ng build"),
+        npx(`ng build ${projectName}`),
 
         ({ packageDirectory }) => createEventsDeclaration(packageDirectory),
 
         test(),
 
-        badge("tests", {
-            label: "tests",
-            message: "passing",
-        }),
+        badge(BadgeType.Test),
 
-        ({ exec, packageDirectory }) => {
-            const projectDirectory = "projects/shoelace-style-angular";
+        createShoelaceVersionBadge(),
+        createAngularVersionBadge(),
 
-            exec("npm version patch", { cd: projectDirectory });
+        ({ exec, packageDirectory, sourceDirectory }) => {
+            exec("npm version patch", { cd: sourceDirectory });
             exec("npm version patch", { cd: packageDirectory });
         },
 
-        createBadge(npmVersion),
-        createBadge(shoelaceVersion),
-        createBadge(license),
+        badge(BadgeType.License),
 
         assets("LICENSE", "README.md"),
 
@@ -48,14 +48,14 @@ npmPackagr({
     ],
 });
 
-function createBadge(pipeline: () => Pipeline): Pipeline {
-    return context => {
-        pipeline()(context);
-    };
+function getSourceRootDirectory(): string {
+    const { projects } = require("./angular.json");
+
+    return projects[projectName].root;
 }
 
-function shoelaceVersion(): Pipeline {
-    const { version } = require("@shoelace-style/shoelace/package");
+function createShoelaceVersionBadge(): Pipe {
+    const { version } = require("@shoelace-style/shoelace/package.json");
 
     return badge("shoelace-version", {
         label: "tests with @shoelace-style/shoelace",
@@ -63,22 +63,11 @@ function shoelaceVersion(): Pipeline {
     });
 }
 
-function npmVersion(): Pipeline {
-    const { version } = require("./package/package");
+function createAngularVersionBadge(): Pipe {
+    const { version } = require("@angular/core/package.json");
 
-    return badge("npm-version", {
-        label: "npm",
+    return badge("ng-version", {
+        label: "tests with angular",
         message: String(version),
-        messageColor: "blue",
-    });
-}
-
-function license(): Pipeline {
-    const { license } = require("./package/package");
-
-    return badge("license", {
-        label: "license",
-        message: String(license),
-        messageColor: "green",
     });
 }

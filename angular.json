@@ -91,6 +91,5 @@
                 }
             }
         }
-    },
-    "defaultProject": "shoelace-style-angular"
+    }
 }

@@ -1,5 +1,5 @@
 import { Component } from "@angular/core";
-import { FormBuilder, Validators } from "@angular/forms";
+import { UntypedFormBuilder, Validators } from "@angular/forms";
 
 @Component({
     selector: "app-greeter",
@@ -28,5 +28,5 @@ export class GreeterComponent {
 
     isDialogOpen = false;
 
-    constructor(private formBuilder: FormBuilder) {}
+    constructor(private formBuilder: UntypedFormBuilder) {}
 }
