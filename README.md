@@ -1,9 +1,9 @@
 # ShoelaceStyleAngular
 
-![test: passed](https://raw.githubusercontent.com/PavelDymkov/shoelace-style-angular/master/badges/test.svg)
-![tests with @shoelace-style/shoelace: 2.0.0-beta.76](https://raw.githubusercontent.com/PavelDymkov/shoelace-style-angular/master/badges/shoelace-version.svg)
-![tests with angular: 13.1.3](https://raw.githubusercontent.com/PavelDymkov/shoelace-style-angular/master/badges/ng-version.svg)
-![license: MIT](https://raw.githubusercontent.com/PavelDymkov/shoelace-style-angular/master/badges/license.svg)
+![test: passed](https://raw.githubusercontent.com/PavelDymkov/shoelace-style-angular/version-1/badges/test.svg)
+![tests with @shoelace-style/shoelace: 2.0.0-beta.76](https://raw.githubusercontent.com/PavelDymkov/shoelace-style-angular/version-1/badges/shoelace-version.svg)
+![tests with angular: 13.1.3](https://raw.githubusercontent.com/PavelDymkov/shoelace-style-angular/version-1/badges/ng-version.svg)
+![license: MIT](https://raw.githubusercontent.com/PavelDymkov/shoelace-style-angular/version-1/badges/license.svg)
 
 > For Angular <= 13. If you using Angular >= 14 use shoelace-style-angular@2.0.0
 
