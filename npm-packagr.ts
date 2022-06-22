@@ -35,7 +35,7 @@ npmPackagr({
             exec("npm version patch", { cd: packageDirectory });
         },
 
-        badge(BadgeType.License),
+        createLicenseBadge(),
 
         assets("LICENSE", "README.md"),
 
@@ -70,4 +70,18 @@ function createAngularVersionBadge(): Pipe {
         label: "tests with angular",
         message: String(version),
     });
+}
+
+function createLicenseBadge(): Pipe {
+    return context => {
+        const { license } = require("./package/package");
+
+        const pipe = badge("license", {
+            label: "license",
+            message: String(license),
+            messageColor: "green",
+        });
+
+        pipe(context);
+    };
 }

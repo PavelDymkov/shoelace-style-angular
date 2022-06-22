@@ -1,5 +1,5 @@
 import { Component } from "@angular/core";
-import { UntypedFormBuilder } from "@angular/forms";
+import { FormBuilder } from "@angular/forms";
 
 @Component({
     selector: "app-form-page",
@@ -35,5 +35,5 @@ export class FormPageComponent {
         multiselect: [["option-2", "option-3"]],
     });
 
-    constructor(private formBuilder: UntypedFormBuilder) {}
+    constructor(private formBuilder: FormBuilder) {}
 }
