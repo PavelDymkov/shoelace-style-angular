@@ -1,25 +1,25 @@
-import { npmPackagr } from "npm-packagr";
 import {
     assets,
     badge,
     BadgeType,
     git,
+    npmPackagr,
     npx,
     Pipe,
     publish,
     test,
-} from "npm-packagr/pipes";
+} from "npm-packagr";
 
 import { createEventsDeclaration } from "./projects/events-declaration/create";
 
-const projectName = "shoelace-style-angular";
+const project = require("./package.json").name;
 
 npmPackagr({
     sourceDirectory: getSourceRootDirectory(),
     pipeline: [
-        git("commit", "shoelace-style-angular"),
+        git("commit", project),
 
-        npx(`ng build ${projectName}`),
+        npx(`ng build ${project}`),
 
         ({ packageDirectory }) => createEventsDeclaration(packageDirectory),
 
@@ -51,7 +51,7 @@ npmPackagr({
 function getSourceRootDirectory(): string {
     const { projects } = require("./angular.json");
 
-    return projects[projectName].root;
+    return projects[project].root;
 }
 
 function createShoelaceVersionBadge(): Pipe {
