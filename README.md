@@ -1,9 +1,9 @@
 # ShoelaceStyleAngular
 
 ![test: passed](https://raw.githubusercontent.com/PavelDymkov/shoelace-style-angular/main/badges/test.svg)
-![tests with @shoelace-style/shoelace: 2.0.0-beta.77](https://raw.githubusercontent.com/PavelDymkov/shoelace-style-angular/main/badges/shoelace-version.svg)
-![tests with angular: 14.0.2](https://raw.githubusercontent.com/PavelDymkov/shoelace-style-angular/main/badges/ng-version.svg)
-![license: MIT](https://raw.githubusercontent.com/PavelDymkov/shoelace-style-angular/main/badges/license.svg)
+![tests with @shoelace-style/shoelace: 2.0.0-beta.83](https://raw.githubusercontent.com/PavelDymkov/shoelace-style-angular/main/badges/shoelace-version.svg)
+![tests with angular: 14.2.2](https://raw.githubusercontent.com/PavelDymkov/shoelace-style-angular/main/badges/ng-version.svg)
+![license: ](https://raw.githubusercontent.com/PavelDymkov/shoelace-style-angular/main/badges/license.svg)
 
 ## Shoelace and Angular
 
@@ -14,42 +14,15 @@ import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
 import { BrowserModule } from "@angular/platform-browser";
 
 import { ShoelaceStyleModule } from "shoelace-style-angular";
+// required if use ReactiveFormsModule (formControlName etc.)
+import { ShoelaceFormControlsModule } from "shoelace-style-angular/form-controls";
 
 @NgModule({
-    imports: [BrowserModule, ShoelaceStyleModule],
+    imports: [BrowserModule, ShoelaceStyleModule, ShoelaceFormControlsModule],
     // required 'cause shoelace based on Web Components:
     schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class AppModule {}
-```
-
-### Outputs (shoelace events)
-
-Add to `src/main.ts`:
-
-```ts
-/// <reference types="shoelace-style-angular/events" />
-```
-
-Now you can use outputs on every elements in templates. Events are bubbling:
-
-```html
-<div (sl-change)="onChange($event)">
-    <sl-switch value="1">Switch 1</sl-switch>
-    <sl-switch value="2">Switch 2</sl-switch>
-</div>
-```
-
-```ts
-onChange(event: CustomEvent): void {
-    console.assert(event instanceof CustomEvent);
-
-    if (event.target instanceof SlSwitch) {
-        const { checked, value } = event.target;
-
-        console.log(checked, value);
-    }
-}
 ```
 
 ### Assets
@@ -76,12 +49,6 @@ Provide `shoelace` components and styles to `index.html`:
 
 ```html
 <link rel="stylesheet" href="/assets/shoelace/themes/light.css" />
-
-<!--
-    add script if never import "@shoelace-style/shoelace" in code:
-
-    <script type="module" src="/assets/shoelace/shoelace.js"></script>
--->
 ```
 
 ## Example

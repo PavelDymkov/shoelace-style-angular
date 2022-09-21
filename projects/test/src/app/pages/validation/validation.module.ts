@@ -1,7 +1,7 @@
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from "@angular/core";
 import { ReactiveFormsModule } from "@angular/forms";
 import { RouterModule } from "@angular/router";
-import { ShoelaceStyleModule } from "shoelace-style-angular";
+import { ShoelaceFormControlsModule } from "shoelace-style-angular/form-controls";
 
 import { ValidationPageComponent } from "./validation.component";
 
@@ -11,7 +11,7 @@ import { ValidationPageComponent } from "./validation.component";
         RouterModule.forChild([
             { path: "", component: ValidationPageComponent },
         ]),
-        ShoelaceStyleModule,
+        ShoelaceFormControlsModule,
     ],
     declarations: [ValidationPageComponent],
     schemas: [CUSTOM_ELEMENTS_SCHEMA],

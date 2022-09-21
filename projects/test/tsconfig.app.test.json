@@ -2,7 +2,8 @@
     "extends": "./tsconfig.app.json",
     "compilerOptions": {
         "paths": {
-            "shoelace-style-angular": ["package"]
+            "shoelace-style-angular": ["package"],
+            "shoelace-style-angular/form-controls": ["package/form-controls"]
         }
     }
 }

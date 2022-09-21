@@ -1,27 +1,21 @@
-import { npmPackagr } from "npm-packagr";
 import {
     assets,
     badge,
     BadgeType,
     git,
+    npmPackagr,
     npx,
     Pipe,
     publish,
     test,
-} from "npm-packagr/pipes";
+} from "npm-packagr";
 
-import { createEventsDeclaration } from "./projects/events-declaration/create";
-
-const projectName = "shoelace-style-angular";
+const project = require("./package.json").name;
 
 npmPackagr({
     sourceDirectory: getSourceRootDirectory(),
     pipeline: [
-        git("commit", "shoelace-style-angular"),
-
-        npx(`ng build ${projectName}`),
-
-        ({ packageDirectory }) => createEventsDeclaration(packageDirectory),
+        npx(`ng build ${project}`),
 
         test(),
 
@@ -30,16 +24,16 @@ npmPackagr({
         createShoelaceVersionBadge(),
         createAngularVersionBadge(),
 
+        badge(BadgeType.License),
+
         ({ exec, packageDirectory, sourceDirectory }) => {
             exec("npm version patch", { cd: sourceDirectory });
             exec("npm version patch", { cd: packageDirectory });
         },
 
-        createLicenseBadge(),
+        assets("LICENSE", "README.md", "events"),
 
-        assets("LICENSE", "README.md"),
-
-        git("commit", "shoelace-style-angular"),
+        git("commit", project),
         git("push"),
 
         publish({
@@ -51,7 +45,7 @@ npmPackagr({
 function getSourceRootDirectory(): string {
     const { projects } = require("./angular.json");
 
-    return projects[projectName].root;
+    return projects[project].root;
 }
 
 function createShoelaceVersionBadge(): Pipe {
@@ -70,18 +64,4 @@ function createAngularVersionBadge(): Pipe {
         label: "tests with angular",
         message: String(version),
     });
-}
-
-function createLicenseBadge(): Pipe {
-    return context => {
-        const { license } = require("./package/package.json");
-
-        const pipe = badge("license", {
-            label: "license",
-            message: String(license),
-            messageColor: "green",
-        });
-
-        pipe(context);
-    };
 }

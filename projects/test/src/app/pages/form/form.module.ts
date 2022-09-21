@@ -2,7 +2,7 @@ import { CommonModule } from "@angular/common";
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from "@angular/core";
 import { ReactiveFormsModule } from "@angular/forms";
 import { RouterModule } from "@angular/router";
-import { ShoelaceStyleModule } from "shoelace-style-angular";
+import { ShoelaceFormControlsModule } from "shoelace-style-angular/form-controls";
 
 import { FormPageComponent } from "./form.component";
 
@@ -11,7 +11,7 @@ import { FormPageComponent } from "./form.component";
         CommonModule,
         ReactiveFormsModule,
         RouterModule.forChild([{ path: "", component: FormPageComponent }]),
-        ShoelaceStyleModule,
+        ShoelaceFormControlsModule,
     ],
     declarations: [FormPageComponent],
     schemas: [CUSTOM_ELEMENTS_SCHEMA],

@@ -1,13 +1,11 @@
 import { Directive, ElementRef, forwardRef } from "@angular/core";
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from "@angular/forms";
-import { SlRadio, SlRadioButton } from "@shoelace-style/shoelace";
+import { SlRadioGroup } from "@shoelace-style/shoelace";
 
 @Directive({
     selector: `
-        sl-radio[formControlName],
-        sl-radio[formControl],
-        sl-radio-button[formControlName],
-        sl-radio-button[formControl],
+        sl-radio-group[formControlName],
+        sl-radio-group[formControl],
     `,
     providers: [
         {
@@ -18,12 +16,12 @@ import { SlRadio, SlRadioButton } from "@shoelace-style/shoelace";
     ],
 })
 export class FormControlRadio implements ControlValueAccessor {
-    constructor(private hostRef: ElementRef<SlRadio | SlRadioButton>) {}
+    constructor(private hostRef: ElementRef<SlRadioGroup>) {}
 
     writeValue(value: any): void {
         const host = this.hostRef.nativeElement;
 
-        host.checked = host.value === value;
+        host.value = value;
     }
 
     registerOnChange(callback: any): void {
@@ -38,7 +36,5 @@ export class FormControlRadio implements ControlValueAccessor {
         this.hostRef.nativeElement.addEventListener("sl-blur", callback);
     }
 
-    setDisabledState(disabled: boolean): void {
-        this.hostRef.nativeElement.disabled = disabled;
-    }
+    setDisabledState(disabled: boolean): void {}
 }

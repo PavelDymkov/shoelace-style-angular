@@ -1,21 +1,25 @@
 {
     "compilerOptions": {
-        "baseUrl": "./",
+        "baseUrl": ".",
         "downlevelIteration": true,
         "experimentalDecorators": true,
         "importHelpers": true,
         "lib": ["ES2020", "DOM"],
         "module": "ES2020",
         "moduleResolution": "Node",
+        "skipLibCheck": true,
+        "strict": true,
+        "target": "ES2020",
+
         "paths": {
             "shoelace-style-angular": [
-                "projects/shoelace-style-angular/src/lib/shoelace-style.module.ts"
+                "projects/shoelace-style-angular/main/shoelace.module.ts"
+            ],
+            "shoelace-style-angular/form-controls": [
+                "projects/shoelace-style-angular/form-controls/form-controls.module.ts"
             ]
-        },
-        "target": "ES2020",
-        "skipLibCheck": true,
-        "strict": true
+        }
     },
 
-    "exclude": ["npm-packagr.ts"]
+    "exclude": ["events", "npm-packagr.ts"]
 }

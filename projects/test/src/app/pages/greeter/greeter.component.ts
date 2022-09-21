@@ -14,6 +14,7 @@ import { UntypedFormBuilder, Validators } from "@angular/forms";
                 Say Hello
             </sl-button>
         </form>
+        <div (sl-show)="(null)"></div>
 
         <sl-dialog label="Greetings" [(open)]="isDialogOpen">
             Hello,
