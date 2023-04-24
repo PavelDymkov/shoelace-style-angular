@@ -1,7 +1,7 @@
 # ShoelaceStyleAngular
 
 ![test: passed](https://raw.githubusercontent.com/PavelDymkov/shoelace-style-angular/main/badges/test.svg)
-![tests with @shoelace-style/shoelace: 2.0.0-beta.83](https://raw.githubusercontent.com/PavelDymkov/shoelace-style-angular/main/badges/shoelace-version.svg)
+![tests with @shoelace-style/shoelace: 2.4.0](https://raw.githubusercontent.com/PavelDymkov/shoelace-style-angular/main/badges/shoelace-version.svg)
 ![tests with angular: 14.2.2](https://raw.githubusercontent.com/PavelDymkov/shoelace-style-angular/main/badges/ng-version.svg)
 ![license: ](https://raw.githubusercontent.com/PavelDymkov/shoelace-style-angular/main/badges/license.svg)
 

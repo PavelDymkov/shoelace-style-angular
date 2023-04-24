@@ -17,7 +17,7 @@ describe("Form Directive", () => {
         ok(await getAttribute(slSwitch, "checked"));
         ok(await getAttribute(slSwitchWithValue, "checked"));
 
-        isEqual(await getValue("sl-color-picker"), "#aaa");
+        isEqual(await getValue("sl-color-picker"), "#aaaaaa");
 
         isEqual(await getValue("sl-input[type=text]"), "abc");
         isEqual(await getValue("sl-textarea"), "abc");
